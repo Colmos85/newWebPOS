@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html ng-app="myApp">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+
+  <title>Web POS</title>
+  <base href="/" />
+
+
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:500,700' rel='stylesheet' type='text/css'>
+  <!-- <link data-require="angular-material@0.10.1" data-semver="0.9.4" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.css" /> -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="app/scripts/node_modules/angular-material/angular-material.css">
+
+<script src="app/scripts/bower_components/angular/angular.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
+
+<script src="app/scripts/node_modules/angular-resource/angular-resource.min.js"></script>
+<script src="app/scripts/node_modules/angular-animate/angular-animate.js"></script>
+<script src="app/scripts/node_modules/angular-aria/angular-aria.js"></script>
+<script src="app/scripts/node_modules/angular-messages/angular-messages.js"></script>
+<script src="app/scripts/node_modules/angular-material/angular-material.min.js"></script>
+<script src='app/scripts/decimal.min.js'></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
+
+
+<!-- Provides accrorian effects etc -->
+<script data-require="angular-bootstrap@0.12.0" data-semver="0.12.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+<script src="app/scripts/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+
+
+
+
+<!-- 
+<script src="http://angular-data-grid.github.io/dist/pagination.js"></script>
+<script src="http://angular-data-grid.github.io/dist/dataGrid.js"></script> -->
+
+<!-- <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script> -->
+
+<!--my scripts-->
+<script src="app/app.routes.js"></script>
+<script src="app/app.modules.js"></script>
+
+<script src="app/main/menu.service.js"></script>
+<script src="app/main/home.controller.js"></script>
+<script src="app/main/menu_toggle.directive.js"></script>
+<script src="app/main/menulink.directive.js"></script>
+
+<script src="app/Authentication/auth.module.js"></script>
+
+<script src="app/general/general.factory.js"></script>
+<script src="app/general/general.controller.js"></script>
+
+<script src="app/products/products.factory.js"></script>
+<script src="app/products/products.controller.js"></script>
+
+<script src="app/cashier/cashier.factory.js"></script>
+<script src="app/cashier/cashier.controller.js"></script>
+
+<script src="app/customers/customers.factory.js"></script>
+<script src="app/customers/customers.controller.js"></script>
+
+<script src="app/employees/employees.factory.js"></script>
+<script src="app/employees/employees.controller.js"></script>
+
+<script src="app/transactions/transactions.factory.js"></script>
+<script src="app/transactions/transactions.controller.js"></script>
+
+
+  <!-- More CSS for Nav Bar? --> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="app/css/style.css" />
+
+<!--   <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css"> -->
+
+</head>
+
+<body>
+
+  <div ui-view layout="column" flex layout-fill></div>
+
+</body>
+
+</html>

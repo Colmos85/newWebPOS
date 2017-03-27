@@ -1,0 +1,164 @@
+<div layout="column" ng-cloak>
+<md-content layout="column" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+
+	<!-- Start of quick buttons -->
+<!--     <md-card flex="20" layout="column" id="hot-pick-buttons-card" hide show-gt-sm>
+	   <md-card-title>
+	        Quick Buttons
+	   </md-card-title>  -->
+<!-- 	   <md-card-content layout="row" layout-align="space-around" layout-padding="layout-padding">
+	      <div  ng-repeat="product in productsTopRow">
+	         <md-button>
+	          {{product.description}}
+	        </md-button>
+	      </div>    
+	   </md-card-content> -->
+<!-- 	   <md-content layout="row" layout-align="space-around" layout-padding="layout-padding">
+	      <div ng-repeat="product in productsTopRow">
+	         <md-button>
+	          {{product.description}}
+	        </md-button>
+	      </div>    
+	   </md-content>
+	</md-card>  -->
+	<!-- End of all buttons -->
+
+	<!-- start of second card in column -->
+	<md-card flex layout="column" > <!-- layout-align="space-around" layout-padding="layout-padding" -->
+
+<!-- 	ORIGINAL	<div> 
+	        <input ng-model="inputProduct" ng-keyup="$event.keyCode == 13 ? addProduct() : null" class="search-input md-whiteframe-3dp" placeholder="Search Product" typeahead="product for product.description in products | filter:$viewValue"/>
+	    </div> -->
+
+<!-- 	    <div> 
+	        <input ng-model="inputProduct" ng-keyup="$event.keyCode == 13 ? addProduct() : null" class="search-input md-whiteframe-3dp" placeholder="Search Product" typeahead="product.description for product in products | filter:$viewValue"/>
+	    </div> -->
+
+
+	    <form ng-submit="$event.preventDefault()" class="autocomplete-input">
+	      <md-autocomplete  md-selected-item="selectedItem" 
+	      					md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" 
+	      					md-selected-item-change="selectedItemChange(item)" 
+	      					md-items="item in products | filter:searchText"
+	      					md-item-text="item.description" 
+	      					md-min-length="1" 
+	      					ng-keyup="$event.keyCode == 13 ? addProduct(searchText) : null"
+	      					placeholder="Global Search"
+	      					class="md-whiteframe-3dp"
+	      					> <!-- md-hide-autocomplete-on-enter -->
+	        <md-item-template>
+	          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.description}}</span>
+	        </md-item-template>
+	      </md-autocomplete>
+	    </form>
+
+
+	   <!-- Lef to right, transaction table, -->
+	   <div layout="column" layout-gt-sm="row" class="transaction-container">
+	   		<div flex-gt-sm="60" layout-padding class="transactionItemsTable" >
+	   			<table flex st-table="items" st-safe-src="saleItems" class="my-table table-striped">
+		   			<thead>
+			          <tr>
+			          	<th class="md-body-1" st-ratio="30" st-sort="id">Description</th>
+			          	<th class="md-body-1 hide-mobile-column" st-ratio="25" st-sort="id">Unit Price</th>
+			            <th class="md-body-1" st-ratio="10" st-sort="name">Qty</th>
+			            <th class="md-body-1" st-ratio="25" st-sort="name">Price</th>
+			            <th class="md-body-1" st-ratio="2"></th>
+			            <th class="md-body-1" st-ratio="2"></th>
+			          </tr>
+			        </thead>
+			        <tbody ng-repeat="item in items">
+			        	<tr>
+			        		<td class="md-body-1"> {{ item.product.description }} </td>
+			        		<td class="md-body-1 hide-mobile-column"> {{ item.unitDisplayPrice }} </td>
+			        		<td class="md-body-1"> {{ item.quantity }} </td>
+			        		<td class="md-body-1"> {{ item.unitTotalDisplayPrice }} </td>
+			        		<td> - {{  }} </td>
+			        		<td> + {{  }} </td>
+			        	</tr>
+			        </tbody>
+		   		</table>
+		   	</div>
+
+		   	<!-- Price table and payment buttons -->
+	   		<div flex-gt-sm="40" id="payment-container" layout-fill>
+	   			<div layout="column" layout-fill >
+	   				<div class="price-table" layout-fill flex="60">
+	   					<table flex class="table-striped">
+				   			<thead>
+				   			  <tr>
+				   			  	<th colspan="2">+customer</th> 
+				   			  </tr>
+					          <tr>
+					          	<th st-ratio="60"></th>
+					          	<th st-ratio="40"></th>
+					          </tr>
+					        </thead>
+					        <tbody>
+					        	<tr>
+					        		<td class="md-body-1">Sub Total</td>
+					        		<td class="md-body-1"> €{{ subTotal }} </td>
+					        	</tr>
+					        	<tr>
+					        		<td class="md-body-1">Tax</td>
+					        		<td class="md-body-1"> €{{ tax }} </td>
+					        	</tr>
+					        	<tr>
+					        		<td class="md-body-1">Total</td>
+					        		<td class="md-body-1"> €{{ total }} </td>
+					        	</tr>
+
+					        	<tr ng-show="payments.length > 0" class="top-row-line"><td>Payments</td><td> </td></tr>
+					        	<tr ng-repeat="payment in payments">
+					        		<td class="md-body-1">{{ payment.type }}</td>
+					        		<td class="md-body-1"> €{{ payment.amount }} </td>
+					        	</tr>
+					        	<tr class="top-row-line">
+					        		<td class="md-body-1">Balance</td>
+					        		<td class="md-body-1"> €{{ balance }} </td>
+					        	</tr>
+					        </tbody>
+				   		</table>
+	   				</div>
+
+	   				<div flex="15"> <!-- Payment Amount -->
+	   					<div layout-fill layout="row" flex class="payment-amount-container">
+<!-- 	   						<md-input-container flex>
+						        <label>Payment Amount</label>
+						        <input ng-model="paymentAmount" type="" name="" />
+						    </md-input-container> -->
+						    <div flex> 
+						        <!-- <label>Global Search</label> -->
+						        <input ng-model="paymentAmount" class="search-input md-whiteframe-3dp" placeholder="Payment Amount"/>
+						    </div>
+	   					</div>
+	   				</div>
+
+	   				<div layout-fill flex="25" style="margin-top: 10px;"> <!-- Payment Buttons -->
+	   					<div layout-fill layout="row">
+	   						<span flex></span>
+   							<md-button ng-click="makePayment('CARD')" class="md-raised md-primary cash-button" flex="50">
+					          Card
+					        </md-button>
+   							
+   							<md-button ng-click="makePayment('CHEQUE')" class="md-raised md-primary cash-button" flex="50">
+					          Cheque
+					        </md-button>
+	   					</div>
+   						<div layout-fill layout="row">
+   							<span flex></span>
+	   						<md-button ng-click="makePayment('CASH')" class="md-raised md-primary cash-button" flex="100">
+					          CASH
+					        </md-button>
+				        </div>
+	   				</div>
+	   			</div>
+	   		</div>
+	   </div>
+
+
+	</md-card>
+	<!-- End of second card column -->
+
+</md-content>
+</div>

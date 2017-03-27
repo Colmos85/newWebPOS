@@ -1,0 +1,704 @@
+/* Styles go here */
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  color: orangered;
+  background-color:#e8e8e8;
+}
+
+.fill-height{
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+}
+
+.fill-height > div{
+  min-height: 100%;
+  display: flex;
+}
+
+.user-avatar {
+  border-radius: 99%;
+}
+
+md-toolbar {
+  background-color: #a0a0a0;/*#a0a0a0;*/
+  .md-button.md-default-theme {
+    border-radius: 99%; // round toolbar buttons
+  }
+}
+
+md-toolbar span{
+  color: white;
+}
+
+md-toolbar md-button{
+  color: white;
+}
+
+
+.extendedTableData{
+  padding: 5px;
+}
+
+.extendedTableData ul{
+  list-style: none;
+  padding: 0;
+}
+
+
+.search-input{
+/*    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;*/
+    width: calc(100% - 22px); /* - padding */
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20px;
+    border:1px solid #eaeaea;
+    outline:none;
+}
+.search-input:hover{
+    border-color: #a0a0a0 #b9b9b9 #b9b9b9 #b9b9b9;
+}
+.search-input:focus{
+    border-color:#4d90fe;
+}
+
+.autocomplete-input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+
+/*.search-input[type="submit"] {
+    border-radius: 2px;
+    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    color: #757575;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    padding: 0 16px;
+    height:36px;
+}
+.search-input[type="submit"]:hover {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    background: #f8f8f8;
+    border: 1px solid #c6c6c6;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    color: #222;
+}*/
+
+
+.home-content{
+  /*padding:1em;*/
+  /*background-color: white; /*#e8e8e8; #a3a3a3;*/
+  background-color:#e8e8e8;
+  color: black;
+}
+
+
+.navigation-content{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+md-content {
+  background-color:#e8e8e8;
+  /*padding:10px;*/
+  /*background-color:white;*/
+}
+
+.transaction-container{
+  overflow: auto;
+}
+
+
+
+.price-table{
+  overflow-y:auto;
+  overflow-x:auto;
+  height: 280px; /*50vh;*/ /*365px;*/
+/*  min-height: 300px;
+  max-height: 300px;*/
+  background-color: #3f3f3f;
+  border-radius: 4px;
+  border:1px solid #3f3f3f;
+}
+
+.price-table table{
+  width:100%;
+}
+
+.price-table table thead tr{
+  border:none;
+}
+
+.price-table table thead tr th{
+  padding: 5px;
+  color:white;
+  background-color: #3f3f3f;
+  text-align: left;
+}
+
+.price-table table tbody tr td{
+  padding: 5px; 
+  color:white;
+  background-color: #3f3f3f;
+  text-align: left;
+}
+
+.bottom-row-line td{
+    border-bottom: 2px solid white;
+}
+
+.top-row-line td{
+    border-top: 2px solid white;
+}
+
+.cash-button{
+  min-height:70px;
+  color: green;
+}
+
+.cash-button:not([disabled]):hover {
+  background-color: rgba(158, 158, 158, 0.2);
+}
+
+
+#payment-container{
+  padding:none;
+}
+
+.transactionItemsTable{
+  overflow-y:auto;
+  overflow-x:auto;
+  height: 540px; /*80vh;*/ /*650px;*/
+  /*min-height: 350px;
+  max-height: 350px;*/
+  background-color: #3f3f3f;
+  border-radius: 4px;
+  border:1px solid #3f3f3f;
+}
+
+
+
+.transactionItemsTable table {
+    width:100%; 
+    /*table-layout:fixed;*/
+}
+
+.transactionItemsTable table thead {
+    background-color: #3f3f3f;
+}
+
+.transactionItemsTable table thead tr {
+    background-color: #3f3f3f;
+}
+
+.transactionItemsTable table thead tr th{
+  padding-top: -14px; /* Do this because transaction table uses stying from my-table */
+  padding-bottom: -10px;
+  color:white;
+  background-color: #3f3f3f;
+  text-align: left;
+}
+
+.transactionItemsTable table tbody{
+  background-color: #3f3f3f; 
+/*  min-height:500px;
+  max-height:500px;*/
+}
+
+.transactionItemsTable table tbody tr{
+  padding: 10px;
+  background-color: white; 
+  max-height: 50px;
+  border-bottom: 8px solid #3f3f3f;
+}
+
+.transactionItemsTable table tbody tr td{
+  padding: 10px;
+  background-color: white; 
+  max-height: 50px;
+  border-bottom: 8px solid #3f3f3f;
+/*  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;*/
+}
+
+.payment-amount-container{
+  margin-top: 20px;
+}
+
+/*#payment-container{
+  border-radius: 4px;
+  border:1px solid #3f3f3f;
+}*/
+
+
+@media(max-width:500px)
+{
+  .hide-mobile-column{
+    display: none;
+  }
+}
+
+
+@media(min-width: 960px)
+{
+  #payment-container{
+    padding-left: 8px;
+  }
+
+  .inside-home-content{
+     height: calc(100vh - 65px); /* height:90.5vh; */
+  }
+}
+
+@media(max-width: 960px)
+{
+  #payment-container{
+    padding-top: 8px;
+  }
+  .transactionItemsTable{
+    height:300px;
+  }
+  .price-table{
+    height:280px;
+  }
+}
+
+
+
+/*::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}*/
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+
+
+
+
+
+
+.outerTableDiv{
+  overflow-y:auto;
+  overflow-x:auto;
+}
+
+.my-table {
+  
+  /*border-top: 5px solid white;*/ /*border-top: 1px solid black;*/
+  border-bottom: none; /*1px solid black;*/
+  border-radius: 10px solid;
+  border-collapse: collapse;
+  background-color: white;
+  /*width: 100%;
+  height: 100px;*/
+}
+
+/*.my-table > input{
+  border-radius: 3px solid;
+}*/
+
+.my-table tbody{
+    height: 100px;       
+    overflow-y: auto;    
+    overflow-x: hidden; 
+}
+
+
+.my-table th, .my-table td {
+  text-align: left;
+  max-height: 20px; /*(*************************************************************************)*/
+}
+
+.mainTDRows td{
+  padding: 15px;
+  cursor: hand;
+  border-top: 1px solid #ddd;
+}
+
+.selectedRow{
+  background-color: #ceceed;
+}
+.selectedRow:hover {background-color: #dddddd}
+
+.my-table th{
+  background-color: white; /*#464d59;*/ 
+  border-radius-top: 3px solid;
+  color: black;
+  padding: 15px;
+  border-bottom: 1px solid black;
+  border-top: none;
+  text-align: left;
+}
+
+.my-table tr{
+  
+}
+
+.my-table tr:hover {background-color: #dddddd}
+
+.expandedTableRow {
+/*  transition: transform .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out;*/
+  
+  background-color: #ede8e8;
+  border-color: #464d59;
+  /*border: 1px solid #ddd;*/
+}
+.expandedTableRow :hover {background-color: #ede8e8;} /* Same color */
+
+
+.extendedTableData{
+  border-left: 5px solid;
+  border-color: grey;
+  padding: 15px;
+}
+
+.expandedTableRow > div{
+  padding: 15px;
+}
+
+.st-sort-ascent:before{
+    content: '\25B2';
+  }
+
+.st-sort-descent:before{
+   content: '\25BC';
+ }
+
+/*.select-page {
+  width: 50px;
+  text-align: center;
+}*/
+
+/*.pagination li a input {
+  padding: 0;
+  margin: -5px 0;
+}
+*/
+
+
+ .my-table tfoot > tr {
+    /*display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;*/
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background-color: white;
+}
+
+.my-table tfoot > tr:hover {background-color: white}
+
+.my-table tfoot {
+    border-top: none;/*1px solid white;*/
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    /*border-collapse: collapse;*/                  
+    /*flex-shrink: 0;*/
+    /*display: inline-block;*/
+}
+
+/*tfoot td {
+    width: 100%;
+    display: inline-block;
+}*/
+
+
+
+
+#newProductBtn{
+  float: right;
+}
+
+
+.md-dialog{
+  width: 100%;
+}
+
+.md-dialog md-toolbar h2{
+  color: white;
+}
+
+.fieldset { border:1px solid grey }
+.legend { 
+    display: block;
+    padding-left: 4px;
+    padding-right: 10px;
+    border: none;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.dialogdemoBasicUsage button {
+  width: 200px; }
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008; }
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+  margin-bottom: 0; }
+
+
+
+
+
+
+.material-icons {
+  /*padding-top: 2px;*/
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.material-icons.white { 
+  color: white; 
+}
+
+
+
+
+h2 {
+  font-weight: 400;
+}
+
+.md-toolbar-tools-bottom {
+  font-size: small;
+  & :last-child {
+    opacity: 0.8;
+  }
+}
+
+/* title bar header and side bar header> */
+md-toolbar:not(.md-hue-1),
+.md-fab {
+  fill: grey;
+  background-color: #820000; 
+}
+
+md-sidenav {
+  fill: black;
+  overflow-y: auto;
+  background-color: white;
+  max-width: 250px;
+  height: 100%;
+  clear:both;
+  ng-md-icon {
+    position: relative;
+    top: 5px; // adjust for svg viewbox
+  }
+}
+
+/*@media(max-width: 960px)
+{
+  md-sidenav{
+    width:80%;
+  }
+}*/
+
+
+
+
+.md-toolbar-tools h5 span{
+  color:black;
+}
+
+md-sidenav md-toolbar:not(.md-hue-1)
+{
+  background-color: white;
+  color:black; 
+  border-bottom: 1px solid black;
+}
+
+
+md-backdrop .md-sidenav-backdrop {
+  /*background-color:transparent;*/
+  background-color:rgba(45, 47, 51, 0.5);
+}
+
+
+md-sidenav {
+  overflow: visible;
+  /*background-color: #464d59; */
+}
+
+.side-menu, .side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+.side-menu .md-button.active {
+  background-color: #5b5b5b;
+  color: white;
+  font-weight: bold;
+}
+
+.side-menu .menu-toggle-list a.md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
+.side-menu .menu-toggle-list .md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+}
+
+.side-menu > li {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+  transform: rotateZ(180deg);
+  -webkit-transform: rotateZ(180deg);
+}
+
+.side-menu .md-button-toggle .md-toggle-icon {
+  background-size: 100% auto;
+  display: inline-block;
+  margin: auto 0 auto auto;
+  width: 15px;
+  color: darkgray;
+  transition: transform .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+}
+
+.menu-toggle-list.ng-hide {
+  max-height: 0;
+}
+
+.side-menu .md-button {
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+.menu-toggle-list {
+  background: #fff;
+  max-height: 1300px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: max-height;
+  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: max-height;
+  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: max-height;
+}
+
+
+.side-menu menu-toggle span{
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+
+
+
+
+/********************* ANIMATIONS *************************/
+
+
+/* The starting CSS styles for the enter animation */
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+.slide.ng-enter, .slide.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.slide.ng-enter { }        /* starting animations for enter */
+.slide.ng-enter-active { } /* terminal animations for enter */
+.slide.ng-leave { }        /* starting animations for leave */
+.slide.ng-leave-active { } /* terminal animations for leave */
+

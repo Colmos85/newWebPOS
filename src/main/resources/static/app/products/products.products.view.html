@@ -1,0 +1,67 @@
+
+<div layout="column" ng-cloak>
+  <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+    <md-card flex="flex" >
+	<div layout="column" >
+		
+		<div class="outerTableDiv">
+			<table st-table="products" st-safe-src="productsCtrl.products" class="my-table table-striped" style="width:100%">
+				<thead>
+					<tr>
+			            <th colspan="5">
+			            	<div layout="row">
+			            	<md-input-container class="md-block" flex="80"> <!-- flex-gt-xs -->
+						        <label>Global Filter</label>
+						        <input st-search class="input-sm form-control" type="search"/>
+					      	</md-input-container>
+			              	<!-- <span flex></span> -->
+			              	<md-button class="md-no-focus" ng-click="productsCtrl.openProductForm(null, $event)" layout-align="center end">+ Product</md-button>
+			              	</div>
+			            </th>
+			        </tr>
+					<tr>
+						<th class="md-subhead" st-ratio="20" st-sort="barcode">Brand</th>
+						<th class="md-subhead" st-ratio="45" st-sort="description">Description</th>
+						<th st-ratio="15" st-sort="price">Price</th>
+						<th st-ratio="10">Edit</th>
+            			<th st-ratio="10">Delete</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="product in products" >
+					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
+						<td class="md-body-1" st-ratio="20" >{{product.brand.brandName}}</td>
+						<td class="md-body-1" st-ratio="45" >{{product.description}}</td>
+						<td st-ratio="15" >€ {{product.retailPriceInc}}</td> 
+						<td st-ratio="10">
+			              <button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="btn btn-sm btn-danger">
+			                <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
+			                </i>
+			              </button>
+			            </td>
+			            <td st-ratio="10">
+			              <button type="button" ng-click="productsCtrl.removeItem(product, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
+			                <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
+			                </i>
+			              </button>
+			            </td>
+					</tr>
+					<tr ng-if="isOpen" class="expandedTableRow">
+			          	<td colspan="5" ng-include="'/app/products/productDetails.html'"></td>
+			       	</tr>
+				</tbody>
+				<tfoot >
+					<tr>
+			            <td colspan="5" class="text-center">
+			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
+			            </td>
+			        </tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
+
+	</md-card>
+</md-content>
+	
+</div>

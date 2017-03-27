@@ -1,0 +1,64 @@
+	<md-dialog aria-label="Mango (Fruit)" flex="80" >
+	<form name="customerForm" novalidate ng-submit="save()">
+		<md-toolbar>
+	      <div class="md-toolbar-tools">
+	        <h2 style="color: white">New Customer Form</h2>
+	        <span flex></span>
+<!-- 	        <md-button class="md-icon-button" ng-click="cancel()">
+	          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+	        </md-button> -->
+	        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                  <md-tooltip>Close </md-tooltip>
+                  <i class="material-icons md-36 white">close</i>
+            </md-button>
+	      </div>
+	    </md-toolbar>
+
+	    <md-dialog-content>
+			<div layout="column">
+				<div layout="column" layout-padding layout-margin>
+					<fieldset>
+					<legend><h4>Email</h4></legend>
+								
+						<md-input-container class="md-block" flex-gt-sm>
+				            <label>Email Address</label>
+				            <input type="email" name="email" ng-model="email" md-autofocus required>
+				            <div ng-messages="customerForm.email.$error">
+						      	<div ng-message="required">This is required!</div>
+						      	<div ng-message="email">Enter a valid email!</div>
+						    </div>
+				        </md-input-container>
+
+			         </fieldset>
+		     	</div>
+			</div> 
+			
+		</md-dialog-content>
+
+<!-- 	    <md-dialog-content>
+			<div layout="column"  layout-gt-sm="row">
+				<md-input-container class="md-block" flex-gt-sm>
+		            <label>Email</label>
+		            <input type="email" name="email" ng-model="email" required>
+		            <div ng-messages="customerForm.email.$error">
+				      	<div ng-message="required">This is required!</div>
+				      	<div ng-message="email">Enter a valid email!</div>
+				    </div>
+		        </md-input-container>
+			</div> 
+		</md-dialog-content> -->
+
+		<md-dialog-actions layout="row">
+			<!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+		        More on Wikipedia
+		      </md-button> -->
+		      <span flex></span>
+		      <md-button ng-click="clear()">
+		       Clear
+		      </md-button>
+		      <md-button ng-disabled="customerForm.$invalid" ng-click="save('Message passed - saved customer')">
+		        Save
+		      </md-button>
+		</md-dialog-actions>
+		</form>
+	</md-dialog>

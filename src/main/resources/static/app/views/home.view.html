@@ -1,0 +1,81 @@
+<div layout="column" flex layout-fill>
+  <md-toolbar>
+
+    <div ng-controller="titleController" class="md-toolbar-tools">
+
+      <div ng-controller="sidebarController" hide-gt-sm>
+        <md-button class="md-icon-button" ng-click="openSideNavPanel()">
+            <i class="material-icons md-36 white">menu</i>
+        <!-- <md-tooltip>Side Menu</md-tooltip> -->
+             <!-- <md-icon icon="menu" style="fill: white" size="24"></md-icon>  -->
+        </md-button>
+      </div>
+
+      <div >
+        <span hide show-gt-md><a style="color:red">{{ clock | date : "EEEE "}}</a></span>
+        <span hide show-gt-sm><a style="color:red">{{ clock | date : " dd.MM.y "}}</a></span>
+        <span hide show-gt-sm><a style="color:red">{{ clock | date : " HH:mm:ss" }}</a></span>
+      </div>
+
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+      <span >{{ username }} </span>
+      <span flex></span>
+      <span >{{ activeRegister }}</span> 
+
+      <span flex></span>
+
+      <md-button> 
+      <span ng-click="logout()" href=""
+            class="logout">Logout</span>
+        <!-- <input name="submit" type="submit" id="submit" value="Log out"> -->
+      </md-button>
+    </div>
+
+  </md-toolbar>
+
+  <section layout="row" flex> 
+
+    <!-- <div layout="row"> -->
+      <md-sidenav class="md-sidenav-left md-whiteframe-3dp"
+                        md-whiteframe-"20" 
+                        md-component-id="left" 
+                        md-is-locked-open="$mdMedia('gt-sm')">
+        <md-toolbar md-scroll-shrink >
+          <div class="md-toolbar-tools">
+            <h5>
+              <span>Menu</span>
+            </h5>
+            <span flex></span>
+              <div hide-gt-sm ng-controller="sidebarController"> 
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()" hide-gt-md>
+                  <md-tooltip>Close Side Panel</md-tooltip>
+                  <i class="material-icons md-36 black">close</i>
+                  <!-- <ng-md-icon icon="close" style="fill: white" size="24"></ng-md-icon>  -->
+                </md-button>
+              </div>
+          </div>
+        </md-toolbar>
+        <md-content role="navigation" class="navigation-content">
+          <ul class="side-menu">
+            <li ng-repeat="section in vm.menu.sections" class="parent-list-item"
+                ng-class="{'parentActive' : vm.isSectionSelected(section)}">
+              <h2 class="menu-heading" ng-if="section.type === 'heading'"
+                  id="heading_{{ section.name | nospace }}">
+                {{section}}
+              </h2>
+              <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+              <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+            </li>
+          </ul>
+
+        </md-content>
+      </md-sidenav>
+    <!-- </div> -->
+
+    <md-content flex layout="column" layout-fill class="home-content">
+      <ui-view name="content"></ui-view>
+    </md-content>
+
+  </section>
+</div>

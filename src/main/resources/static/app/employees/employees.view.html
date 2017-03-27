@@ -1,0 +1,67 @@
+
+<div layout="column" ng-cloak>
+<md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+  <md-card flex="flex" >
+
+  <div layout="column" >
+
+    <div class="outerTableDiv">
+      <table st-table="customers" st-safe-src="customersCtrl.customers" class="my-table table-striped" style="width:100%">
+        <thead>
+          <tr>
+              <th colspan="5">
+                <div layout="row">
+                <md-input-container class="md-block" flex="80"> <!-- flex-gt-xs -->
+                <label>Global Filter</label>
+                <input st-search class="input-sm form-control" type="search"/>
+              </md-input-container>
+                  <!-- <span flex></span> -->
+                  <md-button class="md-no-focus" ng-click="customersCtrl.openCustomerForm(null, $event)" layout-align="center end">+ Employee</md-button>
+                  </div>
+              </th>
+          </tr>
+          <tr>
+            <th st-ratio="10" st-sort="id">ID</th>
+            <th st-ratio="30" st-sort="name">Name</th>
+            <th st-ratio="30" st-sort="name">Contact</th>
+            <th st-ratio="10">edit</th>
+            <th st-ratio="10">delete</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="customer in customers">
+          <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
+            <td st-ratio="25" >{{customer.id}}</td>
+            <td st-ratio="30" >{{customer.name}}</td>
+            <td st-ratio="30" >{{customer.contact}}</td>
+            <td st-ratio="10">
+              <button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
+                <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
+                </i>
+              </button>
+            </td>
+            <td st-ratio="10">
+              <button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
+                <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
+                </i>
+              </button>
+            </td>
+          </tr>
+          <tr ng-if="isOpen" class="expandedTableRow">
+                  <td colspan="5" ng-include="'/app/customers/customerDetails.html'"></td>
+          </tr>
+        </tbody>
+        <tfoot >
+          <tr>
+            <td colspan="5" class="text-center">
+              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+  </md-card>
+</md-content>
+  
+</div>

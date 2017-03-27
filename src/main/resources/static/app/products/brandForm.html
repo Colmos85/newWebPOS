@@ -1,0 +1,62 @@
+<md-dialog aria-label="Mango (Fruit)" flex="80" >
+	<form name="brandForm" novalidate ng-submit="save()">
+		<md-toolbar>
+	      <div class="md-toolbar-tools">
+	        <h2 style="color: white">New Brand Form</h2>
+	        <span flex></span>
+<!-- 	        <md-button class="md-icon-button" ng-click="cancel()">
+	          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+	        </md-button> -->
+	        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                  <md-tooltip>Close </md-tooltip>
+                  <i class="material-icons md-36 white">close</i>
+            </md-button>
+	      </div>
+	    </md-toolbar>
+
+	    <md-dialog-content>
+			<div layout="column">
+				<div layout="column" layout-padding layout-margin>
+					<fieldset>
+					<legend><h4>Brand</h4></legend>
+								
+						<md-input-container class="md-block" flex-gt-sm>
+				            <label>Brand Name</label>
+				            <input name="brandName" ng-model="brand.brandName" md-autofocus required record-availability-validator="/brands/exists/" >
+				            <div ng-messages="brandForm.brandName.$error"> <!-- multiple ng-if='brandForm.brandName.$touched' -->
+				            	<div ng-message="required">This is required!</div>
+								<div ng-message="recordLoading">
+							      	Checking database...
+							    </div>
+							    <div ng-message="recordAvailable">
+							        The brand name already exists...
+							    </div>
+				            </div>
+				            <!-- <div ng-messages="brandForm.brandName.$error.validationError" data-ng-show="productForm.$submitted">
+							    <p ng-message="validationError">Error message {{ errorMessage }}</p>
+							</div> -->
+<!-- 				            <div ng-messages="productForm.barcode.$error">
+							   	<div ng-message="required">This is required!</div>
+							</div> -->
+				        </md-input-container>
+
+			         </fieldset>
+		     	</div>
+			</div> 
+			
+		</md-dialog-content>
+
+		<md-dialog-actions layout="row">
+			<!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+		        More on Wikipedia
+		      </md-button> -->
+		      <span flex></span>
+		      <md-button ng-click="clear()">
+		       Clear
+		      </md-button>
+		      <md-button type="submit" ng-disabled="brandForm.$invalid">
+		        Save
+		      </md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

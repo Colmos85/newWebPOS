@@ -1,0 +1,88 @@
+<style>
+
+	nav{
+	    
+	    margin: auto;
+	}
+
+	nav ul {
+	    list-style-type: none;
+	    display:table;
+	    border-collapse: collapse;
+	    border-spacing: 0;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    padding: 5px;
+	}
+
+	nav li {
+		cursor: pointer;
+		background-color: #94C1FF; /*blueish*/
+	    float: left;
+	    display:table-cell;
+	    border-top: 1px solid black;
+	    border-bottom: 1px solid black;
+	    border-spacing: 0;
+	}
+
+	nav li:nth-child(3) {
+	    cursor: default;
+	    background-color: #94C1FF;
+	}
+
+	nav li:nth-child hover(3) {
+	    cursor: default;
+	    background-color: #94C1FF;
+	}
+
+	nav li:nth-child(odd) {
+	    border-left: 1px solid black;
+	    border-right: 1px solid black;
+	}
+
+	nav li:first-child {
+		border-radius: 8px 0 0 8px;
+	    -moz-border-radius: 8px 0 0 8px;	
+		border-left: 1px solid black;
+	    border-right: 1px solid black;
+	}
+
+	nav li:last-child {	
+		border-radius: 0 8px 8px 0;
+	    -moz-border-radius: 0 8px 8px 0;
+		border-left: 1px solid black;
+	    border-right: 1px solid black;
+	}
+
+	nav li a{
+		display: block;
+	    padding: 10px;
+	}
+
+	nav li:active {
+	    background-color: red; /*#66a3ff;*/
+	    color: white;
+	}
+
+	nav li:hover {
+
+		background-color: #cce0ff;
+	}
+
+
+
+	
+</style>
+
+<div layout="row" layout-align="center center" layout-padding layout-margin layout-fill>
+	<nav ng-if="pages.length >= 2" >
+	  <ul class="pagination">
+	    <li><a ng-click="selectPage(1)">First</a>
+	    </li><li><a ng-click="selectPage(currentPage - 1)">&lt;</a>
+	    </li><li><a><page-select></page-select>{{currentPage}} of {{numPages}}</a>
+	    </li><li><a ng-click="selectPage(currentPage + 1)">&gt;</a>
+	    </li><li><a ng-click="selectPage(numPages)">Last</a></li>
+	  </ul>
+	</nav>
+</div>
