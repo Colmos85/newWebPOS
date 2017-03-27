@@ -48,7 +48,7 @@ public class TransactionController {
 	/**
 	 * Post a new Transaction to the database
 	 * 
-	 * @param taxBand
+	 * @param transaction
 	 * @param ucBuilder
 	 * @return
 	 */
