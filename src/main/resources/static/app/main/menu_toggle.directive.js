@@ -18,7 +18,7 @@ angular.module('common.directives')
       '</ul>\n' +
       '');
   }])
-  .directive('menuToggle', ['$timeout', function ($timeout ) {
+  .directive('menuToggle', ['$timeout', function ($timeout) {
     return {
       scope: {
         section: '='

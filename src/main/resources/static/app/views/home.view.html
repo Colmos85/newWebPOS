@@ -41,13 +41,13 @@
                         md-whiteframe-"20" 
                         md-component-id="left" 
                         md-is-locked-open="$mdMedia('gt-sm')">
-        <md-toolbar md-scroll-shrink >
+        <md-toolbar md-scroll-shrink ng-controller="sidebarController">
           <div class="md-toolbar-tools">
             <h5>
               <span>Menu</span>
             </h5>
             <span flex></span>
-              <div hide-gt-sm ng-controller="sidebarController"> 
+              <div hide-gt-sm> 
                 <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()" hide-gt-md>
                   <md-tooltip>Close Side Panel</md-tooltip>
                   <i class="material-icons md-36 black">close</i>

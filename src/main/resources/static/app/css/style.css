@@ -170,7 +170,7 @@ md-content {
 .transactionItemsTable{
   overflow-y:auto;
   overflow-x:auto;
-  height: 540px; /*80vh;*/ /*650px;*/
+  height: 536px; /*80vh;*/ /*650px;*/
   /*min-height: 350px;
   max-height: 350px;*/
   background-color: #3f3f3f;
@@ -203,22 +203,20 @@ md-content {
 
 .transactionItemsTable table tbody{
   background-color: #3f3f3f; 
-/*  min-height:500px;
-  max-height:500px;*/
 }
 
 .transactionItemsTable table tbody tr{
-  padding: 10px;
+  padding: 5px;
   background-color: white; 
   max-height: 50px;
-  border-bottom: 8px solid #3f3f3f;
+  border-bottom: 5px solid #3f3f3f;
 }
 
 .transactionItemsTable table tbody tr td{
-  padding: 10px;
+  padding: 5px;
   background-color: white; 
   max-height: 50px;
-  border-bottom: 8px solid #3f3f3f;
+  border-bottom: 5px solid #3f3f3f;
 /*  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;*/
@@ -618,7 +616,6 @@ md-sidenav md-toolbar:not(.md-hue-1)
 {
   background-color: white;
   color:black; 
-  border-bottom: 1px solid black;
 }
 
 

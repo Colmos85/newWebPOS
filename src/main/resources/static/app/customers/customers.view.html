@@ -11,28 +11,26 @@
           <tr>
               <th colspan="4">
                 <div layout="row">
-                  <div flex="80"> 
-                    <!-- <label>Global Search</label> -->
-                    <input st-search class="search-input md-whiteframe-3dp input-sm form-control" placeholder="Global Filter"/>
-                  </div>
+                  <!-- <label>Global Search</label> -->
+                  <input st-search class="search-input md-whiteframe-3dp input-sm form-control" placeholder="Global Filter"/>
                   <!-- <span flex></span> -->
                   <md-button class="md-no-focus" ng-click="customersCtrl.openCustomerForm(null, $event)" layout-align="center end">+ Customer</md-button>
                   </div>
               </th>
           </tr>
           <tr>
-            <th st-ratio="10" st-sort="id">ID</th>
-            <th st-ratio="30" st-sort="name">Name</th>
-            <th st-ratio="30" st-sort="name">Contact</th>
+            <th class="md-subhead" st-ratio="10" st-sort="id">ID</th>
+            <th class="md-subhead" st-ratio="30" st-sort="name">Name</th>
+            <th class="md-subhead" st-ratio="30" st-sort="name">Contact</th>
             <th st-ratio="20"></th>
           </tr>
         </thead>
         <tbody ng-repeat="customer in customers">
           <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
-            <td st-ratio="25" >{{customer.id}}</td>
-            <td st-ratio="30" >{{customer.name}}</td>
-            <td st-ratio="30" >{{customer.contact}}</td>
-            <td class="md-body-1 button-table-data" st-ratio="10">
+            <td class="md-body-1" st-ratio="25" >{{customer.id}}</td>
+            <td class="md-body-1" st-ratio="30" >{{customer.name}}</td>
+            <td class="md-body-1" st-ratio="30" >{{customer.contact}}</td>
+            <td class="md-body-1" class="md-body-1 button-table-data" st-ratio="10">
             <div layout="row">
               <md-button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
                 <i class="material-icons">edit</i>
