@@ -9,7 +9,7 @@
       <table st-table="brands" st-safe-src="brandsCtrl.brands" class="my-table table-striped" style="width:100%">
         <thead>
           <tr >
-            <th colspan="4">
+            <th colspan="3">
               <div layout="row"> 
                 <div flex="80"> 
                   <input st-search placeholder="global search" class="search-input md-whiteframe-3dp input-sm form-control" type="search"/>
@@ -19,33 +19,30 @@
             </th>
           </tr>
           <tr>
-            <th st-ratio="25" st-sort="id">ID</th>
-            <th st-ratio="55" st-sort="name">Brand Name</th>
-            <th st-ratio="10">edit</th>
-            <th st-ratio="10">delete</th>
+            <th class="md-subhead" st-ratio="25" st-sort="id">ID</th>
+            <th class="md-subhead" st-ratio="55" st-sort="name">Brand Name</th>
+            <th class="md-subhead" st-ratio="20"></th>
           </tr>
         </thead>
         <tbody ng-repeat="brand in brands">
           <tr class="mainTDRows">
-            <td st-ratio="25" >{{brand.id}}</td>
-            <td st-ratio="55" >{{brand.brandName}}</td>
-            <td st-ratio="10">
-              <button  type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
-                <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
-                </i>
-              </button>
-            </td>
-            <td st-ratio="10">
-              <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-                <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
-                </i>
-              </button>
+            <td class="md-body-1" st-ratio="25" >{{brand.id}}</td>
+            <td class="md-body-1" st-ratio="55" >{{brand.brandName}}</td>
+            <td class="md-body-1 button-table-data" st-ratio="10">
+              <div layout="row">
+                <md-button  type="button" ng-click="editItem(row)" class="btn btn-sm btn-danger">
+                  <i class="material-icons">edit</i>
+                </md-button>
+                <md-button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+                  <i class="material-icons">delete</i>
+                </md-button>
+              </div>
             </td>
           </tr>
         </tbody>
         <tfoot >
           <tr>
-            <td colspan="4" class="text-center">
+            <td colspan="3" class="text-center">
               <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
             </td>
           </tr>

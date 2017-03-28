@@ -36,27 +36,23 @@
 
         Decimal.set({ precision: 5, rounding: 4 })
 
-        var empty = new Decimal(0.00);//$scope.displayPrice(0.00);
+        var empty = new Decimal(0.00);
         empty.toFixed(2);
         $scope.subTotal = empty;
-        $scope.tax = empty; // = $scope.displayPrice(0.00);
-        $scope.total = empty; // = $scope.displayPrice(0.00);
+        $scope.tax = empty;
+        $scope.total = empty; 
         $scope.balance = empty; // = $scope.displayPrice(0.00);
 
-        $scope.payments = [/*{type:'Cash', amount:'50.00'}, {type:'Credit', amount:'60.00'}*/];
-
         $scope.saleItems=[];
+        $scope.payments=[];
 
-        /*Hot Pick Buttons*/
+        /*Hot Pick Buttons - Load in from database*/
         $scope.productsTopRow=[
         {brand:'Microsoft',description:'Office home&business 2017'},
         {brand:'Dell',description:'xps gaming laptop'},
         {btand:'AOC',description:'21inch Monitor'},
         {brand:'Microsoft',description:'Office home&business 2017'},
         {brand:'Dell',description:'xps gaming laptop'}];
-
-        //description, unitPrice, quantity, price
-
 
 
         $scope.addProduct = function(barcode)
@@ -139,57 +135,51 @@
 
         $scope.makePayment = function(paymentType){
 
-          console.log("Payment amount: ", $scope.paymentAmount);
-
           var payment = {}; 
-
-          // cash or credit button presses with no payment Value - indicate the balance is being paid off
-          if($scope.paymentAmount === null || $scope.paymentAmount === ""){ 
-              console.log("NO PAYMNET AMOUNT ENTERED");
-              if($scope.payments.length === 0) { // first payment
-                payment.type = paymentType;
-                payment.amount = $scope.displayPrice($scope.paymentAmount);
-                $scope.payments.push(payment);
-                $scope.makeTransaction(0.00);
-              }else { // second payment
-                payment.type = paymentType;
-                payment.amount = $scope.displayPrice($scope.paymentAmount);
-                $scope.payments.push(payment);
-                $scope.makeTransaction(0.00);
-              }
-          }else if($scope.balance > $scope.paymentAmount){
-            console.log("PAYMENT AMOUNT LESS THAN BALANCE");
-              if($scope.payments.length === 0) { // first payment - cant be second as it is restricted to two payments (second payment must be equal to or more than the balance)
-                // change balance
-                $scope.balance = $scope.displayPrice(new Decimal($scope.balance).minus(new Decimal($scope.paymentAmount)));
-                payment.type = paymentType;
-                console.log("Payment amount IN amount less than 1. : ", $scope.paymentAmount);
-                payment.amount = $scope.displayPrice($scope.paymentAmount);
-                console.log("Payment amount IN amount less than 2. : ", payment.payment1Value);
-                $scope.paymentAmount = "";
-                $scope.payments.push(payment); 
-              }else if($scope.payments.length === 1){ //toast message saying the payment must match or be greater than balance
-                $scope.toastMessage("Second Payment must be equal or greater than the balance!!");
-                $scope.paymentAmount = "";
-              } 
-          }
-          else if($scope.balance < $scope.paymentAmount) // change is due.
+          if($scope.saleItems.length >= 1)
           {
-            console.log("PAYMENY AMOUNT LARGER THAN BALANCE");
-            if($scope.payments.length === 0) { // first payment
-                payment.type = paymentType;
-                payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
-                $scope.payments.push(payment);
-                $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
-                //$scope.balance = $scope.displayPrice(new Decimal(0.00));
-            }else { // second payment
-                payment.type = paymentType;
-                payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
-                $scope.payments.push(payment); 
-                $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
-                //$scope.balance = $scope.displayPrice(new Decimal(0.00));
-            }
-
+              // cash or credit button pressed with no payment Value - indicate the balance is being paid off exactly in one go
+              if(($scope.paymentAmount === null) || ($scope.paymentAmount === "") || (typeof $scope.paymentAmount == "undefined")){ 
+                  if($scope.payments.length === 0) { // first payment
+                    payment.type = paymentType;
+                    payment.amount = $scope.displayPrice(new Decimal($scope.balance));
+                    $scope.payments.push(payment);
+                    $scope.makeTransaction(0.00);
+                  }else { // second payment
+                    payment.type = paymentType;
+                    payment.amount = $scope.displayPrice(new Decimal($scope.balance));
+                    $scope.payments.push(payment);
+                    $scope.makeTransaction(0.00);
+                  }
+              }else if($scope.balance > $scope.paymentAmount){ //PAYMENT AMOUNT LESS THAN BALANCE
+                  if($scope.payments.length === 0) { // first payment - cant be second as it is restricted to two payments (second payment must be equal to or more than the balance)
+                    // change balance
+                    $scope.balance = $scope.displayPrice(new Decimal($scope.balance).minus(new Decimal($scope.paymentAmount)));
+                    payment.type = paymentType;
+                    payment.amount = $scope.displayPrice($scope.paymentAmount);
+                    $scope.paymentAmount = "";
+                    $scope.payments.push(payment); 
+                  }else if($scope.payments.length === 1){ //toast message saying the payment must match or be greater than balance
+                    $scope.toastMessage("Second Payment must be equal or greater than the balance!!"); // should be alert??
+                    $scope.paymentAmount = "";
+                  } 
+              }
+              else if($scope.balance < $scope.paymentAmount) // change is due. PAYMENY AMOUNT LARGER THAN BALANCE
+              {
+                  if($scope.payments.length === 0) { // first payment
+                      payment.type = paymentType;
+                      payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
+                      $scope.payments.push(payment);
+                      $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
+                      //$scope.balance = $scope.displayPrice(new Decimal(0.00));
+                  }else { // second payment
+                      payment.type = paymentType;
+                      payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
+                      $scope.payments.push(payment); 
+                      $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
+                      //$scope.balance = $scope.displayPrice(new Decimal(0.00));
+                  }
+              }
           }
         }
 
@@ -201,16 +191,16 @@
               onHold: 0,
               transactionItems: $scope.saleItems,
               employee: AuthService.user,
-              changeValue: change /* balance - payment amount */
+              changeValue: change 
           };
 
           if($scope.payments.length >= 1){
-              transaction.payment1Type = $scope.payments[0].type; //paymentType,
-              transaction.payment1Value = $scope.payments[0].amount; // new Decimal($scope.paymentAmount), 
+              transaction.payment1Type = $scope.payments[0].type; 
+              transaction.payment1Value = $scope.payments[0].amount;  
           }
           if($scope.payments.length === 2){
-            transaction.payment2Type = $scope.payments[1].type; //paymentType,
-            transaction.payment2Value= $scope.payments[1].amount; // new Decimal($scope.paymentAmount), 
+            transaction.payment2Type = $scope.payments[1].type; 
+            transaction.payment2Value= $scope.payments[1].amount; 
           }
 
           transactionsFactory.insertTransaction(transaction).then(function successCallback(result){
@@ -253,7 +243,7 @@
           $scope.selectedItem = null;
           $scope.searchText = '';
           
-          // remove focus
+          // remove focus ?
 
         }
 

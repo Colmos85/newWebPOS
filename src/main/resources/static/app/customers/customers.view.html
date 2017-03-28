@@ -9,7 +9,7 @@
       <table st-table="customers" st-safe-src="customersCtrl.customers" class="my-table table-striped" style="width:100%">
         <thead>
           <tr>
-              <th colspan="5">
+              <th colspan="4">
                 <div layout="row">
                   <div flex="80"> 
                     <!-- <label>Global Search</label> -->
@@ -24,29 +24,28 @@
             <th st-ratio="10" st-sort="id">ID</th>
             <th st-ratio="30" st-sort="name">Name</th>
             <th st-ratio="30" st-sort="name">Contact</th>
-            <th st-ratio="10">edit</th>
-            <th st-ratio="10">delete</th>
+            <th st-ratio="20"></th>
           </tr>
         </thead>
         <tbody ng-repeat="customer in customers">
-          <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'slide selectedRow': isOpen}">
+          <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
             <td st-ratio="25" >{{customer.id}}</td>
             <td st-ratio="30" >{{customer.name}}</td>
             <td st-ratio="30" >{{customer.contact}}</td>
-            <td st-ratio="10">
-              <button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
-                <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
-                </i>
-              </button>
-            </td>
-            <td st-ratio="10">
-              <button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
-                <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
-                </i>
-              </button>
+            <td class="md-body-1 button-table-data" st-ratio="10">
+            <div layout="row">
+              <md-button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
+                <i class="material-icons">edit</i>
+              </md-button>
+              <md-button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
+                <!-- <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
+                </i> -->
+                <i class="material-icons">delete</i>
+              </md-button>
+            </div>
             </td>
           </tr>
-          <tr ng-if="isOpen" class="expandedTableRow fade slide">
+          <tr ng-if="isOpen" class="expandedTableRow fade">
                   <td colspan="5" ng-include="'/app/customers/customerDetails.html'"></td>
           </tr>
         </tbody>
