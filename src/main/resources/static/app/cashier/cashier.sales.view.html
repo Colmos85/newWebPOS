@@ -59,22 +59,22 @@
 	   			<table flex st-table="items" st-safe-src="saleItems" class="my-table table-striped">
 		   			<thead>
 			          <tr>
-			          	<th class="md-body-1" st-ratio="30" st-sort="id">Description</th>
-			          	<th class="md-body-1 hide-mobile-column" st-ratio="25" st-sort="id">Unit Price</th>
-			            <th class="md-body-1" st-ratio="10" st-sort="name">Qty</th>
-			            <th class="md-body-1" st-ratio="25" st-sort="name">Price</th>
-			            <th class="md-body-1" st-ratio="10"></th>
+			          	<th class="md-body-2" st-ratio="30" st-sort="id">Description</th>
+			          	<th class="md-body-2 hide-mobile-column" st-ratio="25" st-sort="id">Unit Price</th>
+			            <th class="md-body-2" st-ratio="10" st-sort="name">Qty</th>
+			            <th class="md-body-2" st-ratio="25" st-sort="name">Price</th>
+			            <th class="md-body-2" st-ratio="10"></th>
 			          </tr>
 			        </thead>
 			        <tbody ng-repeat="item in items">
 			        	<tr>
-			        		<td class="md-caption"> {{ item.product.description }} </td>
-			        		<td class="md-caption hide-mobile-column"> {{ item.unitDisplayPrice }} </td>
-			        		<td class="md-caption"> {{ item.quantity }} </td>
-			        		<td class="md-caption"> {{ item.unitTotalDisplayPrice }} </td>
+			        		<td class="md-body-1"> {{ item.product.description }} </td>
+			        		<td class="md-body-1 hide-mobile-column"> {{ item.unitDisplayPrice }} </td>
+			        		<td class="md-body-1"> {{ item.quantity }} </td>
+			        		<td class="md-body-1"> {{ item.unitTotalDisplayPrice }} </td> <!-- md-caption -->
 			        		<td class="button-table-data">
 				        		<div layout="row" layout-fill>
-				        			<md-button class="md-icon-button launch" ng-click="minusProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
+				        			<md-button class="md-icon-button launch" ng-click="removeProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
 					                  <!-- <md-icon  class="material-icons ">minus</md-icon> *** angular material icons ***-->
 					                  <i class="fa fa-minus" aria-label="remove 1 item" aria-hidden="true"></i> <!-- *** font awesome icons *** -->
 					                </md-button>
@@ -149,21 +149,21 @@
 	   				</div>
 
 	   				<div layout-fill flex="25" style="margin-top: 10px;"> <!-- Payment Buttons -->
-	   					<div layout-fill layout="row"><!-- <div layout="row" style="padding: 5px;"> -->
+	   					<div layout-fill layout="row">
 	   						<span flex></span>
-   							<md-button ng-click="makePayment('CARD')" class="md-raised md-primary cash-button md-whiteframe-3dp" flex="50">
-					          CARD
+   							<md-button ng-click="makePayment('CARD')" class="md-raised md-primary cash-button" flex="50">
+					          Card
 					        </md-button>
    							
-   							<md-button ng-click="makePayment('CHEQUE')" class="md-raised md-primary cash-button md-whiteframe-3dp" flex="50">
-					          CHEQUE
+   							<md-button ng-click="makePayment('CHEQUE')" class="md-raised md-primary cash-button" flex="50">
+					          Cheque
 					        </md-button>
 	   					</div>
-   						<div layout="row" style="padding: 5px;"><!-- <div layout-fill layout="row"> -->
+   						<div layout-fill layout="row">
    							<span flex></span>
-	   						<button ng-click="makePayment('CASH')" class="md-raised md-primary cash-button" flex="100">
+	   						<md-button ng-click="makePayment('CASH')" class="md-raised md-primary cash-button" flex="100">
 					          CASH
-					        </button>
+					        </md-button>
 				        </div>
 	   				</div>
 	   			</div>

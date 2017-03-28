@@ -54,6 +54,24 @@
         {brand:'Microsoft',description:'Office home&business 2017'},
         {brand:'Dell',description:'xps gaming laptop'}];
 
+        $scope.removeProduct = function(barcode)
+        {
+            for (var i = 0; i < $scope.saleItems.length; i++) {
+              if($scope.saleItems[i].product.barcode === barcode){
+                  if($scope.saleItems[i].quantity === 1) // then remove from the list
+                  {
+                    $scope.saleItems.splice(i,1);
+                    $scope.updatePrices();
+                  }
+                  else{
+                    $scope.saleItems[i].quantity --;
+                    $scope.saleItems[i].unitTotalDisplayPrice = $scope.displayPrice(new Decimal($scope.saleItems[i].product.retailPriceInc).times(new Decimal($scope.saleItems[i].quantity)));
+                    // update subTotal, tax and total
+                    $scope.updatePrices();
+                  }
+              }
+            }
+        }
 
         $scope.addProduct = function(barcode)
         {
