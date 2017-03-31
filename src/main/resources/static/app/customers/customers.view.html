@@ -20,18 +20,18 @@
           </tr>
           <tr>
             <th class="md-subhead" st-ratio="10" st-sort="id">ID</th>
-            <th class="md-subhead" st-ratio="30" st-sort="name">Name</th>
-            <th class="md-subhead" st-ratio="30" st-sort="name">Contact</th>
-            <th st-ratio="20"></th>
+            <th class="md-subhead" st-ratio="35" st-sort="name">Name</th>
+            <th class="md-subhead" st-ratio="35" st-sort="name">Contact</th>
+            <th st-ratio="15"></th>
           </tr>
         </thead>
         <tbody ng-repeat="customer in customers">
           <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
-            <td class="md-body-1" st-ratio="25" >{{customer.id}}</td>
-            <td class="md-body-1" st-ratio="30" >{{customer.name}}</td>
-            <td class="md-body-1" st-ratio="30" >{{customer.contact}}</td>
-            <td class="md-body-1" class="md-body-1 button-table-data" st-ratio="10">
-            <div layout="row">
+            <td class="md-body-1" st-ratio="10" >{{customer.id}}</td>
+            <td class="md-body-1" st-ratio="35" >{{customer.name}}</td>
+            <td class="md-body-1" st-ratio="35" >{{customer.contact}}</td>
+            <td class="md-body-1" class="md-body-1 button-table-data" st-ratio="15">
+            <div layout="row" >
               <md-button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
                 <i class="material-icons">edit</i>
               </md-button>
@@ -44,12 +44,12 @@
             </td>
           </tr>
           <tr ng-if="isOpen" class="expandedTableRow fade">
-                  <td colspan="5" ng-include="'/app/customers/customerDetails.html'"></td>
+                  <td colspan="4" ng-include="'/app/customers/customerDetails.html'"></td>
           </tr>
         </tbody>
         <tfoot >
           <tr>
-            <td colspan="5" class="text-center">
+            <td colspan="4" class="text-center">
               <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
             </td>
           </tr>

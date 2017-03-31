@@ -73,6 +73,10 @@ md-toolbar md-button{
 }
 
 
+.chipsdemoCustomInputs md-content.autocomplete {
+  min-height: 200px; 
+}
+
 
 
 /*.search-input[type="submit"] {

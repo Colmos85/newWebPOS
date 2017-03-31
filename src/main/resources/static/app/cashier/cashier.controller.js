@@ -262,8 +262,30 @@
           $scope.searchText = '';
           
           // remove focus ?
-
         }
+
+        /******************* Add Customer chip ******************/
+
+        $scope.readonly = false;
+        $scope.selectedItem = null;
+        $scope.searchText = null;
+        $scope.vegetables = $scope.customers;
+        $scope.selectedVegetables = [];
+        $scope.numberBuffer = '';
+        $scope.autocompleteDemoRequireMatch = true;
+
+        /**
+         * Return the proper object when the append is called.
+         */
+        $scope.transformChip = function(chip) {
+          // If it is an object, it's already a known chip
+          if (angular.isObject(chip)) {
+            return chip;
+          }
+          // Otherwise, create a new one ************************** CHANGE THIS
+          return { name: chip, type: 'new' }
+        }
+
 
       }])
   

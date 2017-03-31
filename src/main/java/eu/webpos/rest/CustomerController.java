@@ -44,6 +44,40 @@ public class CustomerController {
 	
 	
 	/**
+	 * Method to check if a customer with this email already exists
+	 * @param email
+	 * @return boolean value
+	 */
+	@RequestMapping(value = "/emailexists/{viewValue:.+}", method = RequestMethod.GET)
+	public boolean emailExists(@PathVariable String viewValue) {
+		boolean exists = false;
+		System.out.println("Email received?: " + viewValue);
+		if(rp.countByEmail(viewValue) > 0){
+			System.out.println("Email exists");
+			exists = true;
+		}
+		return exists;
+	}
+	
+	
+	/**
+	 * Method to check if a customer with this email already exists
+	 * @param username
+	 * @return boolean value
+	 */
+	@RequestMapping(value = "/usernameexists/{viewValue}", method = RequestMethod.GET)
+	public boolean usernameExists(@PathVariable String viewValue) {
+		boolean exists = false;
+		System.out.println("username received?: " + viewValue);
+		if(rp.countByUsername(viewValue) > 0){
+			System.out.println("username exists");
+			exists = true;
+		}
+		return exists;
+	}
+	
+	
+	/**
 	 * Post a new Customer to the database
 	 * 
 	 * @param customer

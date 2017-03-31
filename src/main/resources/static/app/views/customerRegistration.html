@@ -27,15 +27,16 @@
                       <label>Name</label> 
                       <input name="name" ng-model="name" md-autofocus required> 
                       <div ng-messages="customerForm.name.$error"> 
-                      <div ng-message="required">This is required!</div> 
-                  </div> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
                   </md-input-container> 
                   <md-input-container class="md-block" flex-gt-sm> 
                       <label>Email</label> 
-                      <input type="email" name="email" ng-model="email" required> 
+                      <input type="email" name="email" ng-model="email" record-checker="/customers/emailexists/" required> 
                       <div ng-messages="customerForm.email.$error"> 
                       <div ng-message="required">This is required!</div> 
                       <div ng-message="email">Enter a valid email!</div> 
+                      <div ng-message="recordexists">Email already exists!</div>
                   </div> 
                   </md-input-container> 
                   <md-input-container class="md-block" flex-gt-sm> 
@@ -84,9 +85,10 @@
             <legend><h4>Login Details</h4></legend> 
               <md-input-container class="md-block" flex-gt-sm> 
                       <label>Username</label> 
-                      <input name="username" ng-model="username" required> 
+                      <input name="username" ng-model="username" record-checker="/customers/usernameexists/" required> 
                       <div ng-messages="customerForm.username.$error"> 
                       <div ng-message="required">This is required!</div> 
+                      <div ng-message="recordexists">Username already exists!</div>
                   </div> 
                   </md-input-container> 
                   <md-input-container class="md-block" flex-gt-sm> 

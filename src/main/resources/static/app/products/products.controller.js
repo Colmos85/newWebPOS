@@ -478,7 +478,7 @@
                       {
                         setAsLoading(false);
                         setAsAvailable(true);
-                        return;
+                        return value;
                       }
                       apiUrl = attrs.recordAvailabilityValidator.concat(value);
                       setAsLoading(true);

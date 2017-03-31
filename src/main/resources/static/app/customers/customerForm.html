@@ -22,10 +22,11 @@
 								
 						<md-input-container class="md-block" flex-gt-sm>
 				            <label>Email Address</label>
-				            <input type="email" name="email" ng-model="email" md-autofocus required>
+				            <input type="email" name="email" ng-model="email" md-autofocus required record-checker="/customers/emailexists/">
 				            <div ng-messages="customerForm.email.$error">
 						      	<div ng-message="required">This is required!</div>
-						      	<div ng-message="email">Enter a valid email!</div>
+						      	<!-- <div ng-message="email">Enter a valid email!</div> -->
+						      	<div ng-message="recordExists">Email already exists!</div>
 						    </div>
 				        </md-input-container>
 

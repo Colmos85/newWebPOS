@@ -26,16 +26,7 @@
 	<!-- start of second card in column -->
 	<md-card flex layout="column" > <!-- layout-align="space-around" layout-padding="layout-padding" -->
 
-<!-- 	ORIGINAL	<div> 
-	        <input ng-model="inputProduct" ng-keyup="$event.keyCode == 13 ? addProduct() : null" class="search-input md-whiteframe-3dp" placeholder="Search Product" typeahead="product for product.description in products | filter:$viewValue"/>
-	    </div> -->
-
-<!-- 	    <div> 
-	        <input ng-model="inputProduct" ng-keyup="$event.keyCode == 13 ? addProduct() : null" class="search-input md-whiteframe-3dp" placeholder="Search Product" typeahead="product.description for product in products | filter:$viewValue"/>
-	    </div> -->
-
-
-	    <form ng-submit="$event.preventDefault()" class="autocomplete-input">
+		<form ng-submit="$event.preventDefault()" class="autocomplete-input">
 	      <md-autocomplete  md-selected-item="selectedItem" 
 	      					md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" 
 	      					md-selected-item-change="selectedItemChange(item)" 
@@ -101,7 +92,26 @@
 	   					<table flex class="table-striped">
 				   			<thead>
 				   			  <tr>
-				   			  	<th colspan="2">+customer</th> 
+				   			  	<th colspan="2">
+									<md-chips ng-model="selectedVegetables" 
+											  md-autocomplete-snap="" 
+											  md-transform-chip="transformChip($chip)" 
+											  md-require-match="autocompleteDemoRequireMatch">
+								      <md-autocomplete md-selected-item="selectedItem" 
+								      				   md-search-text="searchText" 
+								      				   md-items="item in customers | filter:searchText"  md-item-text="item.name" 
+								      				   placeholder="Add Customer"
+								      				   style="color:white">
+								        <span md-highlight-text="searchText">{{item.name}} :: {{item.username}}</span>
+								      </md-autocomplete>
+								      <md-chip-template>
+								        <span>
+								          <strong>{{$chip.name}}</strong>
+								          <em>({{$chip.username}})</em>
+								        </span>
+								      </md-chip-template>
+								    </md-chips>
+				   			  	</th> 
 				   			  </tr>
 					          <tr>
 					          	<th st-ratio="60"></th>

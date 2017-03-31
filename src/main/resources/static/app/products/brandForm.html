@@ -22,15 +22,10 @@
 								
 						<md-input-container class="md-block" flex-gt-sm>
 				            <label>Brand Name</label>
-				            <input name="brandName" ng-model="brand.brandName" md-autofocus required record-availability-validator="/brands/exists/" >
+				            <input name="brandName" ng-model="brand.brandName" md-autofocus required record-checker="/brands/exists/" >
 				            <div ng-messages="brandForm.brandName.$error"> <!-- multiple ng-if='brandForm.brandName.$touched' -->
 				            	<div ng-message="required">This is required!</div>
-								<div ng-message="recordLoading">
-							      	Checking database...
-							    </div>
-							    <div ng-message="recordAvailable">
-							        The brand name already exists...
-							    </div>
+								<div ng-message="recordexists">Brand name already exists!</div>
 				            </div>
 				            <!-- <div ng-messages="brandForm.brandName.$error.validationError" data-ng-show="productForm.$submitted">
 							    <p ng-message="validationError">Error message {{ errorMessage }}</p>
