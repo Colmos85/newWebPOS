@@ -47,14 +47,23 @@ public class Transaction {
 	@JsonBackReference(value="transactions")
 	private Employee employee;
 	
-	//@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name = "customer_id")
-	//private Customer customer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
+	@JsonBackReference(value="customer-transactions")
+	private Customer customer;
 	
 	//private TillSession tillSession;
 	
 	
 	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	public int getId() {
 		return id;

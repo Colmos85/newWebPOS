@@ -35,7 +35,20 @@ public class Store {
 	@JsonManagedReference(value="store-stock")
 	private List<Stock> stock;
 	
+	@OneToMany(mappedBy = "store")
+	@JsonManagedReference(value="store-tills")
+	private List<Till> tills;
 	
+	
+	
+	public List<Till> getTills() {
+		return tills;
+	}
+
+	public void setTills(List<Till> tills) {
+		this.tills = tills;
+	}
+
 	public Long getStoreId() {
 		return id;
 	}

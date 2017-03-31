@@ -212,6 +212,12 @@
               changeValue: change 
           };
 
+          if($scope.selectedCustomers.length > 0)
+          {
+              transaction.customer = $scope.selectedCustomers[0];
+              console.log("1 chip, ", $scope.selectedCustomers[0]);
+          }
+
           if($scope.payments.length >= 1){
               transaction.payment1Type = $scope.payments[0].type; 
               transaction.payment1Value = $scope.payments[0].amount;  
@@ -220,6 +226,11 @@
             transaction.payment2Type = $scope.payments[1].type; 
             transaction.payment2Value= $scope.payments[1].amount; 
           }
+
+          console.log("Length of the selectedCustomers: ", $scope.selectedCustomers.length);
+          console.log("NO IF - chip, ", $scope.selectedCustomers[0]);
+          //transaction.customer = $scope.selectedCustomers[0];
+          console.log("Transaction object: ", transaction);
 
           transactionsFactory.insertTransaction(transaction).then(function successCallback(result){
               $scope.toastMessage("Transaction Made - redirect to print reciept");
@@ -234,6 +245,8 @@
 
               $scope.paymentAmount="";
               $scope.payments = [];
+
+              $scope.selectedCustomers=[];
           });
 
         } 
@@ -269,8 +282,8 @@
         $scope.readonly = false;
         $scope.selectedItem = null;
         $scope.searchText = null;
-        $scope.vegetables = $scope.customers;
-        $scope.selectedVegetables = [];
+        //$scope.custList = $scope.customers;
+        $scope.selectedCustomers = [];
         $scope.numberBuffer = '';
         $scope.autocompleteDemoRequireMatch = true;
 

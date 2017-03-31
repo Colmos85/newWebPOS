@@ -23,16 +23,16 @@
 									
 							<md-input-container class="md-block" flex-gt-sm>
 					            <label>Barcode</label>
-					            <input name="barcode" ng-model="barcode" ng-disabled="barcodeDisabled" md-autofocus required>
+					            <input name="barcode" ng-model="barcode" ng-disabled="barcodeDisabled" md-autofocus integer-validator ng-minlength="10" ng-maxlength="20" required>
 					            <div ng-messages="productForm.barcode.$error">
-							      	<div ng-message="required">This is required!</div>
+							      	<div ng-messages-include="app/common/numValidationTemplate.html"></div>
 							    </div>
 					        </md-input-container>
 					        <md-input-container class="md-block" flex-gt-sm>
 					            <label>Description</label>
-					            <input name="description" ng-model="description" required>
+					            <input name="description" ng-model="description" ng-minlength="2" ng-maxlength="45" required>
 					            <div ng-messages="productForm.description.$error">
-							      	<div ng-message="required">This is required!</div>
+							      	<div ng-messages-include="app/common/standardValidationTemplate.html"></div>
 							    </div>
 					        </md-input-container>
 					        <md-input-container class="md-block" flex-gt-sm>
@@ -71,7 +71,10 @@
 							<div layout="column" flex layout-gt-sm="row">
 								<md-input-container class="md-block" flex-gt-sm>
 						            <label>Trade Price Ex Vat</label>
-						            <input ng-model="tradePriceEx" ng-change="tradePriceExChange()" ng-blur="formatTradePriceEx()">
+						            <input ng-model="tradePriceEx" ng-change="tradePriceExChange()" ng-blur="formatTradePriceEx()" ng-minlength="1" ng-maxlength="15">
+						            <div ng-messages="productForm.tradePrice.$error">
+								      	<div ng-messages-include="app/common/standardValidationTemplate.html"></div>
+								    </div>
 						        </md-input-container>
 						        <div hide show-gt-sm>
 						        	<!-- <md-icon md-font-icon="close" />
@@ -80,14 +83,20 @@
 						        </div>
 								<md-input-container class="md-block" flex-gt-sm>
 						            <label>Markup %</label>
-						            <input ng-model="markup" ng-change="markupChange()" ng-blur="formatMarkup()">
+						            <input ng-model="markup" ng-change="markupChange()" ng-blur="formatMarkup()" ng-minlength="1" ng-maxlength="15">
+						            <div ng-messages="productForm.markup.$error">
+								      	<div ng-messages-include="app/common/standardValidationTemplate.html"></div>
+								    </div>
 						        </md-input-container>
 						        <div hide show-gt-sm>
 						        	<p style="padding: 13px">=</p>
 						        </div>
 						        <md-input-container class="md-block" flex-gt-sm>
 						            <label>Sales Price Ex Vat</label>
-						            <input ng-model="salesPriceEx" ng-change="salesPriceExChange()" ng-blur="formatSalesPriceEx()">
+						            <input ng-model="salesPriceEx" ng-change="salesPriceExChange()" ng-blur="formatSalesPriceEx()" ng-minlength="1" ng-maxlength="15">
+						            <div ng-messages="productForm.salesPriceEx.$error">
+								      	<div ng-messages-include="app/common/standardValidationTemplate.html"></div>
+								    </div>
 						        </md-input-container>
 							</div>
 							<div layout="column" layout-gt-sm="row" >
@@ -101,7 +110,10 @@
 				          		</md-input-container>
 						        <md-input-container class="md-block" flex-gt-sm>
 						            <label>Sales Price inc Vat</label>
-						            <input ng-model="salesPriceInc" ng-change="salesPriceIncChange()" ng-blur="formatSalesPriceInc()">
+						            <input ng-model="salesPriceInc" ng-change="salesPriceIncChange()" ng-blur="formatSalesPriceInc()" ng-minlength="1" ng-maxlength="15">
+						            <div ng-messages="productForm.salesPriceInc.$error">
+								      	<div ng-messages-include="app/common/standardValidationTemplate.html"></div>
+								    </div>
 						        </md-input-container>
 							</div>
 						</fieldset>

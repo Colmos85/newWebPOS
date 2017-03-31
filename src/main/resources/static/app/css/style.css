@@ -230,6 +230,68 @@ md-content {
   margin-top: 20px;
 }
 
+#chips-header input::-webkit-input-placeholder {
+  color:white;
+  font-style: italic;
+  font-size: 14px;
+  opacity: 0.7;
+}
+#chips-header input{
+  color: white;
+  font-style: italic;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+#chips-header input:-moz-placeholder{
+  color: white;
+  font-style: italic;
+  font-size: 14px;
+  opacity: 0.5;
+}
+#chips-header input:-ms-input-placeholder{
+  color: white;
+  font-style: italic;
+  font-size: 14px;
+  opacity: 0.5;
+}
+#chips-header input::-moz-placeholder, {
+    color: white;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+/*  *** THESE ALL WORK BUT NOT IN MD-CHIPS
+
+md-autocomplete{
+  color: red;
+}
+md-autocomplete-wrap{
+  color: red;
+}
+input{
+  color: red;
+}
+
+::-webkit-input-placeholder {
+   color: blue;
+}
+
+:-moz-placeholder { 
+   color: blue;  
+}
+
+::-moz-placeholder {  
+   color: blue;  
+}
+
+:-ms-input-placeholder {  
+   color: blue;  
+}*/
+
+
+
 /*#payment-container{
   border-radius: 4px;
   border:1px solid #3f3f3f;
