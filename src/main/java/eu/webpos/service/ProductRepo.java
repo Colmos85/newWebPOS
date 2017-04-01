@@ -21,6 +21,9 @@ public interface ProductRepo extends JpaRepository<Product, Integer>{
 	@Query(value="SELECT * FROM product WHERE active = 1", nativeQuery = true)
 	public List<Product> findAllActiveProducts();
 	
+/*	@Query(value="SELECT * FROM product WHERE active = 1", nativeQuery = true)
+	public List<Product> findAllActiveProducts();*/
+	
 	//@Query("SELECT * FROM Product p JOIN p.movements m WHERE m.name = :name")
 	/*@Query("SELECT * FROM Product p WHERE p.active=1")
 	public List<Product> findAllActive(@Param("name") String name);*/

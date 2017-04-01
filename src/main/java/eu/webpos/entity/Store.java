@@ -19,9 +19,10 @@ public class Store {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	
 	private String name;
+
 	private String address1;
 	private String address2;
 	private String address3;
@@ -40,6 +41,13 @@ public class Store {
 	private List<Till> tills;
 	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public List<Till> getTills() {
 		return tills;
@@ -49,11 +57,11 @@ public class Store {
 		this.tills = tills;
 	}
 
-	public Long getStoreId() {
+	public int getStoreId() {
 		return id;
 	}
 
-	public void setStoreId(Long id) {
+	public void setStoreId(int id) {
 		this.id = id;
 	}
 

@@ -52,10 +52,13 @@ public class Transaction {
 	@JsonBackReference(value="customer-transactions")
 	private Customer customer;
 	
-	//private TillSession tillSession;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "till_session_id")
+	@JsonBackReference(value="session-transactions")
+	private TillSession tillSession;
 	
 	
-	
+
 
 	public Customer getCustomer() {
 		return customer;
@@ -153,6 +156,16 @@ public class Transaction {
 
 	public void setTransactionItems(List<TransactionItem> transactionItems) {
 		this.transactionItems = transactionItems;
+	}
+	
+	
+
+	public TillSession getTillSession() {
+		return tillSession;
+	}
+
+	public void setTillSession(TillSession tillSession) {
+		this.tillSession = tillSession;
 	}
 	
 

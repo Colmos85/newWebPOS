@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -19,14 +20,44 @@ public class Till {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id")
 	@JsonBackReference(value="store-tills")
-	private Employee store;
+	private Store store;
+
+	
+	@OneToMany(mappedBy = "till")
+	@JsonManagedReference(value="tills-sessions")
+	private List<TillSession> tillSessions;
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
 	
 
 }

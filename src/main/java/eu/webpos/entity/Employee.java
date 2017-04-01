@@ -49,6 +49,10 @@ public class Employee implements UserDetails {
 	private List<Transaction> transactions;
 	
 	
+	@OneToMany(mappedBy = "employee")
+	@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
+	private List<TillSession> tillSessions;
+	
 
 	public Long getId() {
 		return id;
@@ -132,6 +136,23 @@ public class Employee implements UserDetails {
 	@Override
 	public String getUsername() {
 		return username;
+	}
+	
+	
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public List<TillSession> getTillSessions() {
+		return tillSessions;
+	}
+
+	public void setTillSessions(List<TillSession> tillSessions) {
+		this.tillSessions = tillSessions;
 	}
 
 }
