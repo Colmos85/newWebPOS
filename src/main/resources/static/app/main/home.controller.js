@@ -128,7 +128,6 @@
               }
               else{console.log("homeCtrl - No Till - first time login or cache reset.");};
             };
-
         });
 
         
@@ -151,10 +150,13 @@
         }
 
 
+        
+
+
 
     }]) // END of Getting started controller
 
-    .controller("titleController", function($rootScope, $log, $state, $timeout, $location, $scope, $interval, AuthService, HomeService) {
+    .controller("titleController", function($http, $rootScope, $log, $state, $timeout, $location, $scope, $interval, AuthService, HomeService) {
         
       	// set the username for the title bar
       	if(AuthService.user !== null){
@@ -178,8 +180,8 @@
             $scope.activeRegister = HomeService.till.name;
         }
 
+        // recieve broadcast on till change 
         $scope.$on('till:updated', function(event,data) {
-            // you could inspect the data to see if what you care about changed, or just update your own scope
             $scope.activeRegister = data.name;
         });
 
@@ -190,20 +192,18 @@
         tick();
         $interval(tick, 1000);
 
-        $scope.$on('LoginSuccessful', function() {
-          $scope.username = AuthService.user.firstName;
-        });
-        $scope.$on('LogoutSuccessful', function() {
-          $scope.username = null;
-        });
+        //$http.post(urlBase, product);
         $scope.logout = function() {
-          AuthService.user = null;
-          localStorage.setItem('user', null);
-          localStorage.setItem('token', null);
-          $rootScope.$broadcast('LogoutSuccessful');
-          $state.go('login');
+          $http.post("logout/", AuthService.user.username).then(function successCallback(response) {
+            AuthService.user = null;
+            localStorage.setItem('user', null);
+            localStorage.setItem('token', null);
+            $state.go('login');
+          }); 
         };
-    })
+    }) // END OF TITLE CONTROLLER
+
+
 
     .controller("sidebarController", function($scope, $mdSidenav, AuthService) {
         $scope.controllerName = "sidebarController";

@@ -53,6 +53,9 @@ public class Employee implements UserDetails {
 	@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
 	private List<TillSession> tillSessions;
 	
+	private boolean loggedIn;
+
+	
 
 	public Long getId() {
 		return id;
@@ -153,6 +156,14 @@ public class Employee implements UserDetails {
 
 	public void setTillSessions(List<TillSession> tillSessions) {
 		this.tillSessions = tillSessions;
+	}
+	
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 }

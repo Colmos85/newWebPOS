@@ -210,9 +210,10 @@
               onHold: 0,
               transactionItems: $scope.saleItems,
               employee: AuthService.user,
-              changeValue: change,
+              changeValue: change/*,
               store: HomeService.store,
-              till: HomeService.till 
+              till: HomeService.till */
+              //tillSession: ???
           };
 
           if($scope.selectedCustomers.length > 0)

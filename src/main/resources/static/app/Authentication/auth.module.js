@@ -20,20 +20,28 @@
           }
         }).then(function successCallback(response) {
           // checking if the token is available in the response
-          if (response.data.token) {
-            $scope.toastMessage("Login Successful");
-            // setting the Authorization Bearer token with JWT token
-            $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-            localStorage.setItem('token', response.data.token);
-            
-            // setting the user in AuthService
-            AuthService.user = response.data.user;
-            // transform user object to string for storing in local storage 
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            
-            $rootScope.$broadcast('LoginSuccessful');
-            // going to the home page
-            $state.go('home.gettingstarted');
+          if(response.status === 226)
+          {
+            $scope.password = "";
+            console.log("Im already Logged in");
+            $scope.toastMessage("User already Logged in!");
+          }
+          else{
+            if(response.data.token) {
+              $scope.toastMessage("Login Successful");
+              // setting the Authorization Bearer token with JWT token
+              $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+              localStorage.setItem('token', response.data.token);
+              
+              // setting the user in AuthService
+              AuthService.user = response.data.user;
+              // transform user object to string for storing in local storage 
+              localStorage.setItem('user', JSON.stringify(response.data.user));
+              
+              $rootScope.$broadcast('LoginSuccessful');
+              // going to the home page
+              $state.go('home.gettingstarted');
+            }
           }
         }, function errorCallback(response) {
           if(response.status === 401)

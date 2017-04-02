@@ -69,6 +69,20 @@ public class HomeRestController {
 		String loggedUsername = auth.getName();
 		return employeeRepository.findOneByUsername(loggedUsername);
 	}
+	
+	/**
+	 * This method is used to logout an employee..
+	 * 
+	 * @param employee
+	 * @return
+	 */
+	@RequestMapping(value = "/logout/", method = RequestMethod.POST)
+	public ResponseEntity<Employee> logoutEmployee(@RequestBody String username) {
+		Employee emp = employeeRepository.findOneByUsername(username);
+		emp.setLoggedIn(false);
+		employeeRepository.save(emp);
+		return new ResponseEntity<Employee>(emp, HttpStatus.OK);
+	}
 
 	/**
 	 * @param username
@@ -88,6 +102,15 @@ public class HomeRestController {
 					.signWith(SignatureAlgorithm.HS256, "secretkey").compact();
 			tokenMap.put("token", token);
 			tokenMap.put("user", appUser);
+			
+			if(employeeRepository.isEmployeeLoggedIn(appUser.getId()) == 0 ){	
+				appUser.setLoggedIn(true);
+				employeeRepository.save(appUser);
+			}
+			else{ // user is already logged in
+				return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.IM_USED); //226
+			}
+			
 			return new ResponseEntity<Map<String, Object>>(tokenMap, HttpStatus.OK);
 		} else {
 			tokenMap.put("token", null);
