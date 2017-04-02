@@ -25,7 +25,8 @@ public class CustomerRegistrationController {
 	
 	@RequestMapping(value = "/register/sendcustomerlink/", method = RequestMethod.POST)
 	public ResponseEntity<?> sendCustomerMail(@RequestBody String email) throws MessagingException {
-		stmpMailSender.send(email, "Customer Registration", "Here is the link to register - http://192.168.43.212:8080/#!/customerRegistration");
+		stmpMailSender.send(email, "Customer Registration", "Here is the link to register - http://52.214.112.241:80/#!/customerRegistration"
+									+ "	<a href='http://52.214.112.241:80/#!/customerRegistration'>Register Here!</a>");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	

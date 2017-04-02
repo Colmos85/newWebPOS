@@ -19,11 +19,12 @@
       'customersFactory',
       'transactionsFactory',
       'AuthService',
+      'HomeService',
       
       function ($rootScope, $scope, $log, $state, 
                 $timeout, $location, $mdDialog, $mdToast, 
                 $resource, productsFactory, cashierFactory, customersFactory, 
-                transactionsFactory, AuthService, mdHideAutocompleteOnEnter) {
+                transactionsFactory, AuthService, HomeService, mdHideAutocompleteOnEnter) {
 
         //$scope.products=[];
         productsFactory.getAllProducts().then(function successCallback(result){
@@ -209,7 +210,9 @@
               onHold: 0,
               transactionItems: $scope.saleItems,
               employee: AuthService.user,
-              changeValue: change 
+              changeValue: change,
+              store: HomeService.store,
+              till: HomeService.till 
           };
 
           if($scope.selectedCustomers.length > 0)

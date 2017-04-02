@@ -56,7 +56,9 @@
 	
 	          }*/
         }
-      });
+      }); // end of $rootscope.$on
+
+
     })
     .config(function ($mdThemingProvider, $locationProvider, $compileProvider) {
       $compileProvider.preAssignBindingsEnabled(true);
@@ -126,8 +128,8 @@
             views: {
 
               'content@home': {
-                templateUrl: 'app/views/gettingstarted.view.html'/*,
-                controller: 'homeCtrl as homeCtrl'*/
+                templateUrl: 'app/views/gettingstarted.view.html',
+                controller: 'gettingStartedCtrl'
               }
             }
           })

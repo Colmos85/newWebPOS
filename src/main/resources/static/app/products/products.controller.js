@@ -30,7 +30,7 @@
       // load / reload
     	vm.reload = function(productId) {
         // Load stores 
-        storesFactory.initLoadStores().then(function successCallback(result){
+        storesFactory.getAllStores().then(function successCallback(result){
             vm.stores=result.data;
         });
         // Load products 

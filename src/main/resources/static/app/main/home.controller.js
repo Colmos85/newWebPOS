@@ -2,6 +2,13 @@
   'use strict';
 
   angular.module('myApp.controllers')
+
+    .service('HomeService', function() {
+      return {
+        store : null,
+        till : null
+      }
+    })
   
     .controller('homeCtrl', [
       '$rootScope',
@@ -11,7 +18,9 @@
       '$location',
       'menu',
       '$http',
-      function ($rootScope, $log, $state, $timeout, $location, menu, $http/*, AuthService*/) {
+      'storesFactory',
+      'HomeService',
+      function ($rootScope, $log, $state, $timeout, $location, menu, $http, storesFactory, HomeService/*, AuthService*/) {
 
         var vm = this;
         
@@ -22,8 +31,6 @@
       	if(localStorage.getItem('token')){
       		$http.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
       	}
-
-        //vm.user = AuthService.user;
 
         //functions for menu-link and menu-toggle
         vm.isOpen = isOpen;
@@ -47,18 +54,115 @@
 
       }])
 
-    .controller("titleController", function($rootScope, $log, $state, $timeout, $location, $scope, $interval, AuthService) {
+
+    .controller("gettingStartedCtrl", [
+      '$scope',
+      '$rootScope',
+      '$log',
+      '$state',
+      '$timeout',
+      '$location',
+      'menu',
+      '$http',
+      'storesFactory',
+      'HomeService',
+      function ($scope, $rootScope, $log, $state, $timeout, $location, menu, $http, storesFactory, HomeService) {
+        /***********************************  Getting Started Page Controller ****************************************/
+        
+
+        // Load in stores 
+        $scope.selectedStoreIndex = -1;
+        $scope.selectedTillIndex = -1;
+        $scope.store = null;
+        $scope.till = null;
+        $scope.stores = [];
+
+        storesFactory.getAllStores().then(function successCallback(result){
+            $scope.stores = result.data;
+            
+            if(HomeService.store !== null){
+               // set The store on load
+               for (var i = 0; i < $scope.stores.length; i++) {
+                    if (angular.equals($scope.stores[i], HomeService.store)) {
+                      $scope.selectedStoreIndex = i;
+                      $scope.store = $scope.stores[i];
+                    }
+                }
+            }
+            else{ // get it from the localstorage
+              if(localStorage.getItem('store') !== null)
+              {
+                var retrievedStore = localStorage.getItem('store');
+                HomeService.store = JSON.parse(retrievedStore);
+                // set The store on load
+                for (var i = 0; i < $scope.stores.length; i++) {
+                    if (angular.equals($scope.stores[i], HomeService.store)) {
+                      $scope.selectedStoreIndex = i;
+                      $scope.store = $scope.stores[i];
+                    }
+                }
+                // set store as selection in the combobox????
+              }
+              else{console.log("homeCtrl - No Store - first time login or cache reset.");};
+            };
+
+            if(HomeService.till !== null){
+               // set The till on load
+               for (var i = 0; i < $scope.store.tills.length; i++) {
+                    if (angular.equals($scope.store.tills[i], HomeService.till)) {
+                      $scope.selectedTillIndex = i;
+                    }
+                }
+            }
+            else{ // get it from the localstorage
+              if(localStorage.getItem('till') !== null)
+              {
+                var retrievedTill = localStorage.getItem('till');
+                HomeService.till = JSON.parse(retrievedTill);
+                // set The store on load
+                for (var i = 0; i < $scope.store.tills.length; i++) {
+                    if (angular.equals($scope.store.tills[i], HomeService.till)) {$scope.selectedTillIndex = i;
+                    }
+                }
+                // set store as selection in the combobox????
+              }
+              else{console.log("homeCtrl - No Till - first time login or cache reset.");};
+            };
+
+        });
+
+        
+        // Do on blur on store combobox
+        $scope.setStore = function(){
+            localStorage.setItem('store', JSON.stringify($scope.store));
+            HomeService.store = $scope.store;   
+            // set till to null
+            HomeService.till = null;
+            // remove from local storage
+            localStorage.setItem('till', null);
+        }
+
+        // Do on blur on till combobox
+        $scope.setTill = function(){
+            localStorage.setItem('till', JSON.stringify($scope.till));
+            HomeService.till = $scope.till;
+            // broadcast message so title ctrl will pick it up and change the till name on title
+            $rootScope.$broadcast('till:updated', $scope.till); 
+        }
+
+
+
+    }]) // END of Getting started controller
+
+    .controller("titleController", function($rootScope, $log, $state, $timeout, $location, $scope, $interval, AuthService, HomeService) {
         
       	// set the username for the title bar
       	if(AuthService.user !== null){
-          console.log("titleController - if AuthService had a username!");
       		$scope.username = AuthService.user.firstName;
       	}
         else{ // get it from the localstorage
-          console.log("titleController - if AuthService has NO username!");
           if(localStorage.getItem('user') !== null)
           {
-            console.log("titleController - else local storage has user!");
             var retrievedObject = localStorage.getItem('user');
             AuthService.user = JSON.parse(retrievedObject);
             $scope.username = AuthService.user.firstName;
@@ -66,9 +170,19 @@
           else{console.log("titleController - else local storage has NO user!");};
         };
     		
-        $scope.activeRegister = "Main Register";
+        // set the till name on title bar
+        if(localStorage.getItem('till') !== null)
+        {
+            var retrievedTill = localStorage.getItem('till');
+            HomeService.till = JSON.parse(retrievedTill);
+            $scope.activeRegister = HomeService.till.name;
+        }
 
-        
+        $scope.$on('till:updated', function(event,data) {
+            // you could inspect the data to see if what you care about changed, or just update your own scope
+            $scope.activeRegister = data.name;
+        });
+
         
         var tick = function() {
             $scope.clock = Date.now();
