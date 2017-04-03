@@ -19,6 +19,11 @@
 
       factory.insertTransaction = function (transaction) {
           return $http.post(urlBase, transaction);
+          /*return $http({
+                  url: urlBase,
+                  method: "POST",
+                  params: params
+                  });*/
       };
 
       factory.updateTransaction = function (id, transaction) {

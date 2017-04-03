@@ -7,20 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import eu.webpos.entity.Product;
-import eu.webpos.entity.Store;
-import eu.webpos.entity.Till;
+import eu.webpos.entity.TillSession;
 
 
-public interface TillRepo extends JpaRepository<Till, Integer>{
+public interface TillSessionRepo extends JpaRepository<TillSession, Integer>{
 	
-	public int countByName(String name);
+	//public int countByName(String name);
 	//public Till findByName(String name);
 	
-	@Query(value="SELECT * FROM till t WHERE t.name= :name AND t.store_id = :id", nativeQuery = true)
-	public Till findTillByNameInStore(@Param("name") String name, @Param("id") int id);
+	@Query(value="SELECT * FROM till_session ts WHERE ts.employee_id= :id AND ts.close_date_time IS NULL", nativeQuery = true)
+	public TillSession findTillByEmployeeOpenSession(@Param("id") Long id);
 	
-	//@Query(value="SELECT * FROM store s WHERE till_id= :till_id", nativeQuery = true)
-	//public Store findStoreByTillId(@Param("till_id") int till_id);
 	
 /*	@Query(value="Select * FROM artists WHERE id = :id", nativeQuery = true)
 	public Artist findByIdNative(@Param("id") int id);*/

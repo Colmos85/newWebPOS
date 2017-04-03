@@ -31,10 +31,23 @@ public class Till {
 
 	
 	@OneToMany(mappedBy = "till")
-	@JsonManagedReference(value="tills-sessions")
-	private List<TillSession> tillSessions;
+	@JsonManagedReference(value="till-transactions")
+	private List<Transaction> transactions;
 	
 	
+	
+	
+	
+	
+	
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
 	public int getId() {
 		return id;
 	}

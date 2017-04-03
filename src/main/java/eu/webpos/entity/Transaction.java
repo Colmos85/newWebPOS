@@ -57,8 +57,20 @@ public class Transaction {
 	@JsonBackReference(value="session-transactions")
 	private TillSession tillSession;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "till_id")
+	@JsonBackReference(value="till-transactions")
+	private Till till;
 	
 
+
+	public Till getTill() {
+		return till;
+	}
+
+	public void setTill(Till till) {
+		this.till = till;
+	}
 
 	public Customer getCustomer() {
 		return customer;

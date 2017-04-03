@@ -1,3 +1,12 @@
+/**
+ * 
+ * This class (badly named) will store a shift/session details for an employee
+ * An employee an log out of one till and later log into another, while resuming
+ * their sales on the same session.  The session ends when the employee
+ * closes the till
+ * 
+ */
+		
 package eu.webpos.entity;
 
 import java.util.Date;
@@ -32,10 +41,6 @@ public class TillSession {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Date closeDateTime;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "till_id")
-	@JsonBackReference(value="tills-sessions")
-	private Till till;
 	
 	@OneToMany(mappedBy = "tillSession")
 	@JsonManagedReference(value="session-transactions")
@@ -75,14 +80,6 @@ public class TillSession {
 
 	public void setCloseDateTime(Date closeDateTime) {
 		this.closeDateTime = closeDateTime;
-	}
-
-	public Till getTill() {
-		return till;
-	}
-
-	public void setTill(Till till) {
-		this.till = till;
 	}
 
 	public List<Transaction> getTransactions() {

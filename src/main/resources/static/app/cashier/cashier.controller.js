@@ -183,7 +183,7 @@
                     $scope.paymentAmount = "";
                   } 
               }
-              else if($scope.balance < $scope.paymentAmount) // change is due. PAYMENY AMOUNT LARGER THAN BALANCE
+              else if($scope.balance <= $scope.paymentAmount) // change is due. PAYMENY AMOUNT LARGER THAN BALANCE
               {
                   if($scope.payments.length === 0) { // first payment
                       payment.type = paymentType;
@@ -210,16 +210,13 @@
               onHold: 0,
               transactionItems: $scope.saleItems,
               employee: AuthService.user,
-              changeValue: change/*,
-              store: HomeService.store,
-              till: HomeService.till */
-              //tillSession: ???
+              changeValue: change,
+              till: HomeService.till
           };
 
           if($scope.selectedCustomers.length > 0)
           {
               transaction.customer = $scope.selectedCustomers[0];
-              console.log("1 chip, ", $scope.selectedCustomers[0]);
           }
 
           if($scope.payments.length >= 1){
@@ -231,11 +228,7 @@
             transaction.payment2Value= $scope.payments[1].amount; 
           }
 
-          console.log("Length of the selectedCustomers: ", $scope.selectedCustomers.length);
-          console.log("NO IF - chip, ", $scope.selectedCustomers[0]);
-          //transaction.customer = $scope.selectedCustomers[0];
-          console.log("Transaction object: ", transaction);
-
+          //var params = {'transaction': transaction, 'till':HomeService.till};
           transactionsFactory.insertTransaction(transaction).then(function successCallback(result){
               $scope.toastMessage("Transaction Made - redirect to print reciept");
               //$scope.products=result.data;
