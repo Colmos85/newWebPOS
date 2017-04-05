@@ -26,6 +26,8 @@
                 $resource, productsFactory, cashierFactory, customersFactory, 
                 transactionsFactory, AuthService, HomeService, mdHideAutocompleteOnEnter) {
 
+        $scope.showSalesSummary = false;
+
         //$scope.products=[];
         productsFactory.getAllProducts().then(function successCallback(result){
             $scope.products=result.data;
@@ -187,13 +189,13 @@
               {
                   if($scope.payments.length === 0) { // first payment
                       payment.type = paymentType;
-                      payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
+                      payment.amount = $scope.displayPrice($scope.paymentAmount);
                       $scope.payments.push(payment);
                       $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
                       //$scope.balance = $scope.displayPrice(new Decimal(0.00));
                   }else { // second payment
                       payment.type = paymentType;
-                      payment.amount = new Decimal($scope.displayPrice($scope.paymentAmount));
+                      payment.amount = $scope.displayPrice($scope.paymentAmount);//new Decimal($scope.displayPrice($scope.paymentAmount));
                       $scope.payments.push(payment); 
                       $scope.makeTransaction(new Decimal($scope.displayPrice(new Decimal($scope.paymentAmount).minus(new Decimal($scope.balance)))));
                       //$scope.balance = $scope.displayPrice(new Decimal(0.00));
@@ -203,6 +205,37 @@
         }
 
 
+        $scope.backToSale = function(){
+          $scope.showSalesSummary = false;
+        }
+
+
+        $scope.finishTransaction = function()
+        {
+            console.log("Finish transaction");
+            $scope.saleItems = [];
+            $scope.subTotal = $scope.displayPrice(0.00);
+            $scope.tax = $scope.displayPrice(0.00);
+            $scope.total = $scope.displayPrice(0.00); //new Decimal(0.00);
+            $scope.balance = $scope.displayPrice(0.00);
+
+            $scope.paymentAmount="";
+            $scope.payments = [];
+
+            $scope.selectedCustomers=[];
+
+            $scope.showSalesSummary = false;
+        }
+
+
+        $scope.print = function() {
+            var printContents = document.getElementById("sales-summary").innerHTML;
+            var popupWin = window.open('', '_blank', 'width=450,height=700');
+            popupWin.document.open();
+            popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+            popupWin.document.close();
+            $mdDialog.hide();
+        };
 
         $scope.makeTransaction = function(change){
 
@@ -210,9 +243,14 @@
               onHold: 0,
               transactionItems: $scope.saleItems,
               employee: AuthService.user,
-              changeValue: change,
+              changeValue: $scope.displayPrice(change),// change.toFixed(2),
+              store: HomeService.store,
               till: HomeService.till
           };
+
+          $scope.transaction = transaction; 
+
+          console.log("This trasnaction: ", transacton);
 
           if($scope.selectedCustomers.length > 0)
           {
@@ -228,23 +266,70 @@
             transaction.payment2Value= $scope.payments[1].amount; 
           }
 
+          $scope.showSalesSummary = true;
+
           //var params = {'transaction': transaction, 'till':HomeService.till};
           transactionsFactory.insertTransaction(transaction).then(function successCallback(result){
               $scope.toastMessage("Transaction Made - redirect to print reciept");
               //$scope.products=result.data;
 
+              
+
+              /*$mdDialog.show({
+                locals:{
+                  subTotal: $scope.subTotal,
+                  total: $scope.total,
+                  tax: $scope.tax,
+                  payments: $scope.payments,
+                  transaction: transaction
+                },
+                controller: DialogController,
+                templateUrl: 'app/cashier/sale.summary.html',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose:false,
+                fullscreen: false // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'Brand Saved "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+
+              function DialogController($scope, $mdDialog, subTotal, total, tax, payments, transaction) {
+
+                $scope.subTotal = subTotal;
+                $scope.total = total;
+                $scope.tax = tax
+                $scope.payments = payments;
+                $scope.transaction = transaction;
+
+                console.log("Transaction: ", $scope.transaction);
+
+                $scope.print = function() {
+                  var printContents = document.getElementById("sales-summary").innerHTML;
+                  var popupWin = window.open('', '_blank', 'width=300,height=300');
+                  popupWin.document.open();
+                  popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+                  popupWin.document.close();
+                  $mdDialog.hide();
+                };
+
+                $scope.email = function() {
+                  $mdDialog.hide();
+                };
+        
+                $scope.close = function() {
+                  $mdDialog.cancel();
+                };
+
+              }; // END OF DialogController*/
+
               //clear transaction items & price
-              $scope.saleItems = [];
-              $scope.subTotal = $scope.displayPrice(0.00);
-              $scope.tax = $scope.displayPrice(0.00);
-              $scope.total = $scope.displayPrice(0.00); //new Decimal(0.00);
-              $scope.balance = $scope.displayPrice(0.00);
 
-              $scope.paymentAmount="";
-              $scope.payments = [];
-
-              $scope.selectedCustomers=[];
           });
+
+          
 
         } 
 

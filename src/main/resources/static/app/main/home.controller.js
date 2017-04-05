@@ -12,6 +12,7 @@
   
     .controller('homeCtrl', [
       '$rootScope',
+      '$scope',
       '$log',
       '$state',
       '$timeout',
@@ -20,7 +21,7 @@
       '$http',
       'storesFactory',
       'HomeService',
-      function ($rootScope, $log, $state, $timeout, $location, menu, $http, storesFactory, HomeService/*, AuthService*/) {
+      function ($rootScope, $scope, $log, $state, $timeout, $location, menu, $http, storesFactory, HomeService/*, AuthService*/) {
 
         var vm = this;
         
@@ -42,6 +43,13 @@
           isFirstOpen: true,
           isFirstDisabled: false
         };
+
+
+        vm.enableCashiersButton = false;
+        $scope.$on('till:updated', function(event,data) {
+            vm.enableCashiersButton = true;
+        });
+
 
 
         function isOpen(section) {
@@ -79,54 +87,33 @@
 
         storesFactory.getAllStores().then(function successCallback(result){
             $scope.stores = result.data;
-            
-            if(HomeService.store !== null){
-               // set The store on load
-               for (var i = 0; i < $scope.stores.length; i++) {
-                    if (angular.equals($scope.stores[i], HomeService.store)) {
-                      $scope.selectedStoreIndex = i;
-                      $scope.store = $scope.stores[i];
-                    }
-                }
-            }
-            else{ // get it from the localstorage
-              if(localStorage.getItem('store') !== null)
-              {
-                var retrievedStore = localStorage.getItem('store');
-                HomeService.store = JSON.parse(retrievedStore);
-                // set The store on load
-                for (var i = 0; i < $scope.stores.length; i++) {
-                    if (angular.equals($scope.stores[i], HomeService.store)) {
-                      $scope.selectedStoreIndex = i;
-                      $scope.store = $scope.stores[i];
-                    }
-                }
-                // set store as selection in the combobox????
-              }
-              else{console.log("homeCtrl - No Store - first time login or cache reset.");};
-            };
 
-            if(HomeService.till !== null){
-               // set The till on load
-               for (var i = 0; i < $scope.store.tills.length; i++) {
-                    if (angular.equals($scope.store.tills[i], HomeService.till)) {
-                      $scope.selectedTillIndex = i;
+            console.log("ALL STORES RETRIEVED!!!!!!!!!!!!!!!!!");
+            
+            if(localStorage.getItem('store') !== null)
+            {
+              var retrievedStore = localStorage.getItem('store');
+              HomeService.store = JSON.parse(retrievedStore);
+              // set The store on load
+              for (var i = 0; i < $scope.stores.length; i++) {
+                  if (angular.equals($scope.stores[i], HomeService.store)) {
+                    $scope.selectedStoreIndex = i;
+                    $scope.store = $scope.stores[i];
+
+                    if(localStorage.getItem('till') !== null)
+                    {
+                      var retrievedTill = localStorage.getItem('till');
+                      HomeService.till = JSON.parse(retrievedTill);
+                      // set The store on load
+                      for (var i = 0; i < $scope.store.tills.length; i++) {
+                          if (angular.equals($scope.store.tills[i], HomeService.till)) {
+                            $scope.selectedTillIndex = i;
+                            $rootScope.$broadcast('till:updated', $scope.till);
+                          }
+                      }
                     }
-                }
-            }
-            else{ // get it from the localstorage
-              if(localStorage.getItem('till') !== null)
-              {
-                var retrievedTill = localStorage.getItem('till');
-                HomeService.till = JSON.parse(retrievedTill);
-                // set The store on load
-                for (var i = 0; i < $scope.store.tills.length; i++) {
-                    if (angular.equals($scope.store.tills[i], HomeService.till)) {$scope.selectedTillIndex = i;
-                    }
-                }
-                // set store as selection in the combobox????
-              }
-              else{console.log("homeCtrl - No Till - first time login or cache reset.");};
+                  }
+              };
             };
         });
 
@@ -136,6 +123,7 @@
             localStorage.setItem('store', JSON.stringify($scope.store));
             HomeService.store = $scope.store;   
             // set till to null
+            $scope.selectedTillIndex = -1;
             HomeService.till = null;
             // remove from local storage
             localStorage.setItem('till', null);
@@ -150,7 +138,7 @@
         }
 
 
-        
+
 
 
 
@@ -182,7 +170,9 @@
 
         // recieve broadcast on till change 
         $scope.$on('till:updated', function(event,data) {
-            $scope.activeRegister = data.name;
+            if(data !== null){
+              $scope.activeRegister = data.name;
+            }
         });
 
         
@@ -195,6 +185,7 @@
         //$http.post(urlBase, product);
         $scope.logout = function() {
           $http.post("logout/", AuthService.user.username).then(function successCallback(response) {
+
             AuthService.user = null;
             localStorage.setItem('user', null);
             localStorage.setItem('token', null);
@@ -208,6 +199,12 @@
     .controller("sidebarController", function($scope, $mdSidenav, AuthService) {
         $scope.controllerName = "sidebarController";
         $scope.showMobileMainHeader = true;
+
+        $scope.enableCashiersButton = false;
+        $scope.$on('till:updated', function(event,data) {
+            $scope.enableCashiersButton = true;
+        });
+
         $scope.openSideNavPanel = function() {
             $mdSidenav('left').open();
         };

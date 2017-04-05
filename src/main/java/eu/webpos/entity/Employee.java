@@ -50,7 +50,8 @@ public class Employee implements UserDetails {
 	
 	
 	@OneToMany(mappedBy = "employee")
-	@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
+	//@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
+	@JsonIgnore
 	private List<TillSession> tillSessions;
 	
 	private boolean loggedIn;

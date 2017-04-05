@@ -1,0 +1,73 @@
+<md-dialog flex="80" >
+<md-dialog-content>
+<div layout="column" id="sales-summary">
+	<div style="text-align: center;" style="margin: 3px;">
+		<p>POSJS</h2>
+		<p>Address 1</h3>
+		<h3>Address 2</h3>
+		<h3>Address 3</h3>
+		<h4>Store Contact details</h4>
+		<h5>VAT NUM: 68465454</h5>
+	</div>
+	<md-list ng-cloak>
+		<md-subheader style="text-align: center;" class="md-no-sticky">Sales Summary</md-subheader>
+		<md-divider></md-divider>
+		<md-subheader class="md-no-sticky">Sale Items</md-subheader>
+			<md-list-item layout="row">
+			    <p flex="65">Desc</p>
+			    <p flex="15">Qty</p>
+			    <p layout-align="center end">Price</p>
+		  	</md-list-item>
+		<md-divider></md-divider>
+		 	<md-list-item layout="row" ng-repeat="item in transaction.transactionItems">
+			    <p flex="70">{{ item.product.description }} </p>
+			    <p flex="10">{{ item.quantity }} </p>
+			    <p layout-align="center end">{{ item.unitTotalDisplayPrice | currency:"€" }} </p>
+		  	</md-list-item>
+		<md-divider></md-divider>
+		<md-divider></md-divider>
+			<md-list-item layout="row">
+			    <p flex="80">Subtotal</p>
+			    <p layout-align="center end">{{ subTotal | currency:"€" }}</p>
+			</md-list-item>
+			<md-list-item layout="row">
+			    <p flex="80">Tax</p>
+			    <p layout-align="center end">{{ tax | currency:"€" }}</p>
+			</md-list-item>
+			<md-list-item layout="row">
+			    <h3 flex="80">Total</h3>
+			    <h3 layout-align="center end">{{ total | currency:"€" }}</h3>
+			</md-list-item>
+		<md-divider></md-divider>
+		<md-subheader class="md-no-sticky">Payments</md-subheader>
+		<md-divider></md-divider>
+			<md-list-item layout="row" ng-repeat="payment in payments">
+			    <p flex="80">{{ payment.type }} </p>
+			    <p flex="5">{{ payment.amount | currency:"€" }} </p>
+		  	</md-list-item>
+		  	<md-list-item layout="row">
+			    <p flex="80">Change </p>
+			    <p layout-align="center end">{{ transaction.changeValue | currency:"€"}} </p>
+		  	</md-list-item>
+		<md-divider></md-divider>
+		<h5>
+			Some message for the store...
+		</h5>
+</div>
+</md-dialog-content>
+<md-dialog-actions layout="row">
+	<!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+        More on Wikipedia
+      </md-button> -->
+      <md-button ng-click="print()">
+       Print
+      </md-button>
+      <md-button ng-click="email()">
+       Email
+      </md-button>
+      <span flex></span>
+      <md-button nng-click="close()" >
+        Close
+      </md-button>
+</md-dialog-actions>
+</md-dialog>

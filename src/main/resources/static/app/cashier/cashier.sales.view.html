@@ -26,7 +26,7 @@
 	<!-- start of second card in column -->
 	<md-card flex layout="column" > <!-- layout-align="space-around" layout-padding="layout-padding" -->
 
-		<form ng-submit="$event.preventDefault()" class="autocomplete-input">
+		<form ng-submit="$event.preventDefault()" class="autocomplete-input" ng-hide="showSalesSummary === true">
 	      <md-autocomplete  md-selected-item="selectedItem" 
 	      					md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" 
 	      					md-selected-item-change="selectedItemChange(item)" 
@@ -44,143 +44,232 @@
 	    </form>
 
 
+	   <div> <!-- <div ng-switch on="showSalesSummary"> -->
 	   <!-- Lef to right, transaction table, -->
-	   <div layout="column" layout-gt-sm="row" class="transaction-container">
-	   		<div flex-gt-sm="65" layout-padding class="transactionItemsTable" >
-	   			<table flex st-table="items" st-safe-src="saleItems" class="my-table table-striped">
-		   			<thead>
-			          <tr>
-			          	<th class="md-body-2" st-ratio="30" st-sort="id">Description</th>
-			          	<th class="md-body-2 hide-mobile-column" st-ratio="25" st-sort="id">Unit Price</th>
-			            <th class="md-body-2" st-ratio="10" st-sort="name">Qty</th>
-			            <th class="md-body-2" st-ratio="25" st-sort="name">Price</th>
-			            <th class="md-body-2" st-ratio="10"></th>
-			          </tr>
-			        </thead>
-			        <tbody ng-repeat="item in items">
-			        	<tr>
-			        		<td class="md-body-1"> {{ item.product.description }} </td>
-			        		<td class="md-body-1 hide-mobile-column"> {{ item.unitDisplayPrice }} </td>
-			        		<td class="md-body-1"> {{ item.quantity }} </td>
-			        		<td class="md-body-1"> {{ item.unitTotalDisplayPrice }} </td> <!-- md-caption -->
-			        		<td class="button-table-data">
-				        		<div layout="row" layout-fill>
-				        			<md-button class="md-icon-button launch" ng-click="removeProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
-					                  <!-- <md-icon  class="material-icons ">minus</md-icon> *** angular material icons ***-->
-					                  <i class="fa fa-minus" aria-label="remove 1 item" aria-hidden="true"></i> <!-- *** font awesome icons *** -->
-					                </md-button>
-					                <md-button class="md-icon-button launch" ng-click="addProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
-					                  <!-- <md-icon  class="material-icons ">add</md-icon> -->
-					                  <i class="fa fa-plus" aria-label="add 1 item" aria-hidden="true"></i>
+		   <div layout="column" layout-gt-sm="row" class="transaction-container" ng-hide="showSalesSummary === true">
+		   <div fade>
+		   		<div flex-gt-sm="65" layout-padding class="transactionItemsTable" >
+		   			<table flex st-table="items" st-safe-src="saleItems" class="my-table table-striped">
+			   			<thead>
+				          <tr>
+				          	<th class="md-body-2" st-ratio="30" st-sort="id">Description</th>
+				          	<th class="md-body-2 hide-mobile-column" st-ratio="25" st-sort="id">Unit Price</th>
+				            <th class="md-body-2" st-ratio="10" st-sort="name">Qty</th>
+				            <th class="md-body-2" st-ratio="25" st-sort="name">Price</th>
+				            <th class="md-body-2" st-ratio="10"></th>
+				          </tr>
+				        </thead>
+				        <tbody ng-repeat="item in items">
+				        	<tr>
+				        		<td class="md-body-1"> {{ item.product.description }} </td>
+				        		<td class="md-body-1 hide-mobile-column"> {{ item.unitDisplayPrice }} </td>
+				        		<td class="md-body-1"> {{ item.quantity }} </td>
+				        		<td class="md-body-1"> {{ item.unitTotalDisplayPrice }} </td> <!-- md-caption -->
+				        		<td class="button-table-data">
+					        		<div layout="row" layout-fill>
+					        			<md-button class="md-icon-button launch" ng-click="removeProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
+						                  <!-- <md-icon  class="material-icons ">minus</md-icon> *** angular material icons ***-->
+						                  <i class="fa fa-minus" aria-label="remove 1 item" aria-hidden="true"></i> <!-- *** font awesome icons *** -->
+						                </md-button>
+						                <md-button class="md-icon-button launch" ng-click="addProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
+						                  <!-- <md-icon  class="material-icons ">add</md-icon> -->
+						                  <i class="fa fa-plus" aria-label="add 1 item" aria-hidden="true"></i>
+						               </md-button>
+						            </div>
+				                </td>
+	<!-- 			        		<td class="button-table-data">
+				        			<md-button class="md-icon-button launch plus-button" ng-click="addProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
+					                  <md-icon  class="material-icons ">add</md-icon>
 					               </md-button>
-					            </div>
-			                </td>
-<!-- 			        		<td class="button-table-data">
-			        			<md-button class="md-icon-button launch plus-button" ng-click="addProduct(item.product.barcode, $index, $event); $event.stopPropagation(); ">
-				                  <md-icon  class="material-icons ">add</md-icon>
-				               </md-button>
-			        		</td> -->
-			        	</tr>
-			        </tbody>
-		   		</table>
-		   	</div>
+				        		</td> -->
+				        	</tr>
+				        </tbody>
+			   		</table>
+			   	</div>
 
-		   	<!-- Price table and payment buttons -->
-	   		<div flex-gt-sm="35" id="payment-container" layout-fill>
-	   			<div layout="column" layout-fill >
-	   				<div class="price-table" layout-fill flex="60">
-	   					<table flex class="table-striped">
-				   			<thead>
-				   			  <tr>
-				   			  	<th colspan="2" id="chips-header">
-									<md-chips ng-model="selectedCustomers" 
-											  md-max-chips="1"
-											  md-autocomplete-snap="" 
-											  md-transform-chip="transformChip($chip)" 
-											  md-require-match="autocompleteDemoRequireMatch">
-								      <md-autocomplete md-selected-item="selectedItem" 
-								      				   md-search-text="searchText" 
-								      				   md-items="item in customers | filter:searchText"  
-								      				   md-item-text="item.name" 
-								      				   placeholder="+ Customer"
-	      											   ng-hide="selectedCustomers.length > 0"
-								      				   >
-								        <span md-highlight-text="searchText">{{item.name}} :: {{item.username}}</span>
-								      </md-autocomplete>
-								      <md-chip-template>
-								        <span>
-								          <strong>{{$chip.name}}</strong>
-								          <em>({{$chip.username}})</em>
-								        </span>
-								      </md-chip-template>
-								    </md-chips>
-				   			  	</th> 
-				   			  </tr>
-					          <tr>
-					          	<th st-ratio="60"></th>
-					          	<th st-ratio="40"></th>
-					          </tr>
-					        </thead>
-					        <tbody>
-					        	<tr>
-					        		<td class="md-body-1">Sub Total</td>
-					        		<td class="md-body-1"> €{{ subTotal }} </td>
-					        	</tr>
-					        	<tr>
-					        		<td class="md-body-1">Tax</td>
-					        		<td class="md-body-1"> €{{ tax }} </td>
-					        	</tr>
-					        	<tr>
-					        		<td class="md-body-1">Total</td>
-					        		<td class="md-body-1"> €{{ total }} </td>
-					        	</tr>
+			   	<!-- Price table and payment buttons -->
+		   		<div flex-gt-sm="35" id="payment-container" layout-fill>
+		   			<div layout="column" layout-fill >
+		   				<div class="price-table" layout-fill flex="60">
+		   					<table flex class="table-striped">
+					   			<thead>
+					   			  <tr>
+					   			  	<th colspan="2" id="chips-header">
+										<md-chips ng-model="selectedCustomers" 
+												  md-max-chips="1"
+												  md-autocomplete-snap="" 
+												  md-transform-chip="transformChip($chip)" 
+												  md-require-match="autocompleteDemoRequireMatch">
+									      <md-autocomplete md-selected-item="selectedItem" 
+									      				   md-search-text="searchCustomersText" 
+									      				   md-items="item in customers | filter:searchCustomersText"  
+									      				   md-item-text="item.name" 
+									      				   placeholder="+ Customer"
+		      											   ng-hide="selectedCustomers.length > 0"
+									      				   >
+									        <span md-highlight-text="searchCustomersText">{{item.name}} :: {{item.username}}</span>
+									      </md-autocomplete>
+									      <md-chip-template>
+									        <span>
+									          <strong>{{$chip.name}}</strong>
+									          <em>({{$chip.username}})</em>
+									        </span>
+									      </md-chip-template>
+									    </md-chips>
+					   			  	</th> 
+					   			  </tr>
+						          <tr>
+						          	<th st-ratio="60"></th>
+						          	<th st-ratio="40"></th>
+						          </tr>
+						        </thead>
+						        <tbody>
+						        	<tr>
+						        		<td class="md-body-1">Sub Total</td>
+						        		<td class="md-body-1"> €{{ subTotal }} </td>
+						        	</tr>
+						        	<tr>
+						        		<td class="md-body-1">Tax</td>
+						        		<td class="md-body-1"> €{{ tax }} </td>
+						        	</tr>
+						        	<tr>
+						        		<td class="md-body-1">Total</td>
+						        		<td class="md-body-1"> €{{ total }} </td>
+						        	</tr>
 
-					        	<tr ng-show="payments.length > 0" class="top-row-line"><td>Payments</td><td> </td></tr>
-					        	<tr ng-repeat="payment in payments">
-					        		<td class="md-body-1">{{ payment.type }}</td>
-					        		<td class="md-body-1"> €{{ payment.amount }} </td>
-					        	</tr>
-					        	<tr class="top-row-line">
-					        		<td class="md-body-1">Balance</td>
-					        		<td class="md-body-1"> €{{ balance }} </td>
-					        	</tr>
-					        </tbody>
-				   		</table>
-	   				</div>
+						        	<tr ng-show="payments.length > 0" class="top-row-line"><td>Payments</td><td> </td></tr>
+						        	<tr ng-repeat="payment in payments">
+						        		<td class="md-body-1">{{ payment.type }}</td>
+						        		<td class="md-body-1"> €{{ payment.amount }} </td>
+						        	</tr>
+						        	<tr class="top-row-line">
+						        		<td class="md-body-1">Balance</td>
+						        		<td class="md-body-1"> €{{ balance }} </td>
+						        	</tr>
+						        </tbody>
+					   		</table>
+		   				</div>
 
-	   				<div flex="15"> <!-- Payment Amount -->
-	   					<div layout-fill layout="row" flex class="payment-amount-container">
-<!-- 	   						<md-input-container flex>
-						        <label>Payment Amount</label>
-						        <input ng-model="paymentAmount" type="" name="" />
-						    </md-input-container> -->
-						    <div flex> 
-						        <!-- <label>Global Search</label> -->
-						        <input ng-model="paymentAmount" type="number" step="0.01" class="search-input md-whiteframe-3dp" placeholder="Payment Amount"/>
-						    </div>
-	   					</div>
-	   				</div>
+		   				<div flex="15"> <!-- Payment Amount -->
+		   					<div layout-fill layout="row" flex class="payment-amount-container">
+	<!-- 	   						<md-input-container flex>
+							        <label>Payment Amount</label>
+							        <input ng-model="paymentAmount" type="" name="" />
+							    </md-input-container> -->
+							    <div flex> 
+							        <!-- <label>Global Search</label> -->
+							        <input ng-model="paymentAmount" type="number" step="0.01" class="search-input md-whiteframe-3dp" placeholder="Payment Amount"/>
+							    </div>
+		   					</div>
+		   				</div>
 
-	   				<div layout-fill flex="25" style="margin-top: 10px;"> <!-- Payment Buttons -->
-	   					<div layout-fill layout="row">
-	   						<span flex></span>
-   							<md-button ng-click="makePayment('CARD')" class="md-raised md-primary cash-button" flex="50">
-					          Card
-					        </md-button>
-   							
-   							<md-button ng-click="makePayment('CHEQUE')" class="md-raised md-primary cash-button" flex="50">
-					          Cheque
-					        </md-button>
-	   					</div>
-   						<div layout-fill layout="row">
-   							<span flex></span>
-	   						<md-button ng-click="makePayment('CASH')" class="md-raised md-primary cash-button" flex="100">
-					          CASH
-					        </md-button>
-				        </div>
-	   				</div>
-	   			</div>
-	   		</div>
+		   				<div layout-fill flex="25" style="margin-top: 10px;"> <!-- Payment Buttons -->
+		   					<div layout-fill layout="row">
+		   						<span flex></span>
+	   							<md-button ng-click="makePayment('CARD')" class="md-raised md-primary cash-button" flex="50">
+						          Card
+						        </md-button>
+	   							
+	   							<md-button ng-click="makePayment('CHEQUE')" class="md-raised md-primary cash-button" flex="50">
+						          Cheque
+						        </md-button>
+		   					</div>
+	   						<div layout-fill layout="row">
+	   							<span flex></span>
+		   						<md-button ng-click="makePayment('CASH')" class="md-raised md-primary cash-button" flex="100">
+						          CASH
+						        </md-button>
+					        </div>
+		   				</div>
+		   			</div>
+		   		</div>
+		   </div>
+		   </div>
+
+		   <div layout="column" id="sales-summary" ng-hide="showSalesSummary === false">
+		   <div fade>
+		   		<!-- <div>
+		   			<span flex></span>
+						<md-button ng-click="backToSale()" class="md-raised md-primary" layout-align="center end">
+			          	Back to sale
+			        	</md-button>
+				</div> -->
+				<div id="sales-summary">
+					<div style="text-align: center;" style="margin: 3px;">
+						<p>{{transaction.store.name}}</h2>
+						<p>{{transaction.store.address1}}</h3>
+						<h3>{{transaction.store.address2}}</h3>
+						<h3>{{transaction.store.address3}}</h3>
+						<h4>{{transaction.store.contact}}</h4>
+						
+					</div>
+					<md-list ng-cloak>
+						<md-subheader style="text-align: center;" class="md-no-sticky">Sales Summary</md-subheader>
+						<md-divider></md-divider>
+						<md-subheader class="md-no-sticky">Sale Items</md-subheader>
+							<md-list-item layout="row">
+							    <p flex="65">Desc</p>
+							    <p flex="15">Qty</p>
+							    <p layout-align="center end">Price</p>
+						  	</md-list-item>
+						<md-divider></md-divider>
+						 	<md-list-item layout="row" ng-repeat="item in saleItems">
+							    <p flex="65">{{ item.product.description }} </p>
+							    <p flex="15">{{ item.quantity }} </p>
+							    <p layout-align="center end">{{ item.unitTotalDisplayPrice | currency:"€" }} </p>
+						  	</md-list-item>
+						<md-divider></md-divider>
+						<md-divider></md-divider>
+							<md-list-item layout="row">
+							    <p flex="80">Subtotal</p>
+							    <p layout-align="center end">{{ subTotal | currency:"€" }}</p>
+							</md-list-item>
+							<md-list-item layout="row">
+							    <p flex="80">Tax</p>
+							    <p layout-align="center end">{{ tax | currency:"€" }}</p>
+							</md-list-item>
+							<md-list-item layout="row">
+							    <h3 flex="80">Total</h3>
+							    <h3 layout-align="center end">{{ total | currency:"€" }}</h3>
+							</md-list-item>
+						<md-divider></md-divider>
+						<md-subheader class="md-no-sticky">Payments</md-subheader>
+						<md-divider></md-divider>
+							<md-list-item layout="row" ng-repeat="payment in payments">
+							    <p flex="80">{{ payment.type }} </p>
+							    <p flex="5">{{ payment.amount | currency:"€" }} </p>
+						  	</md-list-item>
+						  	<md-list-item layout="row">
+							    <p flex="80">Change </p>
+							    <p layout-align="center end">{{ transaction.changeValue | currency:"€"}} </p>
+						  	</md-list-item>
+						<md-divider></md-divider>
+						<h5>
+							Some message for the store...
+						</h5>
+						<div layout="row" style="text-align: center;" style="margin: 3px;">
+							<h4 flex="50">You were served by: </h4>
+							<h4 flex="50">{{transaction.employee.firstName}}</h4>
+						</div>
+						<div style="text-align: center;" style="margin: 3px;">
+							<h4>Till: {{ transaction.till.name }}</h4>
+						</div>
+					</md-list>
+				</div>
+				<div layout="row" >
+				 	  <md-button ng-click="print()">
+				       Print
+				      </md-button>
+				      <md-button ng-click="email()">
+				       Email
+				      </md-button>
+				      <span flex></span>
+				      <md-button class="md-raised" ng-click="finishTransaction()" >
+				       Done
+				      </md-button>
+				</div>
+			</div>
+			</div>
 	   </div>
 
 

@@ -41,6 +41,17 @@
       };*/
 
 
+      factory.initLoadStores = function(){
+        factory.getAllStores().then(function successCallback(result){
+            console.log("Init Load stores!!!!! in factory");
+            $scope.allStores = result.data;
+        });
+        //return $http.get('stores/');
+      }
+
+      factory.getFactoryStores = function(){
+        return $scope.allStores;
+      }
 
 
       factory.getAllStores = function(){

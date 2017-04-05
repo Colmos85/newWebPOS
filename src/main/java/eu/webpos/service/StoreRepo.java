@@ -11,9 +11,6 @@ public interface StoreRepo extends JpaRepository<Store, Integer>{
 	
 	public int countByName(String name);
 	
-	//"SELECT DISTINCT c FROM Customer c LEFT JOIN FETCH c.purchaseOrders WHERE c.cust_id=1"
-	
-	//@Query(value="SELECT DISTINCT s FROM store s LEFT JOIN FETCH s.tills AS t WHERE t.id= :till_id", nativeQuery = true) 
 	//SELECT DISTINCT * FROM store JOIN till ON store.id = till.store_id WHERE till.id = 1;
 	@Query(value="SELECT * FROM store s JOIN till ON s.id = till.store_id WHERE till.id= :till_id", nativeQuery = true) 
 	public Store findStoreByTillId(@Param("till_id") int till_id);

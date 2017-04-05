@@ -22,18 +22,24 @@
     'ngResource',
     'smart-table'
   ])
-    .run(function(AuthService, $rootScope, $state) {
+    .run(function(AuthService, storesFactory, $rootScope, $state) {
+
+      //////////////////storesFactory.initLoadStores();
       // For implementing the authentication with ui-router we need to listen the
       // state change. For every state change the ui-router module will broadcast
       // the '$stateChangeStart'.
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
+        console.log("PPPPPPPPP  State Change  PPPPPPPPPPP");
+        console.log("PPPPPPPPP  State Change  PPPPPPPPPPP - ", AuthService.user);
+        
         // checking the user is logged in or not
-        if (!AuthService.user && !localStorage.getItem('user')) {
-
+        if (!AuthService.user  && !localStorage.getItem('user') /*&& localStorage.getItem('user') !== null*/) {
           // To avoiding the infinite looping of state change we have to add a
           // if condition.
+          console.log("PPPPPPPPP  In First IF  PPPPPPPPPPP - ");
         	if (toState.name != 'login' && toState.name != 'customerRegistration') {
+            console.log("PPPPPPPPP  In SECOND IF  PPPPPPPPPPP - ");
             event.preventDefault();
             $state.go('login');
         	}

@@ -92,7 +92,6 @@ public class TransactionController {
 			TillSession newTillSession = new TillSession();
 			newTillSession.setOpenDateTime(dateTime);
 			newTillSession.setEmployee(transaction.getEmployee());
-			//newTillSession.setTill(transaction.getTillSession());
 			newTillSession = sessonrp.save(newTillSession);
 			transaction.setTillSession(newTillSession);
 		}
