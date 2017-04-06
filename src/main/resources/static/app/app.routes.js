@@ -31,13 +31,19 @@
       // the '$stateChangeStart'.
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
-        console.log("PPPPPPPPP  State Change  PPPPPPPPPPP");
-        //console.log("PPPPPPPPP  State Change  PPPPPPPPPPP - ", AuthService.user);
-        
+        if(localStorage.getItem('user') !== null)
+        {
+            var retrievedObject = localStorage.getItem('user');
+            AuthService.user = JSON.parse(retrievedObject);
+        }
         // checking the user is logged in or not
-        if (!AuthService.user  && !localStorage.getItem('user') /*&& localStorage.getItem('user') !== null*/) {
+        if (!AuthService.user  /* && !localStorage.getItem('user') /*&& localStorage.getItem('user') !== null*/) {
           // To avoiding the infinite looping of state change we have to add a
           // if condition.
+          if(localStorage.getItem('user') === null)
+          {
+            console.log("APP.ROUTES.JS Auth service has no user AND local storage had no user");  
+          }
           console.log("PPPPPPPPP  In First IF  PPPPPPPPPPP - ");
         	if (toState.name != 'login' && toState.name != 'customerRegistration') {
             console.log("PPPPPPPPP  In SECOND IF  PPPPPPPPPPP - ");

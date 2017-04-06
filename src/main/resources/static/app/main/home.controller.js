@@ -92,6 +92,7 @@
             
             if(localStorage.getItem('store') !== null)
             {
+              console.log("STOTE IN LOCAL STORAGE");
               var retrievedStore = localStorage.getItem('store');
               HomeService.store = JSON.parse(retrievedStore);
               // set The store on load
@@ -161,7 +162,8 @@
         };
     		
         // set the till name on title bar
-        if(localStorage.getItem('till') !== null)
+        var till = localStorage.getItem('till');
+        if(localStorage.getItem('till') !== null )
         {
             var retrievedTill = localStorage.getItem('till');
             HomeService.till = JSON.parse(retrievedTill);
