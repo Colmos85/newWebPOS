@@ -229,12 +229,13 @@
 
 
         $scope.print = function() {
-            var printContents = document.getElementById("sales-summary").innerHTML;
-            var popupWin = window.open('', '_blank', 'width=450,height=700');
-            popupWin.document.open();
-            popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
-            popupWin.document.close();
-            $mdDialog.hide();
+            //var printContents = document.getElementById("sales-summary").innerHTML;
+            //var popupWin = window.open('', '_blank', 'width=450,height=700');
+            //popupWin.document.open();
+            //popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+            //popupWin.document.close();
+            //$mdDialog.hide();
+            $scope.showSalesSummary = false; 
         };
 
         $scope.makeTransaction = function(change){
@@ -250,7 +251,7 @@
 
           $scope.transaction = transaction; 
 
-          console.log("This trasnaction: ", transacton);
+          console.log("This trasnaction: ", $scope.transaction);
 
           if($scope.selectedCustomers.length > 0)
           {

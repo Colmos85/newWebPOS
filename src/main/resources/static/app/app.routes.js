@@ -20,7 +20,8 @@
     'ui.bootstrap',
     'ngMessages',
     'ngResource',
-    'smart-table'
+    'smart-table',
+    'ngPrint'
   ])
     .run(function(AuthService, storesFactory, $rootScope, $state) {
 
@@ -31,7 +32,7 @@
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
         console.log("PPPPPPPPP  State Change  PPPPPPPPPPP");
-        console.log("PPPPPPPPP  State Change  PPPPPPPPPPP - ", AuthService.user);
+        //console.log("PPPPPPPPP  State Change  PPPPPPPPPPP - ", AuthService.user);
         
         // checking the user is logged in or not
         if (!AuthService.user  && !localStorage.getItem('user') /*&& localStorage.getItem('user') !== null*/) {
