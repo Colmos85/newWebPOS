@@ -46,8 +46,8 @@
 
 	   <div> <!-- <div ng-switch on="showSalesSummary"> -->
 	   <!-- Lef to right, transaction table, -->
-		   <div layout="column" layout-gt-sm="row" class="transaction-container" ng-hide="showSalesSummary === true">
-		   <div fade>
+		   <div ng-hide="showSalesSummary === true">
+		   <div layout="column" layout-gt-sm="row" class="transaction-container" fade>
 		   		<div flex-gt-sm="65" layout-padding class="transactionItemsTable" >
 		   			<table flex st-table="items" st-safe-src="saleItems" class="my-table table-striped">
 			   			<thead>
@@ -200,7 +200,7 @@
 						<p>{{transaction.store.address1}}</h3>
 						<h3>{{transaction.store.address2}}</h3>
 						<h3>{{transaction.store.address3}}</h3>
-						<h4>{{transaction.store.contactNum}}</h4>
+						<h4>{{transaction.store.contact}}</h4>
 						
 					</div>
 					<md-list ng-cloak>
@@ -257,22 +257,20 @@
 					</md-list>
 				</div>
 				<div layout="row" >
-				 	  <md-button ng-click="print()">
+				 	  <md-button ng-click="print()" ng-print print-element-id="sales-summary">
 				       Print
 				      </md-button>
 				      <md-button ng-click="email()">
 				       Email
 				      </md-button>
 				      <span flex></span>
-				      <md-button class="md-raised" ng-click="finishTransaction()" >
+				      <md-button ng-click="finishTransaction()" >
 				       Done
 				      </md-button>
 				</div>
 			</div>
 			</div>
 	   </div>
-
-
 	</md-card>
 	<!-- End of second card column -->
 
