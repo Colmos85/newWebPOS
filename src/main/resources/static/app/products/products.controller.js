@@ -331,6 +331,7 @@
                   // refresh the list of products and quantity (less efficient but easier for now)
                   vm.reload();
                   vm.toastMessage("Product Updated");
+                  $mdDialog.hide(answer);
                 });
             }
             else // else new product button was pressed

@@ -186,7 +186,7 @@
 		   </div>
 		   </div>
 
-		   <div layout="column" id="sales-summary" ng-hide="showSalesSummary === false">
+		   <div layout="column" ng-hide="showSalesSummary === false">
 		   <div fade>
 		   		<!-- <div>
 		   			<span flex></span>
@@ -195,51 +195,50 @@
 			        	</md-button>
 				</div> -->
 				<div id="sales-summary">
-					<div style="text-align: center;" style="margin: 3px;">
-						<p>{{transaction.store.name}}</h2>
-						<p>{{transaction.store.address1}}</h3>
-						<h3>{{transaction.store.address2}}</h3>
-						<h3>{{transaction.store.address3}}</h3>
-						<h4>{{transaction.store.contact}}</h4>
-						
+					<div class="sales-summary-headers" style="text-align: center;" style="margin: 3px;">
+						<p>{{transaction.store.name}}</p>
+						<p>{{transaction.store.address1}}</p>
+						<p>{{transaction.store.address2}}</p>
+						<p>{{transaction.store.address3}}</p>
+						<p>{{transaction.store.contact}}</p>
 					</div>
 					<md-list ng-cloak>
-						<md-subheader style="text-align: center;" class="md-no-sticky">Sales Summary</md-subheader>
+						<md-subheader style="text-align: center;" class="md-no-sticky sales-summary-headers">Sales Summary</md-subheader>
 						<md-divider></md-divider>
-						<md-subheader class="md-no-sticky">Sale Items</md-subheader>
-							<md-list-item layout="row">
+						<md-subheader class="md-no-sticky sales-summary-headers">Sale Items</md-subheader>
+							<md-list-item class="print-row" layout="row">
 							    <p flex="65">Desc</p>
 							    <p flex="15">Qty</p>
 							    <p layout-align="center end">Price</p>
 						  	</md-list-item>
 						<md-divider></md-divider>
-						 	<md-list-item layout="row" ng-repeat="item in saleItems">
+						 	<md-list-item class="print-row" layout="row" ng-repeat="item in saleItems">
 							    <p flex="65">{{ item.product.description }} </p>
 							    <p flex="15">{{ item.quantity }} </p>
 							    <p layout-align="center end">{{ item.unitTotalDisplayPrice | currency:"€" }} </p>
 						  	</md-list-item>
 						<md-divider></md-divider>
 						<md-divider></md-divider>
-							<md-list-item layout="row">
+							<md-list-item class="print-row" layout="row">
 							    <p flex="80">Subtotal</p>
 							    <p layout-align="center end">{{ subTotal | currency:"€" }}</p>
 							</md-list-item>
-							<md-list-item layout="row">
+							<md-list-item class="print-row" layout="row">
 							    <p flex="80">Tax</p>
 							    <p layout-align="center end">{{ tax | currency:"€" }}</p>
 							</md-list-item>
-							<md-list-item layout="row">
+							<md-list-item class="print-row" layout="row">
 							    <h3 flex="80">Total</h3>
 							    <h3 layout-align="center end">{{ total | currency:"€" }}</h3>
 							</md-list-item>
 						<md-divider></md-divider>
-						<md-subheader class="md-no-sticky">Payments</md-subheader>
+						<md-subheader class="md-no-sticky sales-summary-headers">Payments</md-subheader>
 						<md-divider></md-divider>
-							<md-list-item layout="row" ng-repeat="payment in payments">
+							<md-list-item class="print-row" layout="row" ng-repeat="payment in payments">
 							    <p flex="80">{{ payment.type }} </p>
 							    <p flex="5">{{ payment.amount | currency:"€" }} </p>
 						  	</md-list-item>
-						  	<md-list-item layout="row">
+						  	<md-list-item class="print-row" layout="row">
 							    <p flex="80">Change </p>
 							    <p layout-align="center end">{{ transaction.changeValue | currency:"€"}} </p>
 						  	</md-list-item>
@@ -247,11 +246,11 @@
 						<h5>
 							Some message for the store...
 						</h5>
-						<div layout="row" style="text-align: center;" style="margin: 3px;">
+						<div class="print-row" layout="row" style="text-align: center;" style="margin: 3px;">
 							<h4 flex="50">You were served by: </h4>
 							<h4 flex="50">{{transaction.employee.firstName}}</h4>
 						</div>
-						<div style="text-align: center;" style="margin: 3px;">
+						<div class="print-row" style="text-align: center;" style="margin: 3px;">
 							<h4>Till: {{ transaction.till.name }}</h4>
 						</div>
 					</md-list>

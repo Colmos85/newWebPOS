@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -44,14 +46,15 @@ public class Employee implements UserDetails {
 	private List<String> roles = new ArrayList<>();
 	
 	
+	//@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 	@OneToMany(mappedBy = "employee")
 	@JsonManagedReference(value="transactions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
 	private List<Transaction> transactions;
 	
 	
 	@OneToMany(mappedBy = "employee")
-	//@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
-	@JsonIgnore
+	@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
+	//@JsonIgnore
 	private List<TillSession> tillSessions;
 	
 	private boolean loggedIn;

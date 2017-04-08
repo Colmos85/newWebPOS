@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.webpos.entity.Employee;
 import eu.webpos.service.EmployeeRepo;
+import eu.webpos.service.TransactionRepo;
 
 
 @RestController
@@ -24,6 +25,8 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepo employeeRepository;
 
+	@Autowired
+	private TransactionRepo transactionRepository;
 
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -31,7 +34,29 @@ public class EmployeeController {
 	public List<Employee> users() {
 		return employeeRepository.findAll();
 	}
+	
+/*	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/basic/{username}", method = RequestMethod.GET)
+	public Employee usersOnly(@PathVariable String username) {
+		return employeeRepository.findByUsername(null);
+	}*/
 
+	
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/fivetransactions/", method = RequestMethod.GET)
+	public List<Employee> usersbasic() {
+		List<Employee> emps = employeeRepository.findAll();
+		System.out.println("1. Length of : " + emps.get(0).getTransactions().size());
+		for(Employee e: emps)
+		{
+			// set only last 5 transactions..
+			e.setTransactions(transactionRepository.findTransactionsByEmployeeIdLimitFive(e.getId()));
+		}
+		//findTransactionsLimitFive
+		System.out.println("2. Length of : " + emps.get(0).getTransactions().size());
+		return emps;//employeeRepository.findAllNoTransactions();
+	}
+	
 
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

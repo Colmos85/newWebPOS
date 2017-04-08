@@ -14,9 +14,15 @@ public interface TillSessionRepo extends JpaRepository<TillSession, Integer>{
 	
 	//public int countByName(String name);
 	//public Till findByName(String name);
+	public List<TillSession> findByEmployeeUsername(String username);
 	
 	@Query(value="SELECT * FROM till_session ts WHERE ts.employee_id= :id AND ts.close_date_time IS NULL", nativeQuery = true)
-	public TillSession findTillByEmployeeOpenSession(@Param("id") Long id);
+	public TillSession findTillSessionByEmployeeOpenSession(@Param("id") Long id);
+	
+	
+	public List<TillSession> findByEmployeeId(Long id);
+	/*@Query(value="SELECT * FROM till_session ts WHERE ts.employee_id= :id", nativeQuery = true)
+	public List<TillSession> findTillSessionsByEmployee(@Param("id") Long id);*/
 	
 	
 /*	@Query(value="Select * FROM artists WHERE id = :id", nativeQuery = true)

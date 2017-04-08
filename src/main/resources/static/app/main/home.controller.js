@@ -92,7 +92,7 @@
             
             if(localStorage.getItem('store') !== null)
             {
-              console.log("STOTE IN LOCAL STORAGE");
+              console.log("STORE IN LOCAL STORAGE");
               var retrievedStore = localStorage.getItem('store');
               HomeService.store = JSON.parse(retrievedStore);
               // set The store on load

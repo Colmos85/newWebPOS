@@ -133,6 +133,8 @@
 
       function ($rootScope, $log, $http, $q, $state, $scope, 
                 $timeout, $location, $resource, customersFactory, $mdToast) {
+
+      $scope.success = false;
         
       $scope.toastMessage = function(message) {
         $mdToast.show(
@@ -164,6 +166,16 @@
           // refresh the list of products and quantity (less efficient but easier for now)
           //vm.reload();
           $scope.toastMessage("Added successfully");
+          //$scope.name = "";
+          $scope.email = "";
+          $scope.contact = "";
+          $scope.address1 = "";
+          $scope.address2 = "";
+          $scope.address3 = "";
+          $scope.username = "";
+          $scope.password = "";
+
+          $scope.success = true;
         });
       };
 

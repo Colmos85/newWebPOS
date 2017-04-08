@@ -9,6 +9,7 @@
 <div class="registrationForm"> 
   <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form"> 
     <md-card flex="flex" flex> 
+    <div ng-hide="success === true">
       <md-toolbar> 
         <div class="md-toolbar-tools"> 
           <h2><span>Customer Registration</span></h2> 
@@ -32,7 +33,7 @@
                   </md-input-container> 
                   <md-input-container class="md-block" flex-gt-sm> 
                       <label>Email</label> 
-                      <input type="email" name="email" ng-model="email" record-checker="/customers/emailexists/" required> 
+                      <input type="email" name="email" ng-model="email" record-checker="/register/customer/emailexists/" required> 
                       <div ng-messages="customerForm.email.$error"> 
                       <div ng-message="required">This is required!</div> 
                       <div ng-message="email">Enter a valid email!</div> 
@@ -85,7 +86,7 @@
             <legend><h4>Login Details</h4></legend> 
               <md-input-container class="md-block" flex-gt-sm> 
                       <label>Username</label> 
-                      <input name="username" ng-model="username" record-checker="/customers/usernameexists/" required> 
+                      <input name="username" ng-model="username" record-checker="/register/customer/usernameexists/" required> 
                       <div ng-messages="customerForm.username.$error"> 
                       <div ng-message="required">This is required!</div> 
                       <div ng-message="recordexists">Username already exists!</div>
@@ -118,6 +119,11 @@
     </md-dialog-actions> 
     </form> 
       </md-card-content> 
+
+    </div> <!-- END OF REGISTRATION FORM -->
+    <div layout-center-center layout-padding layout-margin ng-hide="success === false">
+      <h2>Thank you {{ name }}, you are now a registered customer!</h2>
+    </div>
     </md-card> 
   </md-content> 
 </div> 

@@ -2,11 +2,19 @@
     #printSection {
         display: none;
     }
+
+    /*#sales-summary {
+        display: none;
+    }*/
 }
 
 @media print {
     body * {
         display:none;
+    }
+
+    md-sidenav * {
+        display: none !important;
     }
 
     #printSection, #printSection * {
@@ -18,4 +26,49 @@
         left:0;
         top:0;
     }
+
+
+
+
+
+
+    #sales-summary {
+        position:absolute;
+        left:0;
+        top:0;
+        display: block;
+        width:100%;
+        position:absolute;
+        left:0;
+        top:0;
+    }
+
+    .sales-summary-headers p{
+        width:100%;
+        display: block;
+        color: black;
+        text-align: center;
+        margin:4px;
+    }
+
+     .print-row p{
+        width:100%;
+        /*display: inline;*/
+        color: green;
+        margin: 2px;
+        padding: 10px;
+    }
+
+    .print-row h3{
+        width:100%;
+        display: inline;
+        color: green;
+        margin: 2px;
+        padding: 10px;
+    }
+
+    /*@page{
+
+    }*/
+
 }

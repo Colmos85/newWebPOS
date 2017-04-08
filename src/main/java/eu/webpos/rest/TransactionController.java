@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.entity.Employee;
 import eu.webpos.entity.Stock;
 import eu.webpos.entity.Store;
 import eu.webpos.entity.TaxBand;
@@ -59,6 +60,52 @@ public class TransactionController {
 	}
 	
 	
+	/**
+	 * Find last 5 transactions most recent
+	 * @return
+	 */
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/limitfive", method = RequestMethod.GET)
+	public List<Transaction> findFive() {
+		return rp.findTransactionsLimitFive();
+	}
+	
+	
+	
+	/**
+	 * Get last 10 transactions for till
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value = "/employeelimitfive/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Transaction>> employeeLimitFive(@PathVariable int id) {
+		List<Transaction> transactions = rp.findTransactionsLimitTwentyByTillId(id);
+		if (transactions == null) {
+			return new ResponseEntity<List<Transaction>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
+		}
+	}
+	
+	
+	/**
+	 * Get last 10 transactions for employee
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value = "/tilllimitfive/{id}", method = RequestMethod.GET)
+	public  ResponseEntity<List<Transaction>> tillLimitFive(@PathVariable Long id) {
+		List<Transaction> transactions = rp.findTransactionsLimitTwentyByEmployeeId(id);
+		if (transactions == null) {
+			return new ResponseEntity<List<Transaction>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
+		}
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Post a new Transaction to the database
@@ -85,7 +132,7 @@ public class TransactionController {
 		transaction.setTransaction_date(dateTime);
 		
 		// find a till session for t
-		TillSession ts = sessonrp.findTillByEmployeeOpenSession(transaction.getEmployee().getId());
+		TillSession ts = sessonrp.findTillSessionByEmployeeOpenSession(transaction.getEmployee().getId());
 		if(ts != null)
 			transaction.setTillSession(ts);
 		else{ // create a till session

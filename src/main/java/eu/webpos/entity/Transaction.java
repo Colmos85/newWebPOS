@@ -42,22 +42,22 @@ public class Transaction {
 	@JsonManagedReference(value="transaction-items")
 	private List<TransactionItem> transactionItems;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne() //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	@JsonBackReference(value="transactions")
 	private Employee employee;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "customer_id")
 	@JsonBackReference(value="customer-transactions")
 	private Customer customer;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "till_session_id")
 	@JsonBackReference(value="session-transactions")
 	private TillSession tillSession;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "till_id")
 	@JsonBackReference(value="till-transactions")
 	private Till till;

@@ -23,7 +23,7 @@
     'smart-table',
     'ngPrint'
   ])
-    .run(function(AuthService, storesFactory, $rootScope, $state) {
+    .run(function(AuthService, HomeService, storesFactory, $rootScope, $state) {
 
       //////////////////storesFactory.initLoadStores();
       // For implementing the authentication with ui-router we need to listen the
@@ -31,44 +31,34 @@
       // the '$stateChangeStart'.
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
+        if(localStorage.getItem('store') !== null)
+        {
+            var storeObject = localStorage.getItem('store');
+            HomeService.store = JSON.parse(storeObject);
+        }
+
+        if(localStorage.getItem('still') !== null)
+        {
+            var tillObject = localStorage.getItem('still');
+            HomeService.till = JSON.parse(tillObject);
+        }
+
         if(localStorage.getItem('user') !== null)
         {
-            var retrievedObject = localStorage.getItem('user');
-            AuthService.user = JSON.parse(retrievedObject);
+            var userObject = localStorage.getItem('user');
+            AuthService.user = JSON.parse(userObject);
         }
         // checking the user is logged in or not
         if (!AuthService.user  /* && !localStorage.getItem('user') /*&& localStorage.getItem('user') !== null*/) {
           // To avoiding the infinite looping of state change we have to add a
           // if condition.
-          if(localStorage.getItem('user') === null)
-          {
-            console.log("APP.ROUTES.JS Auth service has no user AND local storage had no user");  
-          }
-          console.log("PPPPPPPPP  In First IF  PPPPPPPPPPP - ");
         	if (toState.name != 'login' && toState.name != 'customerRegistration') {
-            console.log("PPPPPPPPP  In SECOND IF  PPPPPPPPPPP - ");
             event.preventDefault();
             $state.go('login');
         	}
-
-	        /*} else {*/
-	          // checking the user is authorized to view the states
-	          /*if (toState.data && toState.data.role) {
-	            var hasAccess = false;
-	            for (var i = 0; i < AuthService.user.roles.length; i++) {
-	              var role = AuthService.user.roles[i];
-	              if (toState.data.role == role) {
-	                hasAccess = true;
-	                break;
-	              }
-	            }
-	            if (!hasAccess) {
-	              event.preventDefault();
-	              $state.go('access-denied');
-	            }
-	
-	          }*/
         }
+
+        
       }); // end of $rootscope.$on
 
 

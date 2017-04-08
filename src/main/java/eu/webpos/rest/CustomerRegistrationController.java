@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import eu.webpos.entity.Brand;
 import eu.webpos.mail.SmtpMailSender;
 import eu.webpos.rest.BrandController.CustomErrorType;
+import eu.webpos.service.CustomerRepo;
 
 @RestController
 //@RequestMapping("/register")
@@ -23,12 +24,53 @@ public class CustomerRegistrationController {
 	@Autowired
 	private SmtpMailSender stmpMailSender;
 	
+	@Autowired
+	private CustomerRepo rp;
+	
 	@RequestMapping(value = "/register/sendcustomerlink/", method = RequestMethod.POST)
 	public ResponseEntity<?> sendCustomerMail(@RequestBody String email) throws MessagingException {
 		stmpMailSender.send(email, "Customer Registration", "Here is the link to register - http://52.214.112.241:80/#!/customerRegistration"
 									+ "	<a href='http://52.214.112.241:80/#!/customerRegistration'>Register Here!</a>");
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	
+	
+	
+	/**
+	 * Method to check if a customer with this email already exists
+	 * @param email
+	 * @return boolean value
+	 */
+	@RequestMapping(value = "/register/customer/emailexists/{viewValue:.+}", method = RequestMethod.GET)
+	public boolean emailExists(@PathVariable String viewValue) {
+		boolean exists = false;
+		System.out.println("Email received?: " + viewValue);
+		if(rp.countByEmail(viewValue) > 0){
+			System.out.println("Email exists");
+			exists = true;
+		}
+		return exists;
+	}
+	
+	
+	/**
+	 * Method to check if a customer with this email already exists
+	 * @param username
+	 * @return boolean value
+	 */
+	@RequestMapping(value = "/register/customer/usernameexists/{viewValue}", method = RequestMethod.GET)
+	public boolean usernameExists(@PathVariable String viewValue) {
+		boolean exists = false;
+		System.out.println("username received?: " + viewValue);
+		if(rp.countByUsername(viewValue) > 0){
+			System.out.println("username exists");
+			exists = true;
+		}
+		return exists;
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/register/sendemployeelink", method = RequestMethod.POST)

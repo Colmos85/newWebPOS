@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@Table(name = "till_session")
 public class TillSession {
 	
 	
@@ -47,7 +49,7 @@ public class TillSession {
 	private List<Transaction> transactions;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "employee_id")
 	@JsonBackReference(value="employee-sessions")
 	private Employee employee;
