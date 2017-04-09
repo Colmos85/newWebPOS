@@ -29,17 +29,17 @@
 			        </tr>
 					<tr>
 						<th class="md-subhead" style="width:30%"  st-sort="transaction.transaction_date">Date</th>
-						<th class="md-subhead" style="width:40%"  st-sort="transaction.employee.firstName">Sold By</th>
-						<th class="md-subhead" style="width:15%"  st-sort="transaction.totalIncVat">Sale Total</th>
+						<th class="md-subhead" style="width:35%"  st-sort="transaction.employee.firstName">Sold By</th>
+						<th class="md-subhead prev-sale-data-right" style="text-align:right" st-sort="transaction.totalIncVat">Sale Total</th>
 						<th style="width:15%" ><!-- Edit --></th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="transaction in transactions" >
 					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
 						<td class="md-body-1" style="width:30%" >{{transaction.transaction_date}}</td>
-						<td class="md-body-1" style="width:40%" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
-						<td class="md-body-1" style="width:15%" >{{transaction.totalIncVat | currency:"€" }}</td> 
-						<td class="md-body-1" style="width:15%" >
+						<td class="md-body-1" style="width:35%" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
+						<td class="md-body-1 prev-sale-data-right" style="text-align:right">{{transaction.totalIncVat | currency:"€" }}</td> 
+						<td class="md-body-1" style="width:20%" >
 						<!-- <div layout="row">
 							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
 			                <i class="material-icons">edit</i>

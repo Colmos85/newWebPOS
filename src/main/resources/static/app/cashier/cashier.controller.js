@@ -421,9 +421,7 @@
                 console.log(vm.prevoiusTransactions[0]);
 
                 // after loading in past twenty transactions - need to do some calculations..
-                for (var i = 0; i < vm.prevoiusTransactions.length; i++) {
-                    vm.prevoiusTransactions[i].totalIncVat = vm.calculateTotal(vm.prevoiusTransactions[i]).toFixed(2);
-                }
+                vm.calculateTotals();
 
               }, function errorCallback(response) {
               console.log("Unsuccessful - load last twenty transactions");
@@ -433,14 +431,27 @@
 
 
 
-          vm.calculateTotal = function(transaction){
+          /*vm.calculateTotal = function(transaction){
              var total = empty; // transaction total
              for (var i = 0; i < transaction.transactionItems.length; i++) {
                  // empty decimal
                 var calcTotal = new Decimal(transaction.transactionItems[i].product.retailPriceInc).times(new Decimal(transaction.transactionItems[i].quantity));
+                
                 total = calcTotal.plus(total);
              }
              return total;
+          }*/
+
+          vm.calculateTotals = function(){
+             for (var i = 0; i < vm.prevoiusTransactions.length; i++) {
+                  var total = empty;
+                  for (var j = 0; j < vm.prevoiusTransactions[i].transactionItems.length; j++) {
+                      var calcTotal = new Decimal(vm.prevoiusTransactions[i].transactionItems[j].product.retailPriceInc).times(new Decimal(vm.prevoiusTransactions[i].transactionItems[j].quantity));
+                      vm.prevoiusTransactions[i].transactionItems[j].lineTotalPrice = calcTotal.toFixed(2);
+                      total = calcTotal.plus(total);
+                  }
+                  vm.prevoiusTransactions[i].totalIncVat = total.toFixed(2);
+              }
           }
 
          
