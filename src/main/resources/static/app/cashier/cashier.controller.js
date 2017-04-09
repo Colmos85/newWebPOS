@@ -418,8 +418,6 @@
           // Load Brands
           transactionsFactory.getTwentyTransactionsByEmployee(HomeService.till.id).then(function successCallback(result){
                 vm.prevoiusTransactions = result.data;
-                console.log(vm.prevoiusTransactions[0]);
-
                 // after loading in past twenty transactions - need to do some calculations..
                 vm.calculateTotals();
 

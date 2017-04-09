@@ -29,19 +29,14 @@
 						<td class="md-body-1" st-ratio="45" >{{product.description}}</td>
 						<td class="md-body-1" st-ratio="15" >{{product.retailPriceInc  | currency:"€" }}</td> 
 						<td class="md-body-1 button-table-data" st-ratio="10">
-						<div layout="row">
-							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
-			                <!-- <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
-			                </i> -->
-			                <i class="material-icons">edit</i>
-			              </md-button>
-			              <md-button type="button" ng-click="productsCtrl.removeItem(product, $index); $event.stopPropagation();" class="md-icon-button launch ">
-			                <!-- <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
-			                </i> -->
-			                <i class="material-icons">delete</i>
-			              </md-button>
-						</div>
-			              
+							<div layout="row">
+								<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
+				                <i class="material-icons">edit</i>
+				              </md-button>
+				              <md-button type="button" ng-click="productsCtrl.removeItem(product, $index); $event.stopPropagation();" class="md-icon-button launch ">
+				                <i class="material-icons">delete</i>
+				              </md-button>
+							</div>
 			            </td>
 <!-- 			            <td st-ratio="10">
 			              

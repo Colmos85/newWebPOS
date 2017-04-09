@@ -1,64 +1,119 @@
-	<md-dialog aria-label="Mango (Fruit)" flex="80" >
-	<form name="customerForm" novalidate ng-submit="save()">
-		<md-toolbar>
-	      <div class="md-toolbar-tools">
-	        <h2 style="color: white">New Customer Form</h2>
-	        <span flex></span>
-<!-- 	        <md-button class="md-icon-button" ng-click="cancel()">
-	          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-	        </md-button> -->
-	        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
-                  <md-tooltip>Close </md-tooltip>
-                  <i class="material-icons md-36 white">close</i>
-            </md-button>
-	      </div>
-	    </md-toolbar>
+<md-dialog aria-label="Mango (Fruit)" flex="80" >
+<form name="productForm" novalidate ng-submit="save()">
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 style="color: white">{{ headerName }}</h2>
+        <span flex></span>
+<!--          <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button> -->
+        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                <md-tooltip>Close </md-tooltip>
+                <i class="material-icons md-36 white">close</i>
+          </md-button>
+      </div>
+    </md-toolbar>
 
-	    <md-dialog-content>
-			<div layout="column">
-				<div layout="column" layout-padding layout-margin>
-					<fieldset>
-					<legend><h4>Email</h4></legend>
-								
-						<md-input-container class="md-block" flex-gt-sm>
-				            <label>Email Address</label>
-				            <input type="email" name="email" ng-model="email" md-autofocus required>
-				            <div ng-messages="customerForm.email.$error">
-						      	<div ng-message="required">This is required!</div>
-						      	<div ng-message="email">Enter a valid email!</div>
-						    </div>
-				        </md-input-container>
-
-			         </fieldset>
-		     	</div>
-			</div> 
-			
-		</md-dialog-content>
-
-<!-- 	    <md-dialog-content>
-			<div layout="column"  layout-gt-sm="row">
-				<md-input-container class="md-block" flex-gt-sm>
-		            <label>Email</label>
-		            <input type="email" name="email" ng-model="email" required>
-		            <div ng-messages="customerForm.email.$error">
-				      	<div ng-message="required">This is required!</div>
-				      	<div ng-message="email">Enter a valid email!</div>
-				    </div>
-		        </md-input-container>
-			</div> 
-		</md-dialog-content> -->
-
-		<md-dialog-actions layout="row">
-			<!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-		        More on Wikipedia
-		      </md-button> -->
-		      <span flex></span>
-		      <md-button ng-click="clear()">
-		       Clear
-		      </md-button>
-		      <md-button ng-disabled="customerForm.$invalid" ng-click="save('Message passed - saved customer')">
-		        Save
-		      </md-button>
-		</md-dialog-actions>
-		</form>
-	</md-dialog>
+    <md-dialog-content>
+    <div layout="column"> <!-- outer div always a column, each div is in a column-->
+      <div layout="column" layout-gt-sm="row" flex layout-padding layout-margin> <!-- top div gt-sm is a row with product and price -->
+        <div layout="column" flex="50" > 
+          <div layout="column" layout-padding layout-margin> 
+            <fieldset flex> 
+            <legend><h4>Employee Details</h4></legend> 
+                   
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>First Name</label> 
+                      <input name="name" ng-model="firstName" md-autofocus required> 
+                      <div ng-messages="employeeForm.name.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Last Name</label> 
+                      <input name="name" ng-model="lastName" required> 
+                      <div ng-messages="employeeForm.name.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Email</label> 
+                      <input type="email" name="email" ng-model="email" required> <!-- record-checker="/register/customer/emailexists/" --> 
+                      <div ng-messages="employeeForm.email.$error"> 
+                      <div ng-message="required">This is required!</div> 
+                      <div ng-message="email">Enter a valid email!</div> 
+                      <div ng-message="recordexists">Email already exists!</div>
+                  </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Contact Num</label> 
+                      <input name="name" ng-model="contact" required> 
+                      <div ng-messages="employeeForm.contact.$error"> 
+                      <div ng-message="required">This is required!</div> 
+                  </div> 
+                  </md-input-container> 
+                 </fieldset> 
+             </div> 
+        </div> <!-- End of column -->  
+        <div layout="column" flex="50" > 
+          <div layout="column" flex layout-padding layout-margin> 
+            <fieldset flex> 
+            <legend><h4>Store Details</h4></legend> 
+              <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Username</label> 
+                      <input name="username" ng-model="username" required> <!-- record-checker="/register/customer/usernameexists/" --> 
+                      <div ng-messages="employeeForm.username.$error"> 
+                      <div ng-message="required">This is required!</div> 
+                      <div ng-message="recordexists">Username already exists!</div>
+                  </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Password</label> 
+                      <input type="password" name="password" ng-model="password" required> 
+                      <div ng-messages="employeeForm.password.$error"> 
+                      <div ng-message="required">This is required!</div> 
+                  </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 30px">
+                      <label>Store</label>
+                      <md-select ng-model="store" required>
+                        <md-option ng-repeat="(index, store) in stores" ng-value="brand" ng-selected="index == {{selectedStoreIndex}}">
+                          {{store.name}}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="employeeForm.store.$error" ng-if="employeeForm.$dirty">
+                          <div ng-message="required">This is required!</div>
+                      </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 30px">
+                      <label>Roles</label>
+                      <md-select ng-model="role" required>
+                        <md-option ng-repeat="(index, role) in roles" ng-value="role" ng-selected="index == {{selectedRoleIndex}}">
+                          {{role.name}}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="employeeForm.role.$error" ng-if="employeeForm.$dirty">
+                          <div ng-message="required">This is required!</div>
+                      </div>
+                  </md-input-container>
+                 </fieldset> 
+             </div> 
+        </div> <!-- End of column --> 
+      </div> <!-- End of outer column --> 
+    </md-dialog-content> 
+ 
+    <md-dialog-actions layout="row"> 
+      <!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus> 
+            More on Wikipedia 
+          </md-button> --> 
+          <span flex></span> 
+          <md-button ng-click="clear()"> 
+           Clear 
+          </md-button> 
+          <md-button ng-disabled="customerForm.$invalid" ng-click="save('Message passed - saved customer')"> 
+            Save 
+          </md-button> 
+    </md-dialog-actions> 
+    </form> 
+</md-dialog>
+  

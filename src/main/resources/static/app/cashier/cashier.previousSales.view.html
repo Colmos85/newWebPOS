@@ -21,7 +21,7 @@
 			<table st-table="transactions" st-safe-src="previousSalesCtrl.prevoiusTransactions" class="my-table table-striped" style="width:100%">
 				<thead>
 					<tr>
-			            <th colspan="4">
+			            <th colspan="5">
 			            	<div layout="row">
 					      		<input st-search class="search-input md-whiteframe-3dp input-sm form-control" placeholder="Global Filter"/>
 			              	</div>
@@ -29,17 +29,19 @@
 			        </tr>
 					<tr>
 						<th class="md-subhead" style="width:30%"  st-sort="transaction.transaction_date">Date</th>
-						<th class="md-subhead" style="width:35%"  st-sort="transaction.employee.firstName">Sold By</th>
-						<th class="md-subhead prev-sale-data-right" style="text-align:right" st-sort="transaction.totalIncVat">Sale Total</th>
+						<th class="md-subhead prev-sale-soldby-head"  st-sort="transaction.employee.firstName">Sold By</th>
+						<th class="md-subhead prev-sale-customer-head"  st-sort="transaction.employee.firstName">Customer</th>
+						<th class="md-subhead prev-sale-header-right" style="text-align:right" st-sort="transaction.totalIncVat">Sale Total</th>
 						<th style="width:15%" ><!-- Edit --></th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="transaction in transactions" >
 					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
 						<td class="md-body-1" style="width:30%" >{{transaction.transaction_date}}</td>
-						<td class="md-body-1" style="width:35%" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
+						<td class="md-body-1 prev-sale-soldby-data" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
+						<td class="md-body-1 prev-sale-customer-data" >{{transaction.customer.name}}</td>
 						<td class="md-body-1 prev-sale-data-right" style="text-align:right">{{transaction.totalIncVat | currency:"€" }}</td> 
-						<td class="md-body-1" style="width:20%" >
+						<td class="md-body-1" style="width:15%" >
 						<!-- <div layout="row">
 							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
 			                <i class="material-icons">edit</i>
@@ -55,12 +57,12 @@
 			            </td> -->
 					</tr>
 					<tr ng-if="isOpen" class="expandedTableRow fade">
-			          	<td colspan="4" ng-include="'/app/cashier/previousSaleDetails.html'"></td>
+			          	<td colspan="5" ng-include="'/app/cashier/previousSaleDetails.html'"></td>
 			       	</tr>
 				</tbody>
 				<tfoot >
 					<tr>
-			            <td colspan="4" class="text-center">
+			            <td colspan="5" class="text-center">
 			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
 			            </td>
 			        </tr>

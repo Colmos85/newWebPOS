@@ -394,14 +394,87 @@ input{
 
 /******************************************************************************** Prevoius Sales layout *********************************************************************************/
 
-.prev-sale-data-right{
+/*.prev-sale-data-right{
+    width:15%;
+    padding-left: 0px;
+    text-align:right; 
+}*/
+
+/* Headers of table */
+@media(max-width:800px)
+{
+  .prev-sale-header-right{
+    width:25%;
+    padding-left: 0px;
+    text-align:right;
+  }
+
+  .prev-sale-customer-head{
+    display: none;
+  }
+
+  .prev-sale-soldby-head{
+    width:30%;
+  } 
+}
+
+@media(min-width:801px)
+{
+  .prev-sale-header-right{
+    width:15%;
+    padding-left: 0px;
+    text-align:right;
+  }
+
+  .prev-sale-customer-head{
     width:20%;
-    text-align:right; /*not working - need to put in in html element*/
+  }
+
+  .prev-sale-soldby-head{
+    width:20%;
+  } 
 }
 
 
 
 
+/* data of table */
+@media(max-width:800px)
+{
+  .prev-sale-data-right{
+    width:25%;
+    margin-right: 3px;
+    text-align:right; /*not working - need to put in in html element*/
+  }
+
+  .prev-sale-customer-data{
+    display: none;
+  }
+
+  .prev-sale-soldby-data{
+    width:30%;
+  } 
+}
+
+@media(min-width:801px)
+{
+  .prev-sale-data-right{
+    width:15%;
+    margin-right: 3px;
+    text-align:right; /*not working - need to put in in html element*/
+  }
+
+  .prev-sale-customer-head{
+    width:20%;
+  }
+
+  .prev-sale-soldby-head{
+    width:20%;
+  } 
+}
+
+
+/* dropdown details of table */
 .prev-sale-details-left{
     width:55%;
 }

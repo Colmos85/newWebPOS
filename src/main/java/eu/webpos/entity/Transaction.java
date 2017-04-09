@@ -89,9 +89,9 @@ public class Transaction {
 		this.id = id;
 	}
 
-	@Column(name = "transaction_date", columnDefinition="DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+/*	@Column(name = "transaction_date", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)*/
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="Europe/London")
 	public Date getTransaction_date() {
 		return transaction_date;
 	}

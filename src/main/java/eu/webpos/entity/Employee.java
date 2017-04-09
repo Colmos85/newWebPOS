@@ -44,6 +44,9 @@ public class Employee implements UserDetails {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
+	private String contact;
+	private String email;
+	
 	@ElementCollection
 	private List<String> roles = new ArrayList<>();
 	
@@ -171,5 +174,23 @@ public class Employee implements UserDetails {
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
+	
+	
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 }

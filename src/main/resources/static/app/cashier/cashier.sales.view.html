@@ -36,6 +36,7 @@
 	      					ng-keyup="$event.keyCode == 13 ? addProduct(searchText) : null"
 	      					placeholder="Global Search"
 	      					class="md-whiteframe-3dp"
+	      					ng-model-options='{ debounce: 500 }' 
 	      					> <!-- md-hide-autocomplete-on-enter -->
 	        <md-item-template>
 	          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.description}}</span>

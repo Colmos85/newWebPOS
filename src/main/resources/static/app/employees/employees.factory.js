@@ -9,27 +9,27 @@
       var urlBase = 'employees/';
       var factory = this;
 
-      factory.sendCustomerLink = function(email){
+      /*factory.sendCustomerLink = function(email){
          return $http.post("register/sendcustomerlink/", email);
-      };
+      };*/
 
-      factory.getAllCustomers = function(){
+      factory.getAllEmployees = function(){
         return $http.get(urlBase);
       };
 
-      factory.getCustomer = function (id) {
+      factory.getEmployee = function (id) {
         return $http.get(urlBase + '/' + id);
       };
 
-      factory.insertCustomer = function (customer) {
+      factory.insertEmployee = function (employee) {
           return $http.post(urlBase, customer);
       };
 
-      factory.updateCustomers = function (id, customer) {
+      factory.updateEmployees = function (id, employee) {
           return $http.put(urlBase + '/' + id, customer)
       };
 
-      factory.deleteCustomers = function (id) {
+      factory.deleteEmployee = function (id) {
           return $http.delete(urlBase + '/' + id);
       };
 

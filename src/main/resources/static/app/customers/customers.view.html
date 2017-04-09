@@ -30,17 +30,15 @@
             <td class="md-body-1" st-ratio="10" >{{customer.id}}</td>
             <td class="md-body-1" st-ratio="35" >{{customer.name}}</td>
             <td class="md-body-1" st-ratio="35" >{{customer.contact}}</td>
-            <td class="md-body-1" class="md-body-1 button-table-data" st-ratio="15">
-            <div layout="row" >
-              <md-button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
-                <i class="material-icons">edit</i>
-              </md-button>
-              <md-button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
-                <!-- <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
-                </i> -->
-                <i class="material-icons">delete</i>
-              </md-button>
-            </div>
+            <td class="md-body-1 button-table-data" st-ratio="15">
+              <div layout="row" >
+                <md-button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
+                  <i class="material-icons">edit</i>
+                </md-button>
+                <md-button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="md-icon-button launch ">
+                  <i class="material-icons">delete</i>
+                </md-button>
+              </div>
             </td>
           </tr>
           <tr ng-if="isOpen" class="expandedTableRow fade">

@@ -6,48 +6,47 @@
   <div layout="column" >
 
     <div class="outerTableDiv">
-      <table st-table="customers" st-safe-src="customersCtrl.customers" class="my-table table-striped" style="width:100%">
+      <table st-table="employees" st-safe-src="employeesCtrl.employees" class="my-table table-striped" style="width:100%">
         <thead>
           <tr>
               <th colspan="5">
                 <div layout="row">
-                <md-input-container class="md-block" flex="80"> <!-- flex-gt-xs -->
-                <label>Global Filter</label>
-                <input st-search class="input-sm form-control" type="search"/>
-              </md-input-container>
+                  <!-- <label>Global Search</label> -->
+                  <input st-search class="search-input md-whiteframe-3dp input-sm form-control" placeholder="Global Filter"/>
                   <!-- <span flex></span> -->
-                  <md-button class="md-no-focus" ng-click="customersCtrl.openCustomerForm(null, $event)" layout-align="center end">+ Employee</md-button>
+                  <md-button class="md-no-focus" ng-click="employeesCtrl.openEmployeeForm(null, $event)" layout-align="center end">+ Employee</md-button>
                   </div>
               </th>
           </tr>
           <tr>
-            <th st-ratio="10" st-sort="id">ID</th>
-            <th st-ratio="30" st-sort="name">Name</th>
-            <th st-ratio="30" st-sort="name">Contact</th>
-            <th st-ratio="10">edit</th>
-            <th st-ratio="10">delete</th>
+            <!-- <th class="md-subhead" st-ratio="10" st-sort="id">ID</th> -->
+            <th class="md-subhead" st-ratio="35" st-sort="firstName">Name</th>
+            <th class="md-subhead" st-ratio="20" st-sort="contact">Contact</th>
+            <th class="md-subhead hide-mobile-column" st-ratio="20" st-sort="email">Email</th>
+            <th class="md-subhead" st-ratio="10" st-sort="loggedIn">Active</th>
+            <th st-ratio="15"></th>
           </tr>
         </thead>
-        <tbody ng-repeat="customer in customers">
+        <tbody ng-repeat="employee in employees">
           <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
-            <td st-ratio="25" >{{customer.id}}</td>
-            <td st-ratio="30" >{{customer.name}}</td>
-            <td st-ratio="30" >{{customer.contact}}</td>
-            <td st-ratio="10">
-              <button  type="button" ng-click="customersCtrl.editItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
-                <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true">
-                </i>
-              </button>
-            </td>
-            <td st-ratio="10">
-              <button type="button" ng-click="customersCtrl.removeItem(customer, $index); $event.stopPropagation();" class="btn btn-sm btn-danger">
-                <i class="fa fa-minus-circle fa-lg" aria-hidden="true">
-                </i>
-              </button>
+            <!-- <td class="md-body-1" st-ratio="10" >{{employee.id}}</td> -->
+            <td class="md-body-1" st-ratio="35" >{{employee.firstName}} {{employee.lastName}}</td>
+            <td class="md-body-1" st-ratio="20" >{{employee.contact}}</td>
+            <td class="md-body-1 hide-mobile-column" st-ratio="20" >{{employee.email}}</td>
+            <td class="md-body-1" st-ratio="10" >{{employee.loggedIn}}</td>
+            <td class="md-body-1 button-table-data" st-ratio="15">
+                <div layout="row">
+                  <md-button  type="button" ng-click="employeesCtrl.editItem(employee, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
+                      <i class="material-icons">edit</i>
+                  </md-button>
+                  <md-button type="button" ng-click="employeesCtrl.removeItem(employee, $index); $event.stopPropagation();" class="md-icon-button launch ">
+                      <i class="material-icons">delete</i>
+                  </md-button>
+                </div>
             </td>
           </tr>
-          <tr ng-if="isOpen" class="expandedTableRow">
-                  <td colspan="5" ng-include="'/app/customers/customerDetails.html'"></td>
+          <tr ng-if="isOpen" class="expandedTableRow fade">
+                  <td colspan="5" ng-include="'/app/employees/employeeDetails.html'"></td>
           </tr>
         </tbody>
         <tfoot >

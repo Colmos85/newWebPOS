@@ -1,7 +1,9 @@
 package eu.webpos.rest;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -143,7 +145,8 @@ public class TransactionController {
 		Transaction createdTransaction = null; 
 		
 		java.util.Date dt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		//sdf.setTimeZone(TimeZone.getTimeZone("UTC"));  //.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
 		String currentTime = sdf.format(dt);
 		
 		java.util.Date dateTime = null;
@@ -152,6 +155,7 @@ public class TransactionController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Time 2: " + dateTime);
 		transaction.setTransaction_date(dateTime);
 		
 		// find a till session for t
