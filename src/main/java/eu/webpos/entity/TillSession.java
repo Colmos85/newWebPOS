@@ -26,10 +26,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "till_session")
+//@JsonIgnoreProperties(value = { "transactions" })
 public class TillSession {
 	
 	
@@ -44,12 +46,12 @@ public class TillSession {
 	private Date closeDateTime;
 
 	
-	@OneToMany(mappedBy = "tillSession")
+	@OneToMany(mappedBy = "tillSession", fetch = FetchType.LAZY)
 	@JsonManagedReference(value="session-transactions")
 	private List<Transaction> transactions;
 	
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	@JsonBackReference(value="employee-sessions")
 	private Employee employee;

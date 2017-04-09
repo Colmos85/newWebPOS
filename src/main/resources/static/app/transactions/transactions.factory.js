@@ -17,6 +17,10 @@
         return $http.get(urlBase + '/' + id);
       };
 
+      factory.getTwentyTransactionsByEmployee = function(id){
+        return $http.get(urlBase + 'employeelimittwenty/' + id);
+      };
+
       factory.insertTransaction = function (transaction) {
           return $http.post(urlBase, transaction);
           /*return $http({

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import eu.webpos.entity.Employee;
 import eu.webpos.service.EmployeeRepo;
 import eu.webpos.service.TransactionRepo;
@@ -27,6 +29,9 @@ public class EmployeeController {
 
 	@Autowired
 	private TransactionRepo transactionRepository;
+	
+	@Autowired
+	private ObjectMapper om;
 
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -54,6 +59,9 @@ public class EmployeeController {
 		}
 		//findTransactionsLimitFive
 		System.out.println("2. Length of : " + emps.get(0).getTransactions().size());
+		
+		//om.
+		
 		return emps;//employeeRepository.findAllNoTransactions();
 	}
 	

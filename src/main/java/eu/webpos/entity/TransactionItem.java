@@ -27,7 +27,7 @@ public class TransactionItem {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
-	@JsonBackReference(value="product-transactions") // transaction items can get product
+	//@JsonBackReference(value="product-transactions") // transaction items can get product
 	private Product product;
 	
 	

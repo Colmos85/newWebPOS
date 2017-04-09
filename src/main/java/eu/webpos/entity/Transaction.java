@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -42,22 +43,22 @@ public class Transaction {
 	@JsonManagedReference(value="transaction-items")
 	private List<TransactionItem> transactionItems;
 
-	@ManyToOne() //(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY) //(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	@JsonBackReference(value="transactions")
+	//@JsonBackReference(value="transactions")
 	private Employee employee;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id")
-	@JsonBackReference(value="customer-transactions")
+	//@JsonBackReference(value="customer-transactions")
 	private Customer customer;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "till_session_id")
 	@JsonBackReference(value="session-transactions")
 	private TillSession tillSession;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "till_id")
 	@JsonBackReference(value="till-transactions")
 	private Till till;
@@ -90,6 +91,7 @@ public class Transaction {
 
 	@Column(name = "transaction_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	public Date getTransaction_date() {
 		return transaction_date;
 	}

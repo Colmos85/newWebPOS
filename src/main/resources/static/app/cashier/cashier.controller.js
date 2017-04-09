@@ -271,7 +271,7 @@
 
           //var params = {'transaction': transaction, 'till':HomeService.till};
           transactionsFactory.insertTransaction(transaction).then(function successCallback(result){
-              $scope.toastMessage("Transaction Made - redirect to print reciept");
+              $scope.toastMessage("Transaction Complete");
               //$scope.products=result.data;
 
               
@@ -384,6 +384,62 @@
 
 
       }])
+
+      
+      .controller('previousSalesCtrl', [
+          '$rootScope',
+          '$scope',
+          '$log',
+          '$state',
+          '$timeout',
+          '$location',
+          '$mdDialog',
+          '$mdToast',
+          '$resource',
+          'productsFactory',
+          'cashierFactory',
+          'customersFactory',
+          'transactionsFactory',
+          'AuthService',
+          'HomeService',
+          
+          function ($rootScope, $scope, $log, $state, 
+                    $timeout, $location, $mdDialog, $mdToast, 
+                    $resource, productsFactory, cashierFactory, customersFactory, 
+                    transactionsFactory, AuthService, HomeService) {
+
+          var vm = this;
+
+          Decimal.set({ precision: 5, rounding: 4 })
+
+          var empty = new Decimal(0.00);
+          empty.toFixed(2);
+
+          // Load Brands
+          transactionsFactory.getTwentyTransactionsByEmployee(HomeService.till.id).then(function successCallback(result){
+              vm.prevoiusTransactions = result.data;
+              console.log("Success load last twenty transactions: ", vm.prevoiusTransactions);
+              }, function errorCallback(response) {
+              console.log("Unsuccessful - load last twenty transactions");
+          });
+
+
+
+
+          vm.calculateTotal = function(transaction){
+             var total = empty; // transaction total
+             for (var i = 0; i < transaction.transactionItems.length; i++) {
+                 // empty decimal
+                var calcTotal = new Decimal(transaction.transactionItems[i].product.retailPriceInc).times(new Decimal(transaction.transactionItems[i].quantity));
+                total = calcTotal.plus(total);
+             }
+             return total;
+          }
+
+         
+      }])  // END of Brands Controller
+
+
   
       .directive('mdHideAutocompleteOnEnter', function ($compile) {
         return {

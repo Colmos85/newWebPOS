@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import eu.webpos.entity.Till;
+import eu.webpos.entity.Transaction;
 import eu.webpos.service.TillRepo;
 
 @RestController
@@ -30,6 +31,7 @@ public class TillController {
 	
 	@Autowired
 	private TillRepo rp;
+	
 	
 	/**
 	 * Web service for getting all the Brands
@@ -44,12 +46,31 @@ public class TillController {
 	
 	
 	/**
+	 * Get last 20 transactions for a till
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value = "/transactions/last-twenty/{id}", method = RequestMethod.GET)
+	public  ResponseEntity<List<Transaction>> tillLimitFive(@PathVariable int id) {
+		List<Transaction> transactions = rp.findTransactionsLimitTwentyByTillId(id);
+		if (transactions == null) {
+			return new ResponseEntity<List<Transaction>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
+		}
+	}
+	
+	
+	
+	
+	
+	/**
 	 * Method to check if a Till name already exists for a store
 	 * @param Till
 	 * @return boolean value
 	 */
 	@RequestMapping(value = "/exists/{store_id}/{name}", method = RequestMethod.GET)
-	public boolean brandNameExists(@PathVariable int store_id, @PathVariable String name) {
+	public boolean TillNameExists(@PathVariable int store_id, @PathVariable String name) {
 		boolean exists = false;
 		if(rp.findTillByNameInStore(name, store_id) != null){
 			exists = true;

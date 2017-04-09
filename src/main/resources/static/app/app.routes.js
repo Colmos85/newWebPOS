@@ -181,7 +181,7 @@
 
               'content@home': {
                 templateUrl: 'app/cashier/cashier.previousSales.view.html',
-                controller: 'cashierCtrl'
+                controller: 'previousSalesCtrl as previousSalesCtrl'
               }
             }
           })

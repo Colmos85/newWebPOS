@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
     <h1 class="col-lg-12">This is the Previous Sales Page!! Refund items?? or reprint receipt</h1>
 </div>
 <div class="row">
@@ -8,4 +8,69 @@
             <li>3 Brothers Hoptimization</li>
         </ul>
     </div>
+</div> -->
+
+
+
+<div layout="column" ng-cloak>
+  <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+    <md-card flex="flex" >
+	<div layout="column" >
+		
+		<div class="outerTableDiv">
+			<table st-table="transactions" st-safe-src="previousSalesCtrl.prevoiusTransactions" class="my-table table-striped" style="width:100%">
+				<thead>
+					<tr>
+			            <th colspan="4">
+			            	<div layout="row">
+					      		<input st-search class="search-input md-whiteframe-3dp input-sm form-control" placeholder="Global Filter"/>
+			              	</div>
+			            </th>
+			        </tr>
+					<tr>
+						<th class="md-subhead" st-ratio="20" st-sort="transaction.transaction_date">Date</th>
+						<th class="md-subhead" st-ratio="50" st-sort="transaction.employee.firstName">Sold By</th>
+						<th class="md-subhead" st-ratio="15" >Sale Total</th>
+						<th st-ratio="15"><!-- Edit --></th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="transaction in transactions" >
+					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
+						<td class="md-body-1" st-ratio="20" >{{transaction.transaction_date}}</td>
+						<td class="md-body-1" st-ratio="45" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
+						<td class="md-body-1" st-ratio="15" >{{previousSalesCtrl.calculateTotal(transaction) | currency:"€" }}</td> 
+						<td class="md-body-1 button-table-data" st-ratio="10">
+						<!-- <div layout="row">
+							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
+			                <i class="material-icons">edit</i>
+			              </md-button>
+			              <md-button type="button" ng-click="productsCtrl.removeItem(product, $index); $event.stopPropagation();" class="md-icon-button launch ">
+			                <i class="material-icons">delete</i>
+			              </md-button>
+						</div> -->
+			              
+			            </td>
+<!-- 			            <td st-ratio="10">
+			              
+			            </td> -->
+					</tr>
+					<tr ng-if="isOpen" class="expandedTableRow fade">
+			          	<td colspan="5" ng-include="'/app/cashier/previousSaleDetails.html'"></td>
+			       	</tr>
+				</tbody>
+				<tfoot >
+					<tr>
+			            <td colspan="5" class="text-center">
+			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
+			            </td>
+			        </tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
+
+	</md-card>
+</md-content>
+	
 </div>

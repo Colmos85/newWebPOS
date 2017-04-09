@@ -73,19 +73,26 @@ public class TransactionController {
 	
 	
 	/**
-	 * Get last 10 transactions for till
+	 * Get last 20 transactions for till
 	 * @param username
 	 * @return
 	 */
-	@RequestMapping(value = "/employeelimitfive/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/employeelimittwenty/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<Transaction>> employeeLimitFive(@PathVariable int id) {
 		List<Transaction> transactions = rp.findTransactionsLimitTwentyByTillId(id);
 		if (transactions == null) {
 			return new ResponseEntity<List<Transaction>>(HttpStatus.NO_CONTENT);
 		} else {
+			/*for(Transaction t: transactions){
+				t.setTransaction_date(t.getTransaction_date().toString());
+			}*/
+			System.out.println("*********************************  Transaction date: " + transactions.get(0).getTransaction_date());
+			System.out.println("*********************************  Transaction date: " + transactions.get(0).getTransaction_date().toString());
 			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
 		}
 	}
+	
+	
 	
 	
 	/**
@@ -104,6 +111,22 @@ public class TransactionController {
 	}
 	
 	
+	/**
+	 * CUSTOM FOR TESTING????????
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/testjoin/", method = RequestMethod.GET)
+	public  ResponseEntity<Object> test() {
+		Long transactionID = new Long(1);
+		Object transaction = rp.test(transactionID);
+		//System.out.println("Transaction - ", transaction.);
+		if (transaction == null) {
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Object>(transaction, HttpStatus.OK);
+		}
+	}
 	
 	
 	

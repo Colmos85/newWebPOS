@@ -12,10 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
+@JsonIgnoreProperties(value = { "transactions" })
 public class Till {
 	
 	@Id
@@ -37,9 +40,7 @@ public class Till {
 	
 	
 	
-	
-	
-	
+	@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
 	}

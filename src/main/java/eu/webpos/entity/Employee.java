@@ -19,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
+@JsonIgnoreProperties(value = { "tillSessions", "transactions" })
 public class Employee implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,12 +49,12 @@ public class Employee implements UserDetails {
 	
 	
 	//@JsonInclude(JsonInclude.Include.NON_DEFAULT)
-	@OneToMany(mappedBy = "employee")
-	@JsonManagedReference(value="transactions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	//@JsonManagedReference(value="transactions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
 	private List<Transaction> transactions;
 	
 	
-	@OneToMany(mappedBy = "employee")
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	@JsonManagedReference(value="employee-sessions") // Employee access transactions --- maybe use Json Ignore?? and make custom query if needed later
 	//@JsonIgnore
 	private List<TillSession> tillSessions;

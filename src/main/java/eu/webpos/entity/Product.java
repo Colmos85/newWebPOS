@@ -15,9 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@JsonIgnoreProperties(value = { "transactionItems" })
 public class Product {
 	
 	@Id
@@ -49,7 +51,7 @@ public class Product {
 	private List<Stock> stock;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
-	@JsonManagedReference(value="product-transactions") //@JsonBackReference
+	//@JsonManagedReference(value="product-transactions") //@JsonBackReference
 	private List<TransactionItem> transactionItems;
 	
 	

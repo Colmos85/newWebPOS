@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
+@JsonIgnoreProperties(value = {"transactions" })
 public class Customer {
 	
 	@Id
@@ -28,7 +30,7 @@ public class Customer {
 	
 	
 	@OneToMany(mappedBy = "customer") //
-	@JsonManagedReference(value="customer-transactions")
+	//@JsonManagedReference(value="customer-transactions")
 	private List<Transaction> transactions;
 	
 	
