@@ -27,7 +27,7 @@
 					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
 						<td class="md-body-1" st-ratio="20" >{{product.brand.brandName}}</td>
 						<td class="md-body-1" st-ratio="45" >{{product.description}}</td>
-						<td class="md-body-1" st-ratio="15" >€ {{product.retailPriceInc}}</td> 
+						<td class="md-body-1" st-ratio="15" >{{product.retailPriceInc  | currency:"€" }}</td> 
 						<td class="md-body-1 button-table-data" st-ratio="10">
 						<div layout="row">
 							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">

@@ -417,11 +417,18 @@
 
           // Load Brands
           transactionsFactory.getTwentyTransactionsByEmployee(HomeService.till.id).then(function successCallback(result){
-              vm.prevoiusTransactions = result.data;
-              console.log("Success load last twenty transactions: ", vm.prevoiusTransactions);
+                vm.prevoiusTransactions = result.data;
+                console.log(vm.prevoiusTransactions[0]);
+
+                // after loading in past twenty transactions - need to do some calculations..
+                for (var i = 0; i < vm.prevoiusTransactions.length; i++) {
+                    vm.prevoiusTransactions[i].totalIncVat = vm.calculateTotal(vm.prevoiusTransactions[i]).toFixed(2);
+                }
+
               }, function errorCallback(response) {
               console.log("Unsuccessful - load last twenty transactions");
           });
+
 
 
 

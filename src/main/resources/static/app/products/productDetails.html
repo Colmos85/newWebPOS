@@ -1,40 +1,32 @@
 <div class="extendedTableData" flex layout-fill layout="row" layout-xs="column">
 	<div layout="column" > <!-- flex="33" -->
-		<h4>Product Details</h4>
-		<br />
-		Barcode: {{ product.barcode }}
-		<br />
-		Brand: {{ product.brand.brandName }}
-		<br />
-		Description: {{ product.description }}
+		<h4 class="md-subhead">Product Details</h4>
+		<ul>
+			<li class="md-body-1">Barcode: {{ product.barcode }}</li>
+			<li class="md-body-1">Brand: {{ product.brand.brandName }}</li>
+			<li class="md-body-1">Description: {{ product.description }}</li>
+		</ul>
+		
 	</div>	
 
 	<div layout="column" >
-		<h4>Stock</h4>
+		<h4 class="md-subhead">Stock</h4>
 		<ul ng-repeat="store in productsCtrl.stores "> <!-- | filter : {productsCtrl.stores.stock.id: product.stock.id} -->
-			<li>Store Name : {{ store.name }}</li>
-<!-- 			<ul ng-repeat="" >
-				<li>{{ store.stock. }}</li>
-			</ul> -->
-			<li>Quantity : {{ productsCtrl.getStoreQuantity(store.stock, product.stock) }}</li>
+			<li class="md-body-1">Store : {{ store.name }}</li>
+			<li class="md-body-1">Quantity : {{ productsCtrl.getStoreQuantity(store.stock, product.stock) }}</li>
 		</ul>
-<!-- 		<br />
-		Ballincollig Store: 5
-		<br />
-		Mallow Store: 15
-		<br /> -->
 	</div>
 
 	<div layout="column" >
-		<h4>Price Breakdown</h4>
+		<h4 class="md-subhead">Price Breakdown</h4>
 		<br />
-		Trade Price Ex VAT: €{{ product.tradePriceEx }}
+		Trade Price Ex VAT: {{ product.tradePriceEx  | currency:"€" }}
 		<br />
 		Markup: {{ product.markup }} %
 		<br />
-		Retail Price Ex VAT: €{{ product.retailPriceEx }}
+		Retail Price Ex VAT: {{ product.retailPriceEx  | currency:"€" }}
 		<br />
-		Retail Price Inc VAT: €{{ product.retailPriceInc }}
+		Retail Price Inc VAT: {{ product.retailPriceInc | currency:"€"  }}
 
 	</div>
 

@@ -28,18 +28,18 @@
 			            </th>
 			        </tr>
 					<tr>
-						<th class="md-subhead" st-ratio="20" st-sort="transaction.transaction_date">Date</th>
-						<th class="md-subhead" st-ratio="50" st-sort="transaction.employee.firstName">Sold By</th>
-						<th class="md-subhead" st-ratio="15" >Sale Total</th>
-						<th st-ratio="15"><!-- Edit --></th>
+						<th class="md-subhead" style="width:30%"  st-sort="transaction.transaction_date">Date</th>
+						<th class="md-subhead" style="width:40%"  st-sort="transaction.employee.firstName">Sold By</th>
+						<th class="md-subhead" style="width:15%"  st-sort="transaction.totalIncVat">Sale Total</th>
+						<th style="width:15%" ><!-- Edit --></th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="transaction in transactions" >
 					<tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
-						<td class="md-body-1" st-ratio="20" >{{transaction.transaction_date}}</td>
-						<td class="md-body-1" st-ratio="45" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
-						<td class="md-body-1" st-ratio="15" >{{previousSalesCtrl.calculateTotal(transaction) | currency:"€" }}</td> 
-						<td class="md-body-1 button-table-data" st-ratio="10">
+						<td class="md-body-1" style="width:30%" >{{transaction.transaction_date}}</td>
+						<td class="md-body-1" style="width:40%" >{{transaction.employee.firstName}} {{transaction.employee.lastName }}</td>
+						<td class="md-body-1" style="width:15%" >{{transaction.totalIncVat | currency:"€" }}</td> 
+						<td class="md-body-1" style="width:15%" >
 						<!-- <div layout="row">
 							<md-button  type="button" ng-click="productsCtrl.editItem(product, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
 			                <i class="material-icons">edit</i>
@@ -55,12 +55,12 @@
 			            </td> -->
 					</tr>
 					<tr ng-if="isOpen" class="expandedTableRow fade">
-			          	<td colspan="5" ng-include="'/app/cashier/previousSaleDetails.html'"></td>
+			          	<td colspan="4" ng-include="'/app/cashier/previousSaleDetails.html'"></td>
 			       	</tr>
 				</tbody>
 				<tfoot >
 					<tr>
-			            <td colspan="5" class="text-center">
+			            <td colspan="4" class="text-center">
 			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
 			            </td>
 			        </tr>
