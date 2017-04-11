@@ -22,11 +22,11 @@
       };
 
       factory.insertEmployee = function (employee) {
-          return $http.post(urlBase, customer);
+          return $http.post(urlBase, employee);
       };
 
       factory.updateEmployees = function (id, employee) {
-          return $http.put(urlBase + '/' + id, customer)
+          return $http.put(urlBase + '/' + id, employee)
       };
 
       factory.deleteEmployee = function (id) {

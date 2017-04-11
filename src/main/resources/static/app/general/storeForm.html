@@ -1,0 +1,80 @@
+<md-dialog aria-label="Mango (Fruit)" flex="80" >
+<form name="storeForm" novalidate ng-submit="save()">
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 style="color: white">{{ headerName }}</h2>
+        <span flex></span>
+<!--          <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button> -->
+        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                <md-tooltip>Close </md-tooltip>
+                <i class="material-icons md-36 white">close</i>
+          </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+    <div layout="column"> <!-- outer div always a column, each div is in a column-->
+      <div layout="column" layout-gt-sm="row" flex layout-padding layout-margin> <!-- top div gt-sm is a row with product and price -->
+        <div layout="column" flex="100" > 
+          <div layout="column" layout-padding layout-margin> 
+            <fieldset flex> 
+            <legend><h4>Store Details</h4></legend> 
+                   
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Name</label> 
+                      <input name="name" ng-model="name" md-autofocus required> 
+                      <div ng-messages="storeForm.name.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Address1</label> 
+                      <input name="address1" ng-model="address1" required> 
+                      <div ng-messages="storeForm.address1.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Address2</label> 
+                      <input name="address2" ng-model="address2" required> 
+                      <div ng-messages="storeForm.address2.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container> 
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Address3</label> 
+                      <input name="address3" ng-model="address3" required> 
+                      <div ng-messages="storeForm.address3.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm> 
+                      <label>Contact Number</label> 
+                      <input name="name" ng-model="contactNum" required> 
+                      <div ng-messages="storeForm.contactNum.$error"> 
+                        <div ng-message="required">This is required!</div> 
+                      </div> 
+                  </md-input-container>   
+                 </fieldset> 
+             </div> 
+        </div> <!-- End of column -->  
+      </div> <!-- End of outer column --> 
+    </md-dialog-content> 
+ 
+    <md-dialog-actions layout="row"> 
+      <!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus> 
+            More on Wikipedia 
+          </md-button> --> 
+          <span flex></span> 
+          <md-button ng-click="clear()"> 
+           Clear 
+          </md-button> 
+          <md-button ng-disabled="storeForm.$invalid" ng-click="save('Message passed - saved customer')"> 
+            Save 
+          </md-button> 
+    </md-dialog-actions> 
+    </form> 
+</md-dialog>
+  

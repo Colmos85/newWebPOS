@@ -134,6 +134,10 @@
                 if (angular.equals(taxBands[i], selectedProduct.taxBand)) {$scope.selectedTaxIndex = i;
                 }
             }*/
+
+
+            // delete from employee_roles where employee_id = 4
+            // 
             
           };
 
@@ -159,13 +163,17 @@
               contact : $scope.contact,
               username : $scope.username,
               password : $scope.password,
-              roles:[],
+              /*roles:[],*/
               store: $scope.store
             };
 
-            console.log("Email Sent????");
-            vm.toastMessage("Email link sent to customer!");
-            employeesFactory.sendCustomerLink(email).then(function successCallback(response) {
+            console.log("Selected Role", $scope.role);
+
+            employee.roles = ["ADMIN"];
+
+            console.log("Employee save??? ", employee);
+            //vm.toastMessage("Email link sent to customer!");
+            employeesFactory.insertEmployee(employee).then(function successCallback(response) {
                 console.log("Email Sent????");
                 vm.toastMessage("Email link sent to customer!");
             });

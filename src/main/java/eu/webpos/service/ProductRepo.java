@@ -21,6 +21,9 @@ public interface ProductRepo extends JpaRepository<Product, Integer>{
 	@Query(value="SELECT * FROM product WHERE active = 1", nativeQuery = true)
 	public List<Product> findAllActiveProducts();
 	
+	@Query(value="SELECT COUNT(DISTINCT `barcode`) FROM product", nativeQuery = true)
+	public int countDistinctProducts();
+	
 /*	@Query(value="SELECT * FROM product WHERE active = 1", nativeQuery = true)
 	public List<Product> findAllActiveProducts();*/
 	

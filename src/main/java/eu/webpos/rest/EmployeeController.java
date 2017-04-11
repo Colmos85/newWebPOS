@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import eu.webpos.entity.Customer;
 import eu.webpos.entity.Employee;
+import eu.webpos.rest.CustomerController.CustomErrorType;
 import eu.webpos.service.EmployeeRepo;
 import eu.webpos.service.TransactionRepo;
 
@@ -86,6 +89,32 @@ public class EmployeeController {
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 		}
 	}
+	
+	
+	/**
+	 * Post a new Employee to the database
+	 * 
+	 * @param customer
+	 * @param ucBuilder
+	 * @return
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<?> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder) {
+        //logger.info("Creating Brand : {}", brand);
+		Employee createdEmployee = null;
+        /*if (employeeRepository.countByUsername(employee.getUsername()) > 0) {
+            return new ResponseEntity(new CustomErrorType("Unable to create. A Customer with username " + 
+            	customer.getUsername() + " already exist."),HttpStatus.CONFLICT);
+        }*/
+		System.out.println("Employee firstname: " + employee.getFirstName());
+		System.out.println("Employee contact: " + employee.getContact());
+		System.out.println("Employee roles: " + employee.getRoles());
+		
+		createdEmployee = employeeRepository.save(employee);
+        return new ResponseEntity<Employee>(createdEmployee, HttpStatus.CREATED);
+    }
+	
+	
 	
 /*	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
 	public ResponseEntity<Employee> userByUsername(@PathVariable String username) {

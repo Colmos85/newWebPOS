@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)" flex="80" >
-<form name="productForm" novalidate ng-submit="save()">
+<form name="employeeForm" novalidate ng-submit="save()">
   <md-toolbar>
       <div class="md-toolbar-tools">
         <h2 style="color: white">{{ headerName }}</h2>
@@ -74,10 +74,10 @@
                       <div ng-message="required">This is required!</div> 
                   </div> 
                   </md-input-container> 
-                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 30px">
+                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 35px">
                       <label>Store</label>
                       <md-select ng-model="store" required>
-                        <md-option ng-repeat="(index, store) in stores" ng-value="brand" ng-selected="index == {{selectedStoreIndex}}">
+                        <md-option ng-repeat="(index, store) in stores" ng-value="store" ng-selected="index == {{selectedStoreIndex}}">
                           {{store.name}}
                         </md-option>
                       </md-select>
@@ -85,7 +85,7 @@
                           <div ng-message="required">This is required!</div>
                       </div>
                   </md-input-container>
-                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 30px">
+                  <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 35px">
                       <label>Roles</label>
                       <md-select ng-model="role" required>
                         <md-option ng-repeat="(index, role) in roles" ng-value="role" ng-selected="index == {{selectedRoleIndex}}">
@@ -110,7 +110,7 @@
           <md-button ng-click="clear()"> 
            Clear 
           </md-button> 
-          <md-button ng-disabled="customerForm.$invalid" ng-click="save('Message passed - saved customer')"> 
+          <md-button ng-disabled="employeeForm.$invalid" ng-click="save('Message passed - saved customer')"> 
             Save 
           </md-button> 
     </md-dialog-actions> 

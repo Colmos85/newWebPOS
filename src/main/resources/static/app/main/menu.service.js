@@ -83,17 +83,17 @@
           pages: [{
             name: 'General',
             type: 'link',
-            state: 'munchies.cheetos',
+            state: 'home.settings.general',
             icon: 'fa fa-group'
           }, {
             name: 'Stores & Registers',
-            state: 'munchies.bananachips',
+            state: 'home.settings.storesandregisters',
             type: 'link',
             icon: 'fa fa-map-marker'
           },
             {
               name: 'Tax Bands & Currency',
-              state: 'munchies.donuts',
+              state: 'home.settings.taxandcurrency',
               type: 'link',
               icon: 'fa fa-map-marker'
             }]

@@ -1,0 +1,32 @@
+<div class="extendedTableData" style="width: 100%" layout-fill layout="row">
+	<div layout="column" style="width: 30%"> <!-- leftside 5px for the border on expanded table row --> 
+		<div style="text-align: left">
+			<div class="md-body-1 store-details-div-padding">{{store.address1}}</div>
+			<div class="md-body-1 ">{{store.address2}}</div>
+			<div class="md-body-1 ">{{store.address3}}</div>
+		</div>
+	</div>
+	<div layout="column" style="width: 70%"> <!-- Till details-->
+		<div layout="row" style="border-bottom: 1px solid black;">
+			<div class="md-body-1 store-details-div-padding" flex="60" >Tills</div>
+			<div flex="40" layout="end center">
+				<span flex></span>
+				<md-button class="md-no-focus" ng-click="storesandregistersCtrl.openTillForm(store, null, $event)">+ Till</md-button>
+			</div>
+		</div>
+		<div layout="row" ng-repeat="till in store.tills">
+				<div class="md-body-1 store-details-div-padding" flex="50"> {{ till.name }}</div>
+				<span flex></span>
+				<div layout="row" layout="end center">
+					<md-button type="button" ng-click="storesandregistersCtrl.editTill(store, till, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
+	                	<i class="material-icons">edit</i>
+	              	</md-button>
+	              	<md-button type="button" ng-click="storesandregistersCtrl.removeTill(store, till, $index); $event.stopPropagation();" class="md-icon-button launch ">
+	                	<i class="material-icons">delete</i>
+	              	</md-button>
+				</div>
+		</div>
+	</div>
+
+	
+</div>

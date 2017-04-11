@@ -241,6 +241,45 @@
               }
             }
           })
+          /*************  Routes For Settings ****************/
+          .state('home.settings', {
+            url: 'settings',
+            abstract: true
+          })
+          .state('home.settings.general', {
+            url: '/general',
+
+            views: {
+
+              'content@home': {
+                templateUrl: 'app/general/generalsettings.view.html',
+                controller: 'generalSettingsCtrl as generalSettingsCtrl'
+              }
+            }
+          })
+          .state('home.settings.storesandregisters', {
+            url: '/storesandregisters',
+
+            views: {
+
+              'content@home': {
+                templateUrl: 'app/general/storesandregisters.view.html',
+                controller: 'storesandregistersCtrl as storesandregistersCtrl'
+              }
+            }
+          })
+          /*.state('home.settings.taxandcurrency', {
+            url: '/openclose',
+
+            views: {
+
+              'content@home': {
+                templateUrl: 'app/settings/cashier.openclose.view.html',
+                controller: 'cashierCtrl'
+              }
+            }
+          })*/
+
       }])
     //take all whitespace out of string
     .filter('nospace', function () {

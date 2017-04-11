@@ -90,13 +90,17 @@ public class TillController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<?> createTill(@RequestBody Till till, UriComponentsBuilder ucBuilder) {
         //logger.info("Creating Brand : {}", brand);
+		System.out.println("TILL ARRIVED: " + till.getName());
+		System.out.println("Tills Store: " + till.getStore().getName());
 		Till createdTill = null;
-        if (rp.findTillByNameInStore(till.getName(), till.getStore().getStoreId()) == null) {
+        if (rp.findTillByNameInStore(till.getName(), till.getStore().getStoreId()) != null) {
             return new ResponseEntity(new CustomErrorType("Unable to create. A Till with name " + 
             till.getName() + " already exist for this store."),HttpStatus.CONFLICT);
         }
-        createdTill = rp.save(till);
-        return new ResponseEntity<Till>(createdTill, HttpStatus.CREATED);
+        else{
+        	createdTill = rp.save(till);
+        	return new ResponseEntity<Till>(createdTill, HttpStatus.CREATED);
+        }
     }
 	
 	

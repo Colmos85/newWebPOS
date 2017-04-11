@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import eu.webpos.entity.Brand;
+import eu.webpos.entity.Product;
+import eu.webpos.entity.Stock;
 import eu.webpos.entity.Store;
 import eu.webpos.rest.BrandController.CustomErrorType;
 import eu.webpos.service.ProductRepo;
+import eu.webpos.service.StockRepo;
 import eu.webpos.service.StoreRepo;
 
 
@@ -27,6 +30,12 @@ public class StoreController {
 	
 	@Autowired
 	private StoreRepo rp;
+	
+	@Autowired
+	private ProductRepo productrp;
+	
+	@Autowired
+	private StockRepo stockrp;
 	
 	/**
 	 * Web service for getting all the Stores in the application.
@@ -72,6 +81,18 @@ public class StoreController {
             store.getName() + " already exist."),HttpStatus.CONFLICT);
         }
         createdStore = rp.save(store);
+        
+        // Create store stock for each product
+        List<Product> activeProducts = productrp.findAllActiveProducts();
+        
+        Stock stock = null;
+        for(Product p: activeProducts){
+        	stock = new Stock();
+        	stock.setProduct(p);
+        	stock.setStore(createdStore);
+        	stockrp.save(stock);
+        }
+        
         return new ResponseEntity<Store>(createdStore, HttpStatus.CREATED);
     }
 	
