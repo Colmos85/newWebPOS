@@ -37,9 +37,9 @@
             HomeService.store = JSON.parse(storeObject);
         }
 
-        if(localStorage.getItem('still') !== null)
+        if(localStorage.getItem('till') !== null)
         {
-            var tillObject = localStorage.getItem('still');
+            var tillObject = localStorage.getItem('till');
             HomeService.till = JSON.parse(tillObject);
         }
 
@@ -192,7 +192,7 @@
 
               'content@home': {
                 templateUrl: 'app/cashier/cashier.openclose.view.html',
-                controller: 'cashierCtrl'
+                controller: 'opencloseCtrl as opencloseCtrl'
               }
             }
           })

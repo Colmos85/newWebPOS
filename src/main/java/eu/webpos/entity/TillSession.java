@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -68,16 +69,18 @@ public class TillSession {
 
 	@Column(name = "open_date_time", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="Europe/London")
 	public Date getOpenDateTime() {
 		return openDateTime;
 	}
-
+	
 	public void setOpenDateTime(Date openDateTime) {
 		this.openDateTime = openDateTime;
 	}
 
 	@Column(name = "close_date_time", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="Europe/London")
 	public Date getCloseDateTime() {
 		return closeDateTime;
 	}

@@ -19,8 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.webpos.entity.Customer;
 import eu.webpos.entity.Employee;
+import eu.webpos.entity.TillSession;
 import eu.webpos.rest.CustomerController.CustomErrorType;
 import eu.webpos.service.EmployeeRepo;
+import eu.webpos.service.TillSessionRepo;
 import eu.webpos.service.TransactionRepo;
 
 
@@ -32,6 +34,9 @@ public class EmployeeController {
 
 	@Autowired
 	private TransactionRepo transactionRepository;
+
+	@Autowired
+	private TillSessionRepo tillSessionRepository;
 	
 	@Autowired
 	private ObjectMapper om;
@@ -125,5 +130,17 @@ public class EmployeeController {
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 		}
 	}*/
+	
+	
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/activetillsession/{id}", method = RequestMethod.GET)
+	public ResponseEntity<TillSession> activeTillSession(@PathVariable Long id) {
+		TillSession tillSession = tillSessionRepository.findTillSessionByEmployeeOpenSession(id);
+		if (tillSession == null) {
+			return new ResponseEntity<TillSession>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<TillSession>(tillSession, HttpStatus.OK);
+		}
+	}
 
 }

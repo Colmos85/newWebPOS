@@ -21,6 +21,10 @@
         return $http.get(urlBase + '/' + id);
       };
 
+      factory.getEmployeeActiveTillSession = function (id) {
+        return $http.get(urlBase + '/activetillsession/' + id);
+      };
+
       factory.insertEmployee = function (employee) {
           return $http.post(urlBase, employee);
       };

@@ -416,7 +416,7 @@
           empty.toFixed(2);
 
           // Load Brands
-          transactionsFactory.getTwentyTransactionsByEmployee(HomeService.till.id).then(function successCallback(result){
+          transactionsFactory.getEmployeeLatestTransactions(HomeService.till.id).then(function successCallback(result){
                 vm.prevoiusTransactions = result.data;
                 // after loading in past twenty transactions - need to do some calculations..
                 vm.calculateTotals();
@@ -424,21 +424,6 @@
               }, function errorCallback(response) {
               console.log("Unsuccessful - load last twenty transactions");
           });
-
-
-
-
-
-          /*vm.calculateTotal = function(transaction){
-             var total = empty; // transaction total
-             for (var i = 0; i < transaction.transactionItems.length; i++) {
-                 // empty decimal
-                var calcTotal = new Decimal(transaction.transactionItems[i].product.retailPriceInc).times(new Decimal(transaction.transactionItems[i].quantity));
-                
-                total = calcTotal.plus(total);
-             }
-             return total;
-          }*/
 
           vm.calculateTotals = function(){
              for (var i = 0; i < vm.prevoiusTransactions.length; i++) {
@@ -454,6 +439,68 @@
 
          
       }])  // END of Brands Controller
+
+      .controller('opencloseCtrl', [
+          '$rootScope',
+          '$scope',
+          '$log',
+          '$state',
+          '$timeout',
+          '$location',
+          '$mdDialog',
+          '$mdToast',
+          '$resource',
+          'productsFactory',
+          'cashierFactory',
+          'employeesFactory',
+          'AuthService',
+          'HomeService',
+          
+          function ($rootScope, $scope, $log, $state, 
+                    $timeout, $location, $mdDialog, $mdToast, 
+                    $resource, productsFactory, cashierFactory, employeesFactory, 
+                    AuthService, HomeService) {
+
+          var vm = this;
+
+          Decimal.set({ precision: 5, rounding: 4 })
+
+          var empty = new Decimal(0.00);
+          empty.toFixed(2);
+
+          vm.numTransactions = 0;
+          var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+          var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+
+          // Get current transaction
+          employeesFactory.getEmployeeActiveTillSession(AuthService.user.id).then(function successCallback(result){
+                vm.currentSession = result.data;
+                var date = vm.currentSession;
+                console.log("Open till sessoin: ", vm.currentSession);
+                var len = vm.currentSession.transactions.length;
+                console.log("Number of transactions: ", vm.currentSession.transactions.length);
+
+                vm.dayOfWeek = getDayOfWeek(vm.currentSession.openDateTime);
+
+                vm.month = moment(vm.currentSession.openDateTime).format('dddd MMMM Do YYYY, HH:mm:ss');
+
+
+
+                //$scope.numTransactions = len;
+              }, function errorCallback(response) {
+              console.log("Unsuccessful - No open till session????");
+          });
+
+          /*function getDayOfWeek(date) {
+            var dayOfWeek = new Date(date).getDay();    
+            return isNaN(dayOfWeek) ? null : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
+          }*/
+
+
+
+         
+      }])  // END of Open/Close Controller
 
 
   

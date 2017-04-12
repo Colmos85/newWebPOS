@@ -17,7 +17,7 @@
         return $http.get(urlBase + '/' + id);
       };
 
-      factory.getTwentyTransactionsByEmployee = function(id){
+      factory.getEmployeeLatestTransactions = function(id){
         return $http.get(urlBase + 'employeelimittwenty/' + id);
       };
 
