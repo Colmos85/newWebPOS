@@ -478,12 +478,12 @@
                 vm.currentSession = result.data;
                 var date = vm.currentSession;
                 console.log("Open till sessoin: ", vm.currentSession);
-                var len = vm.currentSession.transactions.length;
+                vm.numTransactions = vm.currentSession.transactions.length;
                 console.log("Number of transactions: ", vm.currentSession.transactions.length);
 
-                vm.dayOfWeek = getDayOfWeek(vm.currentSession.openDateTime);
+                //vm.dayOfWeek = getDayOfWeek(vm.currentSession.openDateTime);
 
-                vm.month = moment(vm.currentSession.openDateTime).format('dddd MMMM Do YYYY, HH:mm:ss');
+                vm.newDate = moment(vm.currentSession.openDateTime).format('dddd MMMM Do YYYY, HH:mm:ss');
 
 
 
