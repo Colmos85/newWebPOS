@@ -21,6 +21,7 @@
     'ngMessages',
     'ngResource',
     'smart-table',
+    'chart.js',
     'ngPrint'
   ])
     .run(function(AuthService, HomeService, storesFactory, $rootScope, $state) {

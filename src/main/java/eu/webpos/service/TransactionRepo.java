@@ -13,7 +13,10 @@ import eu.webpos.entity.Transaction;
 public interface TransactionRepo extends JpaRepository<Transaction, Integer>{
 	
 	//public int countByTransaction??(String brandName);
-	//public List<Transaction> findByEmployee(Employee employee);
+	
+	
+	@Query(value="SELECT * FROM transaction ts WHERE ts.employee_id= :id ORDER BY transaction_date DESC", nativeQuery = true)
+	public List<Transaction> findByEmployeeId(@Param("id") Long id);
 	
 	
 	/**

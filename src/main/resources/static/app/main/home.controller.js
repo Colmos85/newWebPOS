@@ -73,8 +73,10 @@
       'menu',
       '$http',
       'storesFactory',
+      'employeesFactory',
       'HomeService',
-      function ($scope, $rootScope, $log, $state, $timeout, $location, menu, $http, storesFactory, HomeService) {
+      'AuthService',
+      function ($scope, $rootScope, $log, $state, $timeout, $location, menu, $http, storesFactory, employeesFactory, HomeService, AuthService) {
         /***********************************  Getting Started Page Controller ****************************************/
         
 
@@ -87,12 +89,9 @@
 
         storesFactory.getAllStores().then(function successCallback(result){
             $scope.stores = result.data;
-
-            console.log("ALL STORES RETRIEVED!!!!!!!!!!!!!!!!!");
             
             if(localStorage.getItem('store') !== null)
             {
-              console.log("STORE IN LOCAL STORAGE");
               var retrievedStore = localStorage.getItem('store');
               HomeService.store = JSON.parse(retrievedStore);
               // set The store on load
@@ -140,6 +139,71 @@
 
 
 
+        /*******************************   Performance Chart **************************************/
+
+        //Load data for chart..
+
+
+        employeesFactory.getEmployeeWeeklyPerformance(AuthService.user.id).then(function successCallback(result){
+            var data = result.data;
+            console.log("Weekly returns: ", data);
+            $scope.data = [data.data];
+            $scope.labels = data.labels;
+        });
+
+        $scope.series = ['Sales'];
+        /*$scope.labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];      
+        $scope.data = [[6542, 5990, 8001, 8110, 5645, 5555, 4950, 8001, 8110, 5645, 5555, 5785]];*/
+
+        $scope.onClick = function (points, evt) {
+          console.log(points, evt);
+        };
+        //$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+        $scope.options = {
+          scales: {
+            yAxes: [
+              {
+                id: 'y-axis-1',
+                type: 'linear',
+                display: true,
+                position: 'left'
+              }
+            ]
+          }
+        };
+
+        $scope.performanceBy = "weekly";
+        $scope.getData = function(value){
+          
+          if(value == "weekly"){
+            console.log("Get ", value, " data");
+            //get weekly data
+            employeesFactory.getEmployeeWeeklyPerformance(AuthService.user.id).then(function successCallback(result){
+                var data = result.data;
+                console.log("Weekly returns: ", data);
+                $scope.data = [data.data];
+                $scope.labels = data.labels;
+            });
+          }else{
+            console.log("Get ", value, " data");
+            // get monthly data
+            employeesFactory.getEmployeeMonthlyPerformance(AuthService.user.id).then(function successCallback(result){
+                var data = result.data;
+                console.log("Weekly returns: ", data);
+                $scope.data = [data.data];
+                $scope.labels = data.labels;
+            });
+          }
+        }
+
+
+/*        $scope.getWeeklyData = function(){
+          console.log("Get weekly data");
+        }
+
+        $scope.getMonthlyData = function(){
+          console.log("Get monthly data");
+        }*/
 
 
 

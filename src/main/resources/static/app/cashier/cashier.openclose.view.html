@@ -1,18 +1,109 @@
-<div class="row">
-    <h1 class="col-lg-12">This is the Open / Close a Register and end of day</h1>
-    <br/>
-    <h2>Session Opened: {{ opencloseCtrl.currentSession.openDateTime }}</h2>
-    <br/>
-    <h2>Number of transactions: {{ opencloseCtrl.numTransactions }}</h2>
-    <br/>
-    <h2>Session Open Date: {{ opencloseCtrl.newDate }}</h2>
-    <br/>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <ul>
-            <li>Lost Rhino Face Plant</li>
-            <li>3 Brothers Hoptimization</li>
-        </ul>
-    </div>
+<div layout="column" ng-cloak>
+  <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+    <md-card flex="flex" >
+	<div layout="column" >
+	<div ng-if="opencloseCtrl.openSession === false">
+		<div flex layout="row" style="padding-top: 20px">
+			<div class="md-title" style="padding-top: 20px">
+				No Active Session
+			</div>
+			<span flex></span>
+		</div>
+		<div>
+			<div class="md-subhead">
+				Make a sale to open a session!
+			</div>
+		</div>
+	</div>
+	<div ng-if="opencloseCtrl.openSession">
+		<div flex layout="row" style="padding-top: 20px">
+			<div class="md-title" style="padding-top: 20px">
+				Active Session
+			</div>
+			<span flex></span>
+		</div>
+		<div>
+			<div class="md-subhead">
+				Opened on {{ opencloseCtrl.openDate }}
+			</div>
+		</div>
+		<div>
+			<div class="md-subhead">
+				Number of sales {{ opencloseCtrl.numTransactions }}
+			</div>
+		</div>
+
+		
+		<div class="outerTableDiv" style="padding-top: 30px">
+			<table st-table="stores" st-safe-src="opencloseCtrl.stores" class="my-table table-striped" style="width:100%">
+				<thead>
+					<tr>
+						<th class="md-subhead" st-ratio="25">Payment Type</th>
+						<th class="md-subhead" st-ratio="25">Recorded</th>
+						<th class="md-subhead" st-ratio="25">Counted</th>
+						<th class="md-subhead" st-ratio="25">Balance</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="mainTDRows" style="height: 80px">
+						<td class="md-body-1" st-ratio="25">Opening Float</td>
+						<td class="md-body-1" st-ratio="25">€200.00</td>
+						<td class="md-body-1" st-ratio="25">-</td>
+						<td class="md-body-1" st-ratio="25">-</td>
+					</tr>
+					<tr class="mainTDRows" style="height: 80px">
+						<td class="md-body-1" st-ratio="25">Cash</td>
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.closeReg.cashTotals | currency:"€"}}</td>
+						<td class="md-body-1" st-ratio="25">
+						    <div flex="50" flex-xs="80"> 
+						        <input ng-model="opencloseCtrl.totalCashCounted" ng-change="opencloseCtrl.onCashCountedChange()" type="number" step="0.01" class="search-input md-whiteframe-3dp" placeholder="€0.00"/>
+						    </div>
+						</td> <!-- ******************** -->
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.totalCashDifference  | currency:"€"}} </td>
+					</tr>
+
+					<tr class="mainTDRows" style="height: 80px">
+						<td class="md-body-1" st-ratio="25">Credit Card</td>
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.closeReg.cardTotals  | currency:"€"}}</td>
+						<td class="md-body-1" st-ratio="25">
+							<div flex="50" flex-xs="80"> 
+						        <input ng-model="opencloseCtrl.totalCardCounted" ng-change="opencloseCtrl.onCardCountedChange()" type="number" step="0.01" class="search-input md-whiteframe-3dp" placeholder="€0.00"/>
+						    </div>
+						</td> <!-- ******************** -->
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.totalCardDifference  | currency:"€"}} </td>
+					</tr>
+
+					<tr class="mainTDRows" style="height: 80px">
+						<td class="md-body-1" st-ratio="25">Total</td>
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.total  | currency:"€"}} </td>
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.totalCounted  | currency:"€"}}</td> <!-- ******************** -->
+						<td class="md-body-1" st-ratio="25">{{ opencloseCtrl.totalDifference  | currency:"€"}}</td>
+					</tr>
+		        </tbody>
+				<tfoot >
+					<tr>
+			            <td colspan="3" class="text-center">
+			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
+			            </td>
+			        </tr>
+				</tfoot>
+			</table>
+		</div>
+
+		<div flex layout="row" layout-align="center center" style="padding-top: 50px">
+			<div flex="80" > <!-- style="width:80%" -->
+				<md-button style="width: 100%" layout-fill type="button" ng-click="opencloseCtrlCtrl.removeStore(store)" class="md-primary md-raised cash-button">
+                	Close Register
+            	</md-button>
+			</div>
+		</div>
+	</div>
+	
+
+
+	</div>
+
+	</md-card>
+</md-content>
+	
 </div>

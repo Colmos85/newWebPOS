@@ -463,62 +463,103 @@
 
           var vm = this;
 
+          vm.openSession = true;
+
           Decimal.set({ precision: 5, rounding: 4 })
 
           var empty = new Decimal(0.00);
           empty.toFixed(2);
 
           vm.numTransactions = 0;
-          var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-          var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+          vm.closeReg = [{cardTotals:"0.00"}, {cashTotals:"0.00"}, {allTotal:"0.00"}];
+          vm.total = 0.00;
+          vm.totalCounted = 0.00;
+          vm.totalDifference = 0.00;
 
+          vm.totalCashCounted = null;
+          vm.totalCardCounted = null;
+
+          vm.totalCashDifference = 0.00;
+          vm.totalCardDifference = 0.00;
+          
+          /*var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+          var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];*/
 
           // Get current transaction
           employeesFactory.getEmployeeActiveTillSession(AuthService.user.id).then(function successCallback(result){
-                vm.currentSession = result.data;
-                var date = vm.currentSession;
-                console.log("Open till sessoin: ", vm.currentSession);
-                vm.numTransactions = vm.currentSession.transactions.length;
-                console.log("Number of transactions: ", vm.currentSession.transactions.length);
+                if(result.status === 204)
+                {
+                    vm.openSession = false; // no open till/sales session for logged in Employee
+                }
+                else{
+                    vm.currentSession = result.data;
+                    vm.numTransactions = vm.currentSession.transactions.length;
+                    var date = moment(vm.currentSession.openDateTime, 'DD-MM-YYYY HH:mm:ss')
+                    vm.openDate = moment(date).format('dddd MMMM Do YYYY, HH:mm:ss');
 
-                //vm.dayOfWeek = getDayOfWeek(vm.currentSession.openDateTime);
+                    // get totals from current session
+                    employeesFactory.getEmployeeActiveTillSessionTotals(AuthService.user.id).then(function successCallback(result){
+                          vm.closeReg = result.data;
+                          var total =  new Decimal(vm.closeReg.cashTotals).plus(vm.closeReg.cardTotals);
+                          vm.closeReg.allTotal = total.toFixed(2);
 
-                vm.newDate = moment(vm.currentSession.openDateTime).format('dddd MMMM Do YYYY, HH:mm:ss');
+                          var recordedTotal = new Decimal(new Decimal(200.00)).plus(new Decimal(vm.closeReg.allTotal)); 
+                          vm.total = recordedTotal.toFixed(2);
 
-
+                          // Initally set these..
+                          vm.totalCashDifference = -(vm.closeReg.cashTotals);
+                          vm.totalCardDifference = -(vm.closeReg.cardTotals);
+                          var initalDifference = new Decimal(vm.closeReg.cashTotals).plus(new Decimal(vm.closeReg.cardTotals)).plus(new Decimal(200));
+                          vm.totalDifference = -initalDifference;
+                    });
+                }
 
                 //$scope.numTransactions = len;
               }, function errorCallback(response) {
               console.log("Unsuccessful - No open till session????");
           });
 
-          /*function getDayOfWeek(date) {
-            var dayOfWeek = new Date(date).getDay();    
-            return isNaN(dayOfWeek) ? null : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
-          }*/
 
+          //vm.totalCounted = new Decimal(200.00).toFixed(2);
 
+          vm.onCashCountedChange = function()
+          {
+            var totalCashDifference = new Decimal(vm.totalCashCounted).minus(new Decimal (vm.closeReg.cashTotals));
+            vm.totalCashDifference = totalCashDifference.toFixed(2);
+            if(vm.totalCardCounted !== null){
+              var totalCounted =  new Decimal(vm.totalCashCounted).plus(new Decimal(vm.totalCardCounted));
+              vm.totalCounted = totalCounted.toFixed(2);
+            }else{
+              var totalCounted =  new Decimal(vm.totalCashCounted);
+              vm.totalCounted = totalCounted.toFixed(2);
+            }
+            
+            var totalDifference = new Decimal(vm.totalCashDifference).plus(new Decimal(vm.totalCardDifference));
+            vm.totalDifference = totalDifference.toFixed(2);
+          }
+
+          vm.onCardCountedChange = function()
+          {
+            var totalCardDifference = new Decimal(vm.totalCardCounted).minus(new Decimal(vm.closeReg.cardTotals));
+            vm.totalCardDifference = totalCardDifference.toFixed(2);
+            if(vm.totalCashCounted !== null){
+              var totalCounted =  new Decimal(vm.totalCashCounted).plus(new Decimal(vm.totalCardCounted));
+              vm.totalCounted = totalCounted.toFixed(2);
+            }else{
+              var totalCounted =  new Decimal(vm.totalCardCounted);
+              vm.totalCounted = totalCounted.toFixed(2);
+            }
+
+            var totalDifference = new Decimal(vm.totalCashDifference).plus(new Decimal(vm.totalCardDifference));
+            vm.totalDifference = totalDifference.toFixed(2);
+          }
+
+          
+          /*vm.totalCounted = 
+          vm.totalDifference = */
 
          
       }])  // END of Open/Close Controller
-
-
-  
-      .directive('mdHideAutocompleteOnEnter', function ($compile) {
-        return {
-           restrict: 'A',
-           require: 'mdAutocomplete',
-           link: function(scope, element) {
-              element.on('keydown keypress', function($event) {
-                 // 13: Enter
-                 if ($event.keyCode == 13) {
-                    var eAcInput = this.getElementsByTagName('input')[0];
-                    eAcInput.blur();
-                 }
-              });
-           },
-        };
-      });
 
 
 

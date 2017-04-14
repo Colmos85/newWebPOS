@@ -34,6 +34,27 @@
     	
     </div>
 
+    <div style="padding-top: 20px">
+    <div>
+      <h2>Performance</h2>
+      <h5>Data selected: {{ performanceBy }} </h5>
+      <md-radio-group ng-model="performanceBy" ng-change="getData(performanceBy)">
+        <md-radio-button value="weekly" class="md-primary">Weekly</md-radio-button>
+        <md-radio-button value="monthly"> Monthly </md-radio-button>
+      </md-radio-group>
+
+    </div>
+        <!-- <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-series="series" chart-options="options"
+                chart-dataset-override="datasetOverride" chart-click="onClick">
+        </canvas> -->
+        <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-series="series" chart-options="options"
+                chart-click="onClick">
+        </canvas>
+
+    </div>
+
   </div>
   </md-card>
 </md-content>

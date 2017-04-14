@@ -46,7 +46,9 @@ public class TillSession {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Date closeDateTime;
 
-	
+	private double closingCash; //counted cash on closing session
+	private double closingCredit;
+
 	@OneToMany(mappedBy = "tillSession", fetch = FetchType.LAZY)
 	@JsonManagedReference(value="session-transactions")
 	private List<Transaction> transactions;
@@ -105,5 +107,20 @@ public class TillSession {
 		this.employee = employee;
 	}
 
+	public double getClosingCash() {
+		return closingCash;
+	}
+
+	public void setClosingCash(double closingCash) {
+		this.closingCash = closingCash;
+	}
+
+	public double getClosingCredit() {
+		return closingCredit;
+	}
+
+	public void setClosingCredit(double closingCredit) {
+		this.closingCredit = closingCredit;
+	}
 
 }

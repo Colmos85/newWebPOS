@@ -25,6 +25,18 @@
         return $http.get(urlBase + '/activetillsession/' + id);
       };
 
+      factory.getEmployeeActiveTillSessionTotals = function (id) {
+        return $http.get(urlBase + '/activetillsession/totals/' + id);
+      };
+
+      factory.getEmployeeWeeklyPerformance = function (id) {
+        return $http.get(urlBase + '/weeklyPerformance/' + id);
+      };
+
+      factory.getEmployeeMonthlyPerformance = function (id) {
+        return $http.get(urlBase + '/monthlyPerformance/' + id);
+      };
+
       factory.insertEmployee = function (employee) {
           return $http.post(urlBase, employee);
       };
