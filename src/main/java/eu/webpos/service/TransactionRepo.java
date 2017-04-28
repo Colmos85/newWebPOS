@@ -18,14 +18,16 @@ public interface TransactionRepo extends JpaRepository<Transaction, Integer>{
 	@Query(value="SELECT * FROM transaction ts WHERE ts.employee_id= :id ORDER BY transaction_date DESC", nativeQuery = true)
 	public List<Transaction> findByEmployeeId(@Param("id") Long id);
 	
-	
 	/**
 	 * Find the last 5 transactions for given employee
 	 * @param id
 	 * @return
 	 */
-	@Query(value="SELECT * FROM transaction ts WHERE ts.employee_id= :id ORDER BY transaction_date DESC LIMIT 5", nativeQuery = true)
+	@Query(value="SELECT * FROM transaction ts WHERE ts.employee_id= :id LIMIT 5 ORDER BY transaction_date DESC ", nativeQuery = true)
 	public List<Transaction> findTransactionsByEmployeeIdLimitFive(@Param("id") Long id);
+	
+	@Query(value="SELECT * FROM transaction t WHERE t.employee_id= :id LIMIT 20 ORDER BY transaction_date DESC", nativeQuery = true)
+	public List<Transaction> findTransactionsLimitTwentyByEmployeeId(@Param("id") Long id);
 	
 	
 	
@@ -47,6 +49,8 @@ public interface TransactionRepo extends JpaRepository<Transaction, Integer>{
 	
 	
 	
+	
+	
 	@Query(value="SELECT * FROM transaction t WHERE t.till_id= :id ORDER BY transaction_date DESC LIMIT 20", nativeQuery = true)
 	public List<Transaction> findTransactionsLimitTwentyByTillId(@Param("id") int id);
 	
@@ -55,8 +59,13 @@ public interface TransactionRepo extends JpaRepository<Transaction, Integer>{
 	
 	
 	
-	@Query(value="SELECT * FROM transaction t WHERE t.employee_id= :id LIMIT 20 ORDER BY transaction_date DESC", nativeQuery = true)
-	public List<Transaction> findTransactionsLimitTwentyByEmployeeId(@Param("id") Long id);
+	@Query(value="SELECT * FROM transaction t WHERE t.customer_id= :id ORDER BY transaction_date DESC LIMIT 10", nativeQuery = true)
+	public List<Transaction> findTransactionsLimitTenByCustomerId(@Param("id") Long id);
+	
+	
+	
+	
+	
 	
 	
 	@Query(value="SELECT * FROM transaction ts WHERE ts.employee_id= :id AND ts.close_date_time IS NULL", nativeQuery = true)

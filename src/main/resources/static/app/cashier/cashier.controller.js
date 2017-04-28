@@ -26,6 +26,8 @@
                 $resource, productsFactory, cashierFactory, customersFactory, 
                 transactionsFactory, AuthService, HomeService, mdHideAutocompleteOnEnter) {
 
+        var currentTransaction = {};
+
         $scope.showSalesSummary = false;
 
         //$scope.products=[];
@@ -229,6 +231,62 @@
 
 
         $scope.print = function() {
+          //$scope.transaction
+          var receipt = {
+            content: 
+            [
+                { text: 'Store location', style: 'header', alignment: 'center'},
+                { text: 'address1', style: 'header', alignment: 'center'},
+                { text: 'address2', style: 'header', alignment: 'center'},
+                { text: 'address3', style: 'header', alignment: 'center'},
+                /*table(externalDataRetrievedFromServer, ['name', 'age'])*/
+                {
+                  style: 'tableExample',
+                  table: {
+                    widths: [100, '*', 200, '*'],
+                    body: [
+                      ['width=100', 'star-sized', 'width=200', 'star-sized'],
+                      ['fixed-width cells have exactly the specified width', {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}]
+                    ]
+                  }
+                },
+                {
+                bold: true,
+                ul: [
+                    'auto',
+                    'star',
+                    'fixed value'
+                    ]
+                },
+            ],
+              styles: {
+                header: {
+                  fontSize: 18,
+                  bold: true,
+                  margin: [0, 0, 0, 10]
+                },
+                subheader: {
+                  fontSize: 16,
+                  bold: true,
+                  margin: [0, 10, 0, 5]
+                },
+                tableExample: {
+                  margin: [0, 5, 0, 15]
+                },
+                tableHeader: {
+                  bold: true,
+                  fontSize: 13,
+                  color: 'black'
+                }
+            },
+            defaultStyle: {
+              // alignment: 'justify'
+            }
+
+          }
+
+          pdfMake.createPdf(receipt).print();
+            /////// Not any better than ng-print - printJS('sales-summary', 'html');
             //var printContents = document.getElementById("sales-summary").innerHTML;
             //var popupWin = window.open('', '_blank', 'width=450,height=700');
             //popupWin.document.open();
@@ -248,6 +306,8 @@
               store: HomeService.store,
               till: HomeService.till
           };
+
+          currentTransaction = transaction;
 
           $scope.transaction = transaction; 
 

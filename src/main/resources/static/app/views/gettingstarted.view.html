@@ -9,7 +9,7 @@
 <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
   <md-card flex="flex" >
 
-  <div layout="column" >
+  <div layout="column" id="testid">
 
   	<h2>Select your Store and Till!</h2>
 
@@ -34,6 +34,15 @@
     	
     </div>
 
+    <div>
+      <md-button class="md-no-focus" ng-click="print()" layout-align="center end">Test Print</md-button>
+    </div>
+
+    <div>
+      <md-button class="md-no-focus" onclick="printJS({ printable: 'testid', type: 'html', header: 'User performance' })" layout-align="center end">Print.js</md-button>
+    </div>
+
+
     <div style="padding-top: 20px">
     <div>
       <h2>Performance</h2>
@@ -43,7 +52,7 @@
         <md-radio-button value="monthly"> Monthly </md-radio-button>
       </md-radio-group>
 
-    </div>
+    </div id="linechart">  <!-- style="height: calc(100vh - 200px);" -->
         <!-- <canvas id="line" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-series="series" chart-options="options"
                 chart-dataset-override="datasetOverride" chart-click="onClick">

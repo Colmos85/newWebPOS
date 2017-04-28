@@ -30,10 +30,6 @@
           //products.
       };
 
-/*      factory.getOrders = function (id) {
-          return $http.get(urlBase + '/' + id + '/orders');
-      };
-*/
       return factory;
 
     }]) // END OF productsFactory

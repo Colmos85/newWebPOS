@@ -30,9 +30,6 @@
 <script src="app/scripts/bower_components/angular-chart/dist/angular-chart.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
 
-<script src="app/scripts/ng-print/ng-print.min.js"></script>
-<link rel="stylesheet"  href="app/scripts/ng-print/ng-print.css"></script>
-
 
 <!-- Provides accrorian effects etc -->
 <script data-require="angular-bootstrap@0.12.0" data-semver="0.12.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
@@ -42,6 +39,43 @@
 
 
 <script src="app/scripts/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Best so far for new tab reports -->
+<script src="app/scripts/pdfmake.min.js"></script>  <!-- document defination as var in controller ... -->
+<script src="app/scripts/vfs_fonts.js"></script>
+
+
+
+<script src="app/scripts/ng-print/ng-print.min.js"></script> <!-- use attribute inside element needs @ media print-->
+<!-- <link rel="stylesheet"  href="app/scripts/ng-print/ng-print.css"></script> -->
+ 
+
+<script src="app/scripts/Print.js/dist/print.min.js"></script>   <!-- print from controller - img or pdf-file , 
+Can also print elements, (NEEDS @Media print ????) printJS('myElementId', 'html') -->
+<link rel="stylesheet" type="text/css" href="app/scripts/Print.js/src/css/print.css"></script>
+<script src="app/scripts/html2canvas.js"></script> <!-- meant to work with print.js -->
+
+
+
+
+<!-- KENDO  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+
+
+
+
 
 
 

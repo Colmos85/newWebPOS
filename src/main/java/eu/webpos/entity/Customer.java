@@ -1,19 +1,27 @@
 package eu.webpos.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties(value = {"transactions" })
-public class Customer {
+public class Customer implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +41,8 @@ public class Customer {
 	//@JsonManagedReference(value="customer-transactions")
 	private List<Transaction> transactions;
 	
+	//@ElementCollection
+	//private List<String> roles = new ArrayList<>();
 	
 	
 	public List<Transaction> getTransactions() {
@@ -97,12 +107,81 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	
+/*	public List<String> getRoles() {
+		return roles;
+	}
 
-/*	@OneToMany(mappedBy = "brand")
-	private List<Product> products;
-	*/
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}*/
 	
 	
 	
+	
+	
+/*	@JsonIgnore
+	@ElementCollection
+	private List<String> roles = new ArrayList<>();
+	
+	
+	
+	public List<String> getRoles() {
+		roles.add("CUST");
+		return roles;
+	}
+	
+	public void setRoles(List<String> roles) {
+		roles.add("CUST");
+		this.roles = roles;
+	}*/
+	
+	
+	@JsonIgnore
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		/*for (String role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role));
+		}*/
+		authorities.add(new SimpleGrantedAuthority("USER"));
+		return authorities;
+	}
+	
+/*	@JsonIgnore
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		for (String role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role));
+		}
+		return authorities;
+	}*/
 
 }

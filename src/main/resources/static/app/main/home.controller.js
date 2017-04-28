@@ -117,6 +117,110 @@
             };
         });
 
+        var docDefinition = {
+          content: [
+            'First paragraph',
+            'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
+          ]
+        }
+
+        $scope.print = function(){
+
+
+          /* ********* PDFMAKE *********** */
+
+          /*   
+          // makepdf
+          var whatsThis = pdfMake.createPdf(docDefinition);//.print();
+          console.log("Compuile: ", whatsThis);
+          */
+
+          const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+          var link = "";
+          pdfDocGenerator.getDataUrl((dataUrl) => { // create link to download file
+              const targetElement = document.querySelector('#iframeContainer'); //id of download button?
+              const iframe = document.createElement('iframe');
+              iframe.src = dataUrl;
+              //targetElement.appendChild(iframe);
+
+
+
+              link = iframe.src;
+
+
+              printJS('app/scripts/printjob.pdf');
+
+          });
+
+          //var file = new Blob([data], {type: 'application/pdf'});
+          //var fileURL = URL.createObjectURL(file);
+          //printJS(file.pdf);
+
+          
+          //pdfMake.createPdf(docDefinition).print(); // opens a new tab with rendered pdf then tries to print
+
+          //pdfMake.createPdf(docDefinition).download();
+
+          //pdfMake.createPdf(docDefinition).open();
+
+          /*pdfMake.createPdf(docDefinition).print();*/
+
+
+
+           /* NOT WORKING with CANVAS bar chart*/
+          /*html2canvas(document.getElementById('test2id'), {
+              onrendered: function (canvas) {
+                  var data = canvas.toDataURL();
+                  var docDefinition = {
+                      content: [{
+                          image: data,
+                          width: 500,
+                      }]
+                  };
+                  pdfMake.createPdf(docDefinition).print();
+              }
+          });*/
+
+
+
+
+
+
+          /* ********* PRINT.JS *********** */
+          /* ********* Good if printing pdf file from link in backend *********** */
+          /* ********* Good if printing with html2canvas *********** */
+          //printJS('performance-chart', 'html'); //print an element - css required??
+          //printJS('performance-chart', 'html');
+
+          /*<button type="button" onclick="printJS('printJS-form', 'html')">
+              Print Form
+          </button>*/
+
+          /*<button type="button" onclick="printJS({ printable: 'printJS-form', type: 'html', header: 'PrintJS - Form Element Selection' })">
+              Print Form with Header
+          </button>*/
+
+
+          /* ********* NG-PRINT *********** */
+          /* ****** goes straight to print, no new tab *********** */
+          //done on html
+          /*<md-button ng-click="print()" ng-print print-element-id="sales-summary">
+               Print
+          </md-button>*/
+
+
+          /* ********** KENDO ********* */ // WORKS
+         /* console.log("Called print() function"); // does not work on testidtwo, but works on testid
+          kendo.drawing.drawDOM($("#linechart")).then(function(group) {
+              kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf"); //saves the html element as pdf
+              var draw = kendo.drawing;
+              console.log(draw);
+          });*/
+        }
+
+        
+        
+
         
         // Do on blur on store combobox
         $scope.setStore = function(){

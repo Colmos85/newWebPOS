@@ -776,7 +776,7 @@ h2 {
 md-toolbar:not(.md-hue-1),
 .md-fab {
   fill: grey;
-  background-color: #3f3f3f; /*#800000 - maroon; */ 
+  background-color: #3f3f3f; /*// #3f3f3f; #800000 - maroon; */ 
 }
 
 md-sidenav {

@@ -24,7 +24,6 @@ import eu.webpos.rest.BrandController.CustomErrorType;
 import eu.webpos.service.ProductRepo;
 import eu.webpos.service.StockRepo;
 
-//@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -103,7 +102,7 @@ public class ProductController {
 		// get product existing product with id
 		Product existingProductVersion = rp.findById(id);
 		
-		// if these values change then a new row is needed // check for brand, tax and category too
+		// if these values change then a new row is needed // TODO - check for brand, tax and category too
 		if(!existingProductVersion.getDescription().equalsIgnoreCase(product.getDescription()) || 
 				existingProductVersion.getTradePriceEx() != product.getTradePriceEx() ||
 				existingProductVersion.getMarkup() != product.getMarkup() ||
@@ -115,11 +114,9 @@ public class ProductController {
 			// update product  
 			rp.save(existingProductVersion); // save will update as the id is already there
 			
-			
 			// create new product
 			product.setActive(true);
 			Product newProductVersion = rp.save(product); // saves new as there is no id
-			
 			
 			// update the stock 
 			for(Stock stock : existingProductVersion.getStock())
@@ -140,7 +137,7 @@ public class ProductController {
 			newProductVersion.setStock(existingProductVersion.getStock());
 			
 		}
-		else // no new row needed (might only be stock updated or nothing updated?)
+		else // no new row needed (if only the stock is updated)
 		{
 			System.out.println("Going to update product row!!!!!");
 			// update product (only quantity changed)

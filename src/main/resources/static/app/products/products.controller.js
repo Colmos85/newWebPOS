@@ -132,7 +132,6 @@
 
           if(angular.isUndefined(selectedProduct) || selectedProduct === null)
           {
-            console.log("Dialog controller - new Product");
             $scope.headerName = "New Product Form!";
             $scope.barcodeDisabled = false;
           }
@@ -140,7 +139,6 @@
           {
             update = true;
             $scope.barcodeDisabled = true; // disable the barcode input
-            console.log("dialog controller, product is not null");
             $scope.headerName = "Edit Product";
             $scope.tradePriceEx = selectedProduct.tradePriceEx;
             $scope.description = selectedProduct.description;
@@ -152,7 +150,6 @@
                 if (angular.equals(brands[i], selectedProduct.brand)) {$scope.selectedBrandIndex = i;
                 }
             }
-            //$scope.taxBand = selectedProduct.taxBand;  // ?????????
             for (var i = 0; i < taxBands.length; i++) {
                 if (angular.equals(taxBands[i], selectedProduct.taxBand)) {$scope.selectedTaxIndex = i;
                 }

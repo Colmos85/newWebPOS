@@ -160,7 +160,7 @@ public class EmployeeController {
 		if (transactions == null) {
 			return new ResponseEntity<PerformanceObject>(HttpStatus.NO_CONTENT);
 		} else {
-			int daysInWeek = 1;
+			int daysInWeek = 7;
 			double weeklyTotal = 0.0; // Accumulate totals for each week
 			long diff = 0;
 			long numDays = 0;
