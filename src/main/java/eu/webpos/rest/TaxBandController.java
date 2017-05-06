@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.dao.TaxBandRepo;
 import eu.webpos.entity.TaxBand;
-import eu.webpos.service.TaxBandRepo;
 
 @RestController
 @RequestMapping("/taxbands")

@@ -23,16 +23,10 @@
 						<md-input-container class="md-block" flex-gt-sm>
 				            <label>Brand Name</label>
 				            <input name="brandName" ng-model="brand.brandName" md-autofocus required record-checker="/brands/exists/" >
-				            <div ng-messages="brandForm.brandName.$error"> <!-- multiple ng-if='brandForm.brandName.$touched' -->
+				            <div ng-messages="brandForm.brandName.$error"> 
 				            	<div ng-message="required">This is required!</div>
 								<div ng-message="recordexists">Brand name already exists!</div>
 				            </div>
-				            <!-- <div ng-messages="brandForm.brandName.$error.validationError" data-ng-show="productForm.$submitted">
-							    <p ng-message="validationError">Error message {{ errorMessage }}</p>
-							</div> -->
-<!-- 				            <div ng-messages="productForm.barcode.$error">
-							   	<div ng-message="required">This is required!</div>
-							</div> -->
 				        </md-input-container>
 
 			         </fieldset>

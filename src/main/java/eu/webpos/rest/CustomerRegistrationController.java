@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.dao.CustomerRepo;
 import eu.webpos.entity.Brand;
 import eu.webpos.mail.SmtpMailSender;
 import eu.webpos.rest.BrandController.CustomErrorType;
-import eu.webpos.service.CustomerRepo;
 
 @RestController
 //@RequestMapping("/register")

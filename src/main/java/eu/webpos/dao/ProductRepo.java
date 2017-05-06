@@ -1,4 +1,4 @@
-package eu.webpos.service;
+package eu.webpos.dao;
 
 import java.util.List;
 
@@ -11,11 +11,10 @@ import eu.webpos.entity.Product;
 
 public interface ProductRepo extends JpaRepository<Product, Integer>{
 
-	//public List<Product> findAll(int id);
 	public Product findById(int id);
 	
 	public int countByBarcode(String barcode);
-	public Product findByBarcode(String barcode);
+	public Product findByBarcode(String barcode); // should be  JPQL that checks where product_active = 1
 	
 	
 	@Query(value="SELECT * FROM product WHERE active = 1", nativeQuery = true)

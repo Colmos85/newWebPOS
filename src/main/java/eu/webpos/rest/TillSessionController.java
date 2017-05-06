@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import eu.webpos.dao.TillRepo;
+import eu.webpos.dao.TillSessionRepo;
 import eu.webpos.entity.Till;
 import eu.webpos.entity.TillSession;
-import eu.webpos.service.TillRepo;
-import eu.webpos.service.TillSessionRepo;
 
 @RestController
 @RequestMapping("/tillsessions")

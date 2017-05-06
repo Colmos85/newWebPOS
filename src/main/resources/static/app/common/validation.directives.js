@@ -26,7 +26,7 @@ angular.module('common.directives')
                         reject();
                       }
                       
-                  });
+                  }); // end of get
               });
             };
           }

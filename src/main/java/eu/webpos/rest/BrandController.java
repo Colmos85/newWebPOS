@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import eu.webpos.dao.BrandRepo;
 import eu.webpos.entity.Brand;
-import eu.webpos.service.BrandRepo;
 
 @RestController
 @RequestMapping("/brands")

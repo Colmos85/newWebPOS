@@ -230,20 +230,80 @@
         }
 
 
+
+
         $scope.print = function() {
-          //$scope.transaction
+          console.log("Transaction Object: ", $scope.transaction);
+          function buildTableBody(data, columns) {
+              var tbody = [];
+
+              tbody.push(columns); // push the column headers to the object
+
+              data.forEach(function(row) { //row is the transaction item object
+                  console.log("NUM 1: ", row);
+                  var dataRow = [];
+
+                  dataRow.push(row.quantity.toString());
+                  dataRow.push(row.product.description.toString());
+                  dataRow.push(row.product.retailPriceInc.toString());
+
+                  /*var counter = 1;
+                  columns.forEach(function(column) {
+                      console.log("NUM 2: ", row[column]);
+                      if(counter == 2){ // product object
+                        dataRow.push(row[column].product.description.toString());
+                      }
+                      else if(counter == 3){ dataRow.push(row[column].product.retailPriceInc.toString());}
+                      else{
+                        dataRow.push(row[column].toString());
+                      }
+                      counter ++;
+                  })*/
+
+                  tbody.push(dataRow);
+              });
+
+              /*var returnThis = {
+                table
+                      widths: [100, '*', '*', 50],
+                      body: [
+                        tbody
+                      ]
+              }*/
+              /*var returnThis = {
+                table: {
+                  widths: [100, '*', 50],
+                  body: [
+                    tbody
+                  ]
+                }
+              }*/
+              
+
+              return tbody;
+          }
+
+          function table(data, columns) {
+              return {
+                  table: {
+                      headerRows: 1,
+                      body: buildTableBody(data, columns)
+                  }
+              };
+          }
+          //var itemsObj = [{quantity:}, {desc: }, {price: }];
           var receipt = {
             content: 
             [
-                { text: 'Store location', style: 'header', alignment: 'center'},
-                { text: 'address1', style: 'header', alignment: 'center'},
-                { text: 'address2', style: 'header', alignment: 'center'},
-                { text: 'address3', style: 'header', alignment: 'center'},
+                { text: $scope.transaction.store.name, style: 'header', alignment: 'center'},
+                { text: $scope.transaction.store.address1, style: 'header', alignment: 'center'},
+                { text: $scope.transaction.store.address2, style: 'header', alignment: 'center'},
+                { text: $scope.transaction.store.address3, style: 'header', alignment: 'center'},
                 /*table(externalDataRetrievedFromServer, ['name', 'age'])*/
                 {
                   style: 'tableExample',
                   table: {
-                    widths: [100, '*', 200, '*'],
+                    widths: [100, '*', '*', 50],
                     body: [
                       ['width=100', 'star-sized', 'width=200', 'star-sized'],
                       ['fixed-width cells have exactly the specified width', {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}, {text: 'nothing interesting here', italics: true, color: 'gray'}]
@@ -258,6 +318,18 @@
                     'fixed value'
                     ]
                 },
+                /*{
+                  style: 'tableExample',
+                  table: table($scope.transaction.transactionItems, ['quantity', 'description', 'price'])
+                },*/
+                {
+                  style: 'tableExample',
+                  table: {
+                    widths: [100, '*', 100],
+                    body: [table($scope.transaction.transactionItems, ['quantity', 'description', 'price'])]
+                  }
+                },
+                /*table($scope.transaction.transactionItems, ['quantity', 'description', 'price'])*/
             ],
               styles: {
                 header: {
@@ -285,7 +357,7 @@
 
           }
 
-          pdfMake.createPdf(receipt).print();
+          pdfMake.createPdf(receipt).print(); //open in new tab and print
             /////// Not any better than ng-print - printJS('sales-summary', 'html');
             //var printContents = document.getElementById("sales-summary").innerHTML;
             //var popupWin = window.open('', '_blank', 'width=450,height=700');

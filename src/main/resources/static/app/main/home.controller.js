@@ -87,6 +87,29 @@
         $scope.till = null;
         $scope.stores = [];
 
+        $scope.data = [];
+        $scope.labels = [];
+
+        $scope.showPDF = false;
+
+        var someJSONdata = [
+            {
+               name: 'John Doe',
+               email: 'john@doe.com',
+               phone: '111-111-1111'
+            },
+            {
+               name: 'Barry Allen',
+               email: 'barry@flash.com',
+               phone: '222-222-2222'
+            },
+            {
+               name: 'Cool Dude',
+               email: 'cool@dude.com',
+               phone: '333-333-3333'
+            }
+         ];
+
         storesFactory.getAllStores().then(function successCallback(result){
             $scope.stores = result.data;
             
@@ -136,7 +159,10 @@
           */
 
           const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+          
+          //printJS(file);
           var link = "";
+          // The will create a link
           pdfDocGenerator.getDataUrl((dataUrl) => { // create link to download file
               const targetElement = document.querySelector('#iframeContainer'); //id of download button?
               const iframe = document.createElement('iframe');
@@ -146,9 +172,39 @@
 
 
               link = iframe.src;
+              console.log("Link: ",link);  // URI data:application/pdf;Base64,jjhdf .......
+
+              //var fileURL = window.URL.createObjectURL(link);
+              //console.log("fileURL: ",fileURL);
+
+              $scope.link = link;
+
+              printJS(link);
+
+              //window.open(link);
+
+              //$scope.showPDF = true;
+              //////////////////////////////////////////////////////////////printJS(testFile);
+              //var file = new Blob([data], {type: 'application/pdf'});
+
+              //printJS('app/scripts/printjob.pdf'); // directly goes to print in iframe
+              //printJS(pdfDocGenerator, 'html');
 
 
-              printJS('app/scripts/printjob.pdf');
+
+
+              //create data in JSON format
+              var newdata = [];
+              var row = {};
+              var info = $scope.data[0];
+              for (var i = 0; i < $scope.labels.length; i++) {
+                var x = $scope.labels[i];
+                console.log("Label: ", x);
+                row[x] = "€"+info[i];
+              }
+              newdata.push(row);
+
+              //printJS({printable: newdata, properties: $scope.labels, type: 'json', header: 'User performance'});
 
           });
 
@@ -161,7 +217,7 @@
 
           //pdfMake.createPdf(docDefinition).download();
 
-          //pdfMake.createPdf(docDefinition).open();
+          //pdfMake.createPdf(docDefinition).open(); //makes a blob and opens in new tab
 
           /*pdfMake.createPdf(docDefinition).print();*/
 
@@ -250,9 +306,10 @@
 
         employeesFactory.getEmployeeWeeklyPerformance(AuthService.user.id).then(function successCallback(result){
             var data = result.data;
-            console.log("Weekly returns: ", data);
             $scope.data = [data.data];
             $scope.labels = data.labels;
+            console.log("Weekly returns data: ", $scope.data);
+            console.log("Weekly returns labels: ", $scope.labels);
         });
 
         $scope.series = ['Sales'];
@@ -264,6 +321,15 @@
         };
         //$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
         $scope.options = {
+          responsive: true,
+          maintainAspectRatio: true,
+          lineTension: 0.2,
+          title: {
+            display: true,
+            text: 'Sales Totals',
+            fontColor: 'rgba(0,0,0,0.8)',
+            fontSize: 16
+          },
           scales: {
             yAxes: [
               {

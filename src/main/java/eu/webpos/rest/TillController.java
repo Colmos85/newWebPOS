@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import eu.webpos.dao.TillRepo;
 import eu.webpos.entity.Till;
 import eu.webpos.entity.Transaction;
-import eu.webpos.service.TillRepo;
 
 @RestController
 @RequestMapping("/tills")

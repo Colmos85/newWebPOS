@@ -1,33 +1,52 @@
-<div class="extendedTableData" flex layout-fill layout="row" layout-xs="column">
-	<div layout="column" > <!-- flex="33" -->
-		<h4 class="md-subhead">Product Details</h4>
-		<ul>
-			<li class="md-body-1">Barcode: {{ product.barcode }}</li>
-			<li class="md-body-1">Brand: {{ product.brand.brandName }}</li>
-			<li class="md-body-1">Description: {{ product.description }}</li>
-		</ul>
-		
+<div class="extendedTableData" flex layout-fill layout-padding layout-margin layout="row" layout-xs="column" >
+	<div layout="column" flex-gt-xs="40" style="margin-top: 15px"> <!-- flex="33" -->
+		<div class="md-subhead">Product Details</div>
+		<div layout="row">
+			<div style="width:85px" layout="column">
+				<div class="md-body-1" >Barcode:</div>
+				<div class="md-body-1" >Brand:</div>
+				<div class="md-body-1" >Description: </div>
+			</div>
+			<div flex layout="column">
+				<div class="md-body-1" >{{ product.barcode }}</div>
+				<div class="md-body-1" >{{ product.brand.brandName }}</div>
+				<div class="md-body-1" >{{ product.description }}</div>
+			</div>
+		</div>
 	</div>	
 
-	<div layout="column" >
-		<h4 class="md-subhead">Stock</h4>
-		<ul ng-repeat="store in productsCtrl.stores "> <!-- | filter : {productsCtrl.stores.stock.id: product.stock.id} -->
-			<li class="md-body-1">Store : {{ store.name }}</li>
-			<li class="md-body-1">Quantity : {{ productsCtrl.getStoreQuantity(store.stock, product.stock) }}</li>
-		</ul>
+
+	<div layout="column" flex-gt-xs="30" style="margin-top: 15px">
+		<div class="md-subhead">Stock</div>
+		<div layout="row" ng-repeat="store in productsCtrl.stores" style="margin-top: 10px">
+			<div style="width:70px" layout="column">
+				<div class="md-body-1" >Store: </div>
+				<div class="md-body-1" >Quantity: </div>
+			</div>
+			<div flex layout="column">
+				<div class="md-body-1" >{{ store.name }}</div>
+				<div class="md-body-1" >{{ productsCtrl.getStoreQuantity(store.stock, product.stock) }}</div>
+			</div>
+		</div>
 	</div>
 
-	<div layout="column" >
-		<h4 class="md-subhead">Price Breakdown</h4>
-		<br />
-		Trade Price Ex VAT: {{ product.tradePriceEx  | currency:"€" }}
-		<br />
-		Markup: {{ product.markup }} %
-		<br />
-		Retail Price Ex VAT: {{ product.retailPriceEx  | currency:"€" }}
-		<br />
-		Retail Price Inc VAT: {{ product.retailPriceInc | currency:"€"  }}
+	<div layout="column" flex-gt-xs="30" style="margin-top: 15px">
 
+		<div class="md-subhead">Price Breakdown</div>
+		<div layout="row">
+			<div style="width:135px" layout="column">
+				<div class="md-body-1" >Trade Price Ex VAT: </div>
+				<div class="md-body-1" >Markup: </div>
+				<div class="md-body-1" >Retail Price Ex VAT: </div>
+				<div class="md-body-1" >Retail Price Inc VAT: </div>
+			</div>
+			<div flex layout="column">
+				<div class="md-body-1" >{{ product.tradePriceEx  | currency:"€" }}</div>
+				<div class="md-body-1" >{{ product.markup }} %</div>
+				<div class="md-body-1" >{{ product.retailPriceEx  | currency:"€" }}</div>
+				<div class="md-body-1" >{{ product.retailPriceInc | currency:"€"  }}</div>
+			</div>
+		</div>
 	</div>
 
 

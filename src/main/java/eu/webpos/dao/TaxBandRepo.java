@@ -1,4 +1,4 @@
-package eu.webpos.service;
+package eu.webpos.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

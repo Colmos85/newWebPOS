@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import eu.webpos.dao.CustomerRepo;
+import eu.webpos.dao.TransactionRepo;
 import eu.webpos.entity.Customer;
 import eu.webpos.entity.Employee;
 import eu.webpos.entity.Transaction;
-import eu.webpos.service.CustomerRepo;
-import eu.webpos.service.TransactionRepo;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 

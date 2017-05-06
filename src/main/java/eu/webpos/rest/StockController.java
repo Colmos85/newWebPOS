@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.dao.StockRepo;
 import eu.webpos.entity.Brand;
 import eu.webpos.entity.Stock;
 import eu.webpos.rest.BrandController.CustomErrorType;
-import eu.webpos.service.StockRepo;
 
 
 

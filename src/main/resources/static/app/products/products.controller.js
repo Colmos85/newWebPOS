@@ -49,6 +49,12 @@
 
       vm.reload();
 
+
+      Decimal.set({ precision: 5, rounding: 4 })
+
+      var empty = new Decimal(0.00);
+      empty.toFixed(2);
+
       // function to load quantitys on accordian table for store/product 
       vm.getStoreQuantity = function(storeStock, productStock)
       {
@@ -114,8 +120,9 @@
 	        });
 	     };
 
-      function DialogController($scope, $mdDialog, brands, stores, taxBands, selectedProduct, brandsFactory, storesFactory, productsFactory, stockFactory) {
-          // inject brands from parent ctrl and set to dialogs isolated scope variable
+      function DialogController($scope, $mdDialog, brands, stores, taxBands, selectedProduct, 
+                                brandsFactory, storesFactory, productsFactory, stockFactory) {
+          // inject product from parent ctrl and set to dialogs isolated scope variable
 
           $scope.selectedBrandIndex = -1;
           $scope.selectedTaxIndex = -1;
@@ -140,10 +147,10 @@
             update = true;
             $scope.barcodeDisabled = true; // disable the barcode input
             $scope.headerName = "Edit Product";
-            $scope.tradePriceEx = selectedProduct.tradePriceEx;
+            $scope.tradePriceEx = selectedProduct.tradePriceEx.toFixed(2);//.toFixed(2);
             $scope.description = selectedProduct.description;
             $scope.barcode = selectedProduct.barcode;
-            $scope.markup = selectedProduct.markup;
+            $scope.markup = selectedProduct.markup.toFixed(3);
             
             //$scope.brand = selectedProduct.brand;
             for (var i = 0; i < brands.length; i++) {
@@ -155,8 +162,8 @@
                 }
             }
 
-            $scope.salesPriceEx = selectedProduct.retailPriceEx;
-            $scope.salesPriceInc = selectedProduct.retailPriceInc;
+            $scope.salesPriceEx = selectedProduct.retailPriceEx.toFixed(2);
+            $scope.salesPriceInc = selectedProduct.retailPriceInc.toFixed(2);
 
 
             for (var i = 0, len = stores.length; i < len; i++) {
@@ -170,7 +177,7 @@
           {   
               if($scope.tradePriceEx > 0)
               {
-                  $scope.tradePriceEx = parseFloat($scope.tradePriceEx).toFixed(3);
+                  $scope.tradePriceEx = parseFloat($scope.tradePriceEx).toFixed(2);
               }
           }
           $scope.formatMarkup = function()
@@ -184,14 +191,14 @@
           {
              if($scope.salesPriceEx > 0 )
               {
-                  $scope.salesPriceEx = parseFloat($scope.salesPriceEx).toFixed(3);
+                  $scope.salesPriceEx = parseFloat($scope.salesPriceEx).toFixed(2);
               }
           }
           $scope.formatSalesPriceInc = function()
           {
               if($scope.salesPriceInc > 0 )
               {
-                  $scope.salesPriceInc = parseFloat($scope.salesPriceInc).toFixed(3);
+                  $scope.salesPriceInc = parseFloat($scope.salesPriceInc).toFixed(2);
               }
           }
 
@@ -206,11 +213,11 @@
             if($scope.markup > 0 )
             {
                 var markup = ($scope.markup / 100) + 1; 
-                $scope.salesPriceEx = ($scope.tradePriceEx * markup).toFixed(3);
-                if(/*$scope.product.taxBand.rate > 0 */typeof $scope.taxBand !== 'undefined')
+                $scope.salesPriceEx = ($scope.tradePriceEx * markup).toFixed(2);
+                if(typeof $scope.taxBand !== 'undefined')
                 {
-                    var taxBand = ($scope.taxBands.rate / 100) + 1; 
-                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(3);
+                    var taxBand = ($scope.taxBand.rate / 100) + 1; 
+                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(2);
                 }
             }
           }; 
@@ -227,8 +234,8 @@
                 $scope.salesPriceEx = ($scope.tradePriceEx * markup).toFixed(2);
                 if(typeof $scope.taxBand !== 'undefined')
                 {
-                    var taxBand = ($scope.taxBands.rate / 100) + 1; 
-                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(3);
+                    var taxBand = ($scope.taxBand.rate / 100) + 1; 
+                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(2);
                 }
             }
           };
@@ -245,10 +252,11 @@
                 var markup = $scope.salesPriceEx / $scope.tradePriceEx;
                 markup = (markup - 1) * 100;
                 $scope.markup = markup.toFixed(3);
+                console.log($scope.taxBand);
                 if(typeof $scope.taxBand !== 'undefined')
                 {
                     var taxBand = ($scope.taxBand.rate / 100) + 1; 
-                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(3);
+                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(2);
                 }
             }
           };
@@ -258,7 +266,7 @@
             if(typeof $scope.salesPriceEx !== 'undefined' || $scope.salesPriceEx > 0)
                 {
                     var taxBand = ($scope.taxBand.rate / 100) + 1; 
-                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(3);
+                    $scope.salesPriceInc = ($scope.salesPriceEx * taxBand).toFixed(2);
                 }
 
           }
@@ -273,7 +281,7 @@
             {
                 // change ex vat price
                 var tax = ($scope.taxBand.rate / 100) + 1; 
-                $scope.salesPriceEx = ($scope.salesPriceInc / tax).toFixed(3);
+                $scope.salesPriceEx = ($scope.salesPriceInc / tax).toFixed(2);
                 if($scope.tradePriceEx > 0)
                 {
                     var markup = $scope.salesPriceEx / $scope.tradePriceEx;
@@ -323,7 +331,8 @@
 
             if(update) // edit button pressed
             {
-              productsFactory.updateProduct(selectedProduct.id, product).then(function successCallback(response) {
+              productsFactory.updateProduct(selectedProduct.id, product).then(
+                function successCallback(response) {
                   product.id = response.data.id; // return new product id
                   // refresh the list of products and quantity (less efficient but easier for now)
                   vm.reload();
@@ -350,11 +359,8 @@
               });
 
             }; // end of else
-
-            //vm.reload();
-            //$mdDialog.hide(answer);
-          };
-       };
+          };// end of save function
+       }; // end of Dialog Controller Function
 	     
     }]) // END OF productsCtrl
   

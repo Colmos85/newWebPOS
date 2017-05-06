@@ -22,14 +22,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import eu.webpos.dao.EmployeeRepo;
+import eu.webpos.dao.TillSessionRepo;
+import eu.webpos.dao.TransactionRepo;
 import eu.webpos.entity.Customer;
 import eu.webpos.entity.Employee;
 import eu.webpos.entity.TillSession;
 import eu.webpos.entity.Transaction;
 import eu.webpos.rest.CustomerController.CustomErrorType;
-import eu.webpos.service.EmployeeRepo;
-import eu.webpos.service.TillSessionRepo;
-import eu.webpos.service.TransactionRepo;
 
 
 @RestController

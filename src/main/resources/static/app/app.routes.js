@@ -13,6 +13,7 @@
     'myApp.customers.module',
     'myApp.employees.module',
     'myApp.transactions.module',
+    'myApp.reports.module',
     'ngAnimate',
     'ui.router',
     'ngMaterial',
@@ -31,18 +32,6 @@
       // state change. For every state change the ui-router module will broadcast
       // the '$stateChangeStart'.
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
-        if(localStorage.getItem('store') !== null)
-        {
-            var storeObject = localStorage.getItem('store');
-            HomeService.store = JSON.parse(storeObject);
-        }
-
-        if(localStorage.getItem('till') !== null)
-        {
-            var tillObject = localStorage.getItem('till');
-            HomeService.till = JSON.parse(tillObject);
-        }
 
         if(localStorage.getItem('user') !== null)
         {
@@ -99,7 +88,7 @@
             }
         })
         $stateProvider
-          .state('login', {
+          .state('login', { 
             url: '/login',
             data: {
               requireLogin: false // this property will apply to all children of 'app'
@@ -266,6 +255,17 @@
               'content@home': {
                 templateUrl: 'app/general/storesandregisters.view.html',
                 controller: 'storesandregistersCtrl as storesandregistersCtrl'
+              }
+            }
+          })
+          .state('home.reports', {
+            url: 'reports',
+
+            views: {
+
+              'content@home': {
+                templateUrl: 'app/reports/reports.view.html',
+                controller: 'reportsCtrl'
               }
             }
           })

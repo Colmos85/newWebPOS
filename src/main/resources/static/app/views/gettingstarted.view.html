@@ -1,71 +1,75 @@
-<!-- <h1>This is the Home page - it will have a guide on how to get started with making sales etc...</h1>
 
-<p> Test: {{ vm.test }} </p>
+<!-- <div ng-show="showPDF">
+  <object data="{{link}}" type="application/pdf" style="width: 100%; height: 100%;"></object>
+</div> -->
+<div layout="column" ng-cloak" ng-hide="showPDF">
+  <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
+    <md-card flex="flex" >
 
- -->
+    <div layout="column" id="testid">
+      <div flex="15">
+        <h2>Select your Store and Till!</h2>
 
+        <div layout="row">
+          <md-input-container class="md-block" flex>
+                <label>Store</label>
+                <md-select ng-model="store">
+                  <md-option ng-repeat="(index, store) in stores" ng-value="store" ng-selected="index == {{selectedStoreIndex}}" ng-blur="setStore()">
+                    {{store.name}}
+                  </md-option>
+                </md-select>
+            </md-input-container>
 
- <div layout="column" ng-cloak>
-<md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
-  <md-card flex="flex" >
-
-  <div layout="column" id="testid">
-
-  	<h2>Select your Store and Till!</h2>
-
-    <div layout="row">
-    	<md-input-container class="md-block" flex>
-            <label>Store</label>
-            <md-select ng-model="store">
-              <md-option ng-repeat="(index, store) in stores" ng-value="store" ng-selected="index == {{selectedStoreIndex}}" ng-blur="setStore()">
-                {{store.name}}
-              </md-option>
-            </md-select>
-      	</md-input-container>
-
-      	<md-input-container class="md-block" flex>
-            <label>Till</label>
-            <md-select ng-model="till" >
-              <md-option ng-repeat="(index, till) in store.tills" ng-value="till" ng-selected="index == {{selectedTillIndex}}" ng-blur="setTill()">
-                {{till.name}}
-              </md-option>
-            </md-select>
-      	</md-input-container>
+            <md-input-container class="md-block" flex>
+                <label>Till</label>
+                <md-select ng-model="till" >
+                  <md-option ng-repeat="(index, till) in store.tills" ng-value="till" ng-selected="index == {{selectedTillIndex}}" ng-blur="setTill()">
+                    {{till.name}}
+                  </md-option>
+                </md-select>
+            </md-input-container>
+          
+        </div>
+      </div>
     	
+      <div>
+        <md-button class="md-no-focus" ng-click="print()" layout-align="center end">Test Print</md-button>
+      </div>
+
+  <!--     <div> -->
+        <!-- <md-button class="md-no-focus" onclick="printJS({ printable: 'testid', type: 'html', header: 'User performance' })" layout-align="center end">Print.js</md-button> -->
+
+
+  <!--       <md-button class="md-no-focus" onclick="printJS({printable: someJSONdata, properties: ['name', 'email', 'phone'], type: 'json'})" layout-align="center end">Print.js</md-button>
+      </div> -->
+
+
+      <div style="padding-top: 15px" flex> <!-- style="padding-top: 20px" -->
+        <div layout="column">
+          <h3>Performance</h3>
+          <!-- <h5>Data selected: {{ performanceBy }} </h5> -->
+          <div>
+            <md-radio-group layout="row" ng-model="performanceBy" ng-change="getData(performanceBy)">
+              <md-radio-button value="weekly" class="md-primary">Weekly</md-radio-button>
+              <md-radio-button value="monthly"> Monthly </md-radio-button>
+            </md-radio-group>
+          </div>
+          
+
+          </div id="linechart" flex style="max-width: 400px">  <!-- style="height: calc(100vh - 200px);" -->
+              <!-- <canvas id="line" class="chart chart-line" chart-data="data"
+                      chart-labels="labels" chart-series="series" chart-options="options"
+                      chart-dataset-override="datasetOverride" chart-click="onClick">
+              </canvas> -->
+              <canvas id="line" class="chart chart-line" chart-data="data"
+                      chart-labels="labels" chart-series="series" chart-options="options"
+                      chart-click="onClick">
+              </canvas>
+
+          </div>
+      </div>
     </div>
-
-    <div>
-      <md-button class="md-no-focus" ng-click="print()" layout-align="center end">Test Print</md-button>
-    </div>
-
-    <div>
-      <md-button class="md-no-focus" onclick="printJS({ printable: 'testid', type: 'html', header: 'User performance' })" layout-align="center end">Print.js</md-button>
-    </div>
-
-
-    <div style="padding-top: 20px">
-    <div>
-      <h2>Performance</h2>
-      <h5>Data selected: {{ performanceBy }} </h5>
-      <md-radio-group ng-model="performanceBy" ng-change="getData(performanceBy)">
-        <md-radio-button value="weekly" class="md-primary">Weekly</md-radio-button>
-        <md-radio-button value="monthly"> Monthly </md-radio-button>
-      </md-radio-group>
-
-    </div id="linechart">  <!-- style="height: calc(100vh - 200px);" -->
-        <!-- <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-series="series" chart-options="options"
-                chart-dataset-override="datasetOverride" chart-click="onClick">
-        </canvas> -->
-        <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-series="series" chart-options="options"
-                chart-click="onClick">
-        </canvas>
-
-    </div>
-
-  </div>
-  </md-card>
-</md-content>
+    </md-card>
+  </md-content>
   
 </div>

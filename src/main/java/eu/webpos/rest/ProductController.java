@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.dao.ProductRepo;
+import eu.webpos.dao.StockRepo;
 import eu.webpos.entity.Brand;
 import eu.webpos.entity.Product;
 import eu.webpos.entity.Stock;
 import eu.webpos.rest.BrandController.CustomErrorType;
-import eu.webpos.service.ProductRepo;
-import eu.webpos.service.StockRepo;
 
 @RestController
 @RequestMapping("/products")
@@ -166,7 +166,8 @@ public class ProductController {
         //logger.info("Creating Brand : {}", brand);
 		Product createdProduct = null;
         if (rp.countByBarcode(product.getBarcode()) > 0) {
-            return new ResponseEntity(new CustomErrorType("Unable to create. This Product barcode already exist."),HttpStatus.CONFLICT);
+            return new ResponseEntity(new CustomErrorType("Unable to create. "
+            		+ "This Product barcode already exist."),HttpStatus.CONFLICT);
         }
         
         product.setActive(true);

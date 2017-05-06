@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import eu.webpos.dao.StockRepo;
+import eu.webpos.dao.StoreRepo;
+import eu.webpos.dao.TaxBandRepo;
+import eu.webpos.dao.TillRepo;
+import eu.webpos.dao.TillSessionRepo;
+import eu.webpos.dao.TransactionItemsRepo;
+import eu.webpos.dao.TransactionRepo;
 import eu.webpos.entity.Employee;
 import eu.webpos.entity.Stock;
 import eu.webpos.entity.Store;
@@ -22,13 +29,6 @@ import eu.webpos.entity.TaxBand;
 import eu.webpos.entity.TillSession;
 import eu.webpos.entity.Transaction;
 import eu.webpos.entity.TransactionItem;
-import eu.webpos.service.StockRepo;
-import eu.webpos.service.StoreRepo;
-import eu.webpos.service.TaxBandRepo;
-import eu.webpos.service.TillRepo;
-import eu.webpos.service.TillSessionRepo;
-import eu.webpos.service.TransactionItemsRepo;
-import eu.webpos.service.TransactionRepo;
 
 @RestController
 @RequestMapping("/transactions")
