@@ -188,75 +188,81 @@
 		   </div>
 
 		   <div layout="column" ng-hide="showSalesSummary === false">
-		   <div fade>
-				<div id="sales-summary">
-					<div layout="column" class="sales-summary-headers" style="text-align: center" style="margin: 3px">
-						<div class="print-address">{{transaction.store.name}}</div>
-						<div class="print-address">{{transaction.store.address1}}</div>
-						<div class="print-address">{{transaction.store.address2}}</div>
-						<div class="print-address">{{transaction.store.address3}}</div>
-						<div class="print-address">{{transaction.store.contact}}</div>
-						<br/>
-						<div class="print-address">You were served by: {{transaction.employee.firstName}}</div>
-					</div>
-					<div class="sales-summary-headers">
-						<div style="text-align: center"> Sales Summary</div>	
-					</div>
-					<md-divider></md-divider>
-					<div layout="row" class="print-row">
-						<div class="print-left" flex="65"><p>Desc</p></div>
-						<div class="print-mid" flex="15"><p>Qty</p></div>
-						<div class="print-right" layout-align="center end"><p>Price</p></div>
-					</div>
-					<md-divider></md-divider>
-					<div layout="row" class="print-row" ng-repeat="item in saleItems">
-						<div class="print-left" flex="65">{{item.product.description}} </div>
-					    <div class="print-mid" flex="15">{{item.quantity}} </div>
-					    <div class="print-right" layout-align="center end">{{item.unitTotalDisplayPrice | currency:"€"}} </div>
-					    <br/>
-					</div>
-					<md-divider></md-divider>
-					<md-divider></md-divider>
-					<div layout="row" class="print-row">
-						<div flex="80">Subtotal</div>
-						<div layout-align="center end">{{ subTotal | currency:"€" }}</div>
-					</div>
-					<div layout="row" class="print-row">
-						<div flex="80">Tax</div>
-						<div layout-align="center end">{{ tax | currency:"€" }}</div>
-					</div>
-					<div layout="row" class="print-row">
-						<div flex="80">Total</div>
-						<div layout-align="center end">{{ total | currency:"€" }}</div>
-					</div>
-					<md-divider></md-divider>
-					<div style="text-align: center" class="sales-summary-headers">
-						<div>Payments</div>	
-					</div>
-					<md-divider></md-divider>
-					<div layout="row" class="print-row" ng-repeat="payment in payments">
-						<div flex="80">{{ payment.type }}</div>
-						<div layout-align="center end">{{ payment.amount | currency:"€" }}</div>
-						<br/>
-					</div>
-					<md-divider></md-divider>
-					<div layout="row" class="print-row">
-						<div flex="80">Change</div>
-						<div layout-align="center end">{{ transaction.changeValue | currency:"€"}}</div>
-					</div>
-					<div>
+		   <div fade >
+		   		<div layout="column">
+					<div id="sales-summary" style="width: 300px; margin:0 auto;">
+						<div layout="column" class="sales-summary-headers" style="text-align: center" style="margin: 3px">
+							<div class="print-address">{{transaction.store.name}}</div>
+							<div class="print-address">{{transaction.store.address1}}</div>
+							<div class="print-address">{{transaction.store.address2}}</div>
+							<div class="print-address">{{transaction.store.address3}}</div>
+							<div class="print-address">{{transaction.store.contact}}</div>
+							<br/>
+							<div class="print-address">You were served by: {{transaction.employee.firstName}}</div>
+						</div>
+						<div class="sales-summary-headers">
+							<div style="text-align: center"> Sales Summary</div>	
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="print-row">
+							<div class="print-left" flex="65"><p>Desc</p></div>
+							<div class="print-mid" flex="15"><p>Qty</p></div>
+							<div class="print-right" layout-align="center end"><p>Price</p></div>
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="print-row" ng-repeat="item in saleItems">
+							<div class="print-left" flex="65">{{item.product.description}} </div>
+						    <div class="print-mid" flex="15">{{item.quantity}} </div>
+						    <div class="print-right" layout-align="center end">{{item.unitTotalDisplayPrice | currency:"€"}} </div>
+						    <br/>
+						</div>
+						<md-divider></md-divider>
+						<md-divider></md-divider>
+						<div layout="row" class="print-row">
+							<div class="print-left-full" flex="80">Subtotal</div>
+							<div class="print-right" layout-align="center end">{{ subTotal | currency:"€" }}</div>
+						</div>
+						<div layout="row" class="print-row">
+							<div class="print-left-full" flex="80">Tax</div>
+							<div class="print-right" layout-align="center end">{{ tax | currency:"€" }}</div>
+						</div>
+						<div layout="row" class="print-row">
+							<div class="print-left-full" flex="80">Total</div>
+							<div class="print-right" layout-align="center end">{{ total | currency:"€" }}</div>
+						</div>
+						<md-divider></md-divider>
+						<div style="text-align: center" class="sales-summary-headers">
+							<div>Payments</div>	
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="print-row" ng-repeat="payment in payments">
+							<div class="print-left-full" flex="80">{{ payment.type }}</div>
+							<div class="print-right" layout-align="center end">{{ payment.amount | currency:"€" }}</div>
+							<br/>
+						</div>
+						<md-divider></md-divider>
+						<div layout="row" class="print-row">
+							<div class="print-left-full" flex="80">Change</div>
+							<div class="print-right" layout-align="center end">{{ transaction.changeValue | currency:"€"}}</div>
+						</div>
 						<div>
-							Some message for the store...
+							<div>
+								Some message for the store...
+							</div>
+						</div>
+						<br/>
+						<div class="print-row" style="text-align: center" style="margin: 3px">
+							<h4>Till: {{ transaction.till.name }}</h4>
 						</div>
 					</div>
-					<br/>
-					<div class="print-row" style="text-align: center" style="margin: 3px">
-						<h4>Till: {{ transaction.till.name }}</h4>
+					<div id="change-display" layout="column" style="margin-top: 15px; text-align:center"> <!-- change displayed -->
+						<div class="md-display-3">Change</div>
+						<div class="md-display-3">{{ transaction.changeValue | currency:"€"}}</div>
 					</div>
 				</div>
-				<div layout="row" >
-				 	  <!--<md-button ng-click="print()" ng-print print-element-id="sales-summary">-->
-				 	  <md-button ng-click="print()">
+				<div layout="row" style="margin-top: 15px">
+				 	  <md-button ng-print print-element-id="sales-summary">
+				 	  <!-- <md-button ng-click="print()"> -->
 				       Print
 				      </md-button>
 				      <md-button ng-click="email()">

@@ -32,9 +32,9 @@
         </div>
       </div>
     	
-      <div>
+<!--       <div>
         <md-button class="md-no-focus" ng-click="print()" layout-align="center end">Test Print</md-button>
-      </div>
+      </div> -->
 
   <!--     <div> -->
         <!-- <md-button class="md-no-focus" onclick="printJS({ printable: 'testid', type: 'html', header: 'User performance' })" layout-align="center end">Print.js</md-button> -->
@@ -56,12 +56,12 @@
           </div>
           
 
-          </div id="linechart" flex style="max-width: 400px">  <!-- style="height: calc(100vh - 200px);" -->
+          </div id="linechart" flex style="max-width: 300px">  <!-- style="height: calc(100vh - 200px);" -->
               <!-- <canvas id="line" class="chart chart-line" chart-data="data"
                       chart-labels="labels" chart-series="series" chart-options="options"
                       chart-dataset-override="datasetOverride" chart-click="onClick">
               </canvas> -->
-              <canvas id="line" class="chart chart-line" chart-data="data"
+              <canvas layout-fill id="line" class="chart chart-line" chart-data="data"
                       chart-labels="labels" chart-series="series" chart-options="options"
                       chart-click="onClick">
               </canvas>

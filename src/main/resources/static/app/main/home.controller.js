@@ -179,11 +179,9 @@
 
               $scope.link = link;
 
-              printJS(link);
+              //window.open(link); - opens in new tab
 
-              //window.open(link);
-
-              //$scope.showPDF = true;
+              //$scope.showPDF = true; // to embed in <object> - does not render??
               //////////////////////////////////////////////////////////////printJS(testFile);
               //var file = new Blob([data], {type: 'application/pdf'});
 
@@ -209,7 +207,7 @@
           });
 
           //var file = new Blob([data], {type: 'application/pdf'});
-          //var fileURL = URL.createObjectURL(file);
+          //var fileURL = URL.createObjectURL(file); //window.URL.createObjectURL(file);
           //printJS(file.pdf);
 
           
@@ -245,6 +243,7 @@
           /* ********* PRINT.JS *********** */
           /* ********* Good if printing pdf file from link in backend *********** */
           /* ********* Good if printing with html2canvas *********** */
+          /* ********* Good for JSON to print in table *********** */
           //printJS('performance-chart', 'html'); //print an element - css required??
           //printJS('performance-chart', 'html');
 
@@ -265,7 +264,7 @@
           </md-button>*/
 
 
-          /* ********** KENDO ********* */ // WORKS
+          /* ********** KENDO ********* */ // WORKS TO SAVE IMAGE OF HTML
          /* console.log("Called print() function"); // does not work on testidtwo, but works on testid
           kendo.drawing.drawDOM($("#linechart")).then(function(group) {
               kendo.drawing.pdf.saveAs(group, "Converted PDF.pdf"); //saves the html element as pdf
