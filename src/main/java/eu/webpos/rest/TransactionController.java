@@ -80,16 +80,18 @@ public class TransactionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/employeelimittwenty/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<Transaction>> employeeLimitFive(@PathVariable int id) {
-		List<Transaction> transactions = rp.findTransactionsLimitTwentyByTillId(id);
+	public ResponseEntity<List<Transaction>> employeeLimitTwenty(@PathVariable int id) {
+		System.out.println("*********************************  I GOT HERE IN TOMCAT8: ");
+		List<Transaction> transactions = rp.findTransactionsLimitTwentyByEmployeeId(id);
 		if (transactions == null) {
 			return new ResponseEntity<List<Transaction>>(HttpStatus.NO_CONTENT);
 		} else {
 			/*for(Transaction t: transactions){
 				t.setTransaction_date(t.getTransaction_date().toString());
 			}*/
-			System.out.println("*********************************  Transaction date: " + transactions.get(0).getTransaction_date());
+			/*System.out.println("*********************************  Transaction date: " + transactions.get(0).getTransaction_date());
 			System.out.println("*********************************  Transaction date: " + transactions.get(0).getTransaction_date().toString());
+			*/
 			return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
 		}
 	}
@@ -98,7 +100,7 @@ public class TransactionController {
 	
 	
 	/**
-	 * Get last 10 transactions for employee
+	 * Get last 5 transactions for employee
 	 * @param username
 	 * @return
 	 */

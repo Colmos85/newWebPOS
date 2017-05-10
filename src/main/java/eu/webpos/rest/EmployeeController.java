@@ -189,8 +189,10 @@ public class EmployeeController {
 					obj.getData().add(total);
 					if(weeklyCounter == 0)
 						obj.getLabels().add("This Week");
-					else
+					else if(weeklyCounter == 1)
 						obj.getLabels().add(weeklyCounter + " Week Ago");
+					else
+						obj.getLabels().add(weeklyCounter + " Weeks Ago");
 					//reset Weekly Total
 					weeklyTotal = 0.0;
 					counter +=daysInWeek;
