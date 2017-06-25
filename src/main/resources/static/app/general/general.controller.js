@@ -56,10 +56,11 @@
       '$mdDialog',
       '$resource',
       'storesFactory',
+      'AuthService',
       'tillsFactory',
 
       function ($rootScope, $mdToast, $log, $http, $q, $state, $scope, 
-                $timeout, $location, $mdDialog, $resource, storesFactory, tillsFactory) {
+                $timeout, $location, $mdDialog, $resource, storesFactory, AuthService, tillsFactory) {
         
       var vm = this;
 
@@ -70,6 +71,17 @@
       }
 
       vm.reload();
+
+
+      vm.hasAccess = function(){
+        if(AuthService.user.roles[0] !== "ADMIN"){
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      };
 
       /************************************************/
       /***************** STORES ***********************/

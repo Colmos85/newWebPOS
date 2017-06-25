@@ -22,33 +22,44 @@
 
 <div ng-cloak="" layout="row" md-theme="{{theme}}" md-theme-watch="true">
   <div flex></div>
-  <div flex="90" md-whiteframe="5" class="chartBkgnd">
-    <md-toolbar class="md-whiteframe-2dp md-toolbar-tools" id="toaster">
+  <div flex="100" md-whiteframe="5" class="chartBkgnd" style="margin: 20px">
+    <!-- <md-toolbar class="md-whiteframe-2dp md-toolbar-tools" id="toaster">
       <b> Warehouse Stuff Manager</b>
-      <span flex></span>      <md-button class="md-raised" ng-click="compareStuff()">Compare Stuff</md-button> &nbsp;Bar&nbsp;
+      <span flex></span>      
+      <md-button class="md-raised" ng-click="compareStuff()">Compare Stuff</md-button> &nbsp;Bar&nbsp;
       <md-switch ng-model="chartLine" ng-change="toggle()" aria-label="Bar Line"> Line
       </md-switch>      
-    </md-toolbar>
+    </md-toolbar> -->
 <!--     Comparison Chart -->
-    <md-content layout-padding ng-hide="hideCompare" class="chartBkgnd">
+<!--     <md-content layout-padding ng-hide="hideCompare" class="chartBkgnd" >
         <canvas id="chartjs" class="chart chart-pie" chart-data="dataSets[3]" chart-labels="labelsC" chart-series="seriesC" chart-options="optionsC" chart-dataset-override="datasetOverrideC" chart-click="onClick"></canvas>
-  </md-content>
+  </md-content> -->
     <md-tabs md-stretch-tabs="always" md-dynamic-height md-border-bottom md-selected="1">
       <!--     Chart1 -->
-      <md-tab label="Red Stuff" md-on-select="dataSet(0)">
-        <canvas id="chartjs" class="chart-base" chart-type="type" chart-data="dataSets[0]" chart-labels="labels" chart-series="series" chart-options="optionsR" chart-dataset-override="datasetOverrideR" chart-click="onClick"></canvas>
+      <md-tab label="Stores" md-on-select="dataSet(0)">
+       	<div style="margin: 20px"> 
+       		<div>
+       			
+       		</div>
+       		<canvas id="chartjs" class="chart-base" chart-type="type" chart-data="dataSets[0]" chart-labels="labels" chart-series="series" chart-options="optionsR" chart-dataset-override="datasetOverrideR" chart-click="onClick"></canvas>
+       	</div>
       </md-tab>
       <!--     Chart2 -->
-      <md-tab label="Blue Stuff" md-on-select="dataSet(1)">
-        <canvas id="chartjs" class="chart-base" chart-type="type" chart-data="dataSets[1]" chart-labels="labels" chart-series="series" chart-options="optionsB" chart-dataset-override="datasetOverrideB" chart-click="onClick"></canvas>
+      <md-tab label="Employees" md-on-select="dataSet(1)">
+      	<div style="margin: 20px">
+      		<div>
+      			Select Store:
+      		</div>
+        	<canvas id="chartjs" class="chart-base" chart-type="type" chart-data="dataSets[1]" chart-labels="labels" chart-series="series" chart-options="optionsB" chart-dataset-override="datasetOverrideB" chart-click="onClick"></canvas>
+        </div>
       </md-tab>
       <!--     Chart3 -->      
-      <md-tab label="Pink Stuff" md-on-select="dataSet(2)">
+      <md-tab label="General" md-on-select="dataSet(2)">
         <canvas id="chartjs" class="chart-base" chart-type="type" chart-data="dataSets[2]" chart-labels="labels" chart-series="series" chart-options="optionsP" chart-dataset-override="datasetOverrideP" chart-click="onClick"></canvas>
       </md-tab>      
     </md-tabs>
     <br />
-    <md-toolbar>
+    <!-- <md-toolbar>
       <span class="md-toolbar-tools md-whiteframe-1dp">
         Play with the {{ theme }} stuff !
         <span flex></span>
@@ -62,7 +73,7 @@
         <label>{{label}}</label>
         <input ng-model="dataSets[dIndex][0][$index]" class="md-whiteframe-0dp" ng-change="updateCompare()" type="number">
       </md-input-container>
-    </md-content>
+    </md-content> -->
   </div>
   <div flex></div>
 </div>

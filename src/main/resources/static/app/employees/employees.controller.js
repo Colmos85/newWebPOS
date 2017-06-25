@@ -17,10 +17,11 @@
       '$resource',
       'employeesFactory',
       'storesFactory',
+      'AuthService',
       '$mdToast',
 
       function ($rootScope, $log, $http, $q, $state, $scope, 
-                $timeout, $location, $mdDialog, $resource, employeesFactory, storesFactory, $mdToast) {
+                $timeout, $location, $mdDialog, $resource, employeesFactory, storesFactory, AuthService, $mdToast) {
     	  
     	var vm = this;
 
@@ -39,8 +40,9 @@
 
       vm.reload();
 
-      vm.roles = [{"name":"ADMIN"}, {"name":"USER"}];
-      console.log("Roles print ******* ", vm.roles);
+      // used to populate the roles in employee form
+      vm.roles = [{"name":"ADMIN"}, {"name":"MANAGER"}, {"name":"CASHIER"}];
+      //console.log("Roles print ******* ", vm.roles);
 
       vm.toastMessage = function(message) {
         $mdToast.show(
@@ -51,6 +53,15 @@
       };
 
 
+      vm.hasAccess = function(){
+        if(AuthService.user.roles[0] !== "ADMIN"){
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      };
 
 
 
@@ -169,13 +180,14 @@
 
             console.log("Selected Role", $scope.role);
 
+            //   roles[$scope.selectedRoleIndex]; // get the name at this position in a for loop
             employee.roles = ["ADMIN"];
 
             console.log("Employee save??? ", employee);
             //vm.toastMessage("Email link sent to customer!");
             employeesFactory.insertEmployee(employee).then(function successCallback(response) {
-                console.log("Email Sent????");
-                vm.toastMessage("Email link sent to customer!");
+                //console.log("Email Sent????");
+                vm.toastMessage("Email link sent to Employee!");
             });
 
             //vm.reload();

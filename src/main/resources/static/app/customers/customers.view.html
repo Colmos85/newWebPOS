@@ -3,7 +3,11 @@
 <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
   <md-card flex="flex">
 
-  <div layout="column" >
+  <div ng-hide="customersCtrl.hasAccess()">
+      <div ng-include="'/app/common/notAuthorizedTemplate.html'"></div>
+  </div>
+
+  <div layout="column" ng-show="customersCtrl.hasAccess()">
 
     <div class="outerTableDiv">
       <table st-table="customers" st-safe-src="customersCtrl.customers" class="my-table table-striped" style="width:100%">

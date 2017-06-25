@@ -2,55 +2,27 @@
 <div layout="column" ng-cloak>
   <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" class="inside-home-content">
     <md-card flex="flex" >
-	<div layout="column" >
+	<div layout="row">
 		
-		<div class="outerTableDiv">
-			<table st-table="stores" st-safe-src="storesandregistersCtrl.stores" class="my-table table-striped" style="width:100%">
-				<thead>
-					<tr >
-		            	<th colspan="3">
-		              	<div layout="row"> 
-		                	<input st-search placeholder="global search" class="search-input md-whiteframe-3dp input-sm form-control" type="search"/>
-		                	<md-button class="md-no-focus" ng-click="storesandregistersCtrl.openStoreForm(null, $event)">+ Store</md-button>
-		              	</div>
-		            	</th>
-		          	</tr>
-					<tr>
-						<th class="md-subhead"  st-sort="store.name">Store Name</th>
-						<th class="md-subhead" st-sort="store.contact">Contact</th>
-						<th ><!-- Edit --></th>
-					</tr>
-				</thead>
-				<tbody ng-repeat="store in stores">
-		          <tr class="mainTDRows" ng-click="isOpen=!isOpen" ng-class="{'selectedRow': isOpen}">
-						<td class="md-body-1" st-ratio="45" >{{store.name}}</td>
-						<td class="md-body-1" st-ratio="40" >{{store.contact}}</td>
-						<td class="md-body-1 button-table-data" st-ratio="15">
-							<div layout="row">
-								<md-button  type="button" ng-click="storesandregistersCtrl.editStore(store, $index, $event); $event.stopPropagation(); " class="md-icon-button launch ">
-				                <i class="material-icons">edit</i>
-				              </md-button>
-				              <md-button type="button" ng-click="storesandregistersCtrl.removeStore(store, $index); $event.stopPropagation();" class="md-icon-button launch ">
-				                <i class="material-icons">delete</i>
-				              </md-button>
-							</div>
-			            </td>
-<!-- 			            <td st-ratio="10">
-			              
-			            </td> -->
-					</tr>
-					<tr ng-if="isOpen" class="expandedTableRow fade">
-			          	<td colspan="5" ng-include="'/app/general/storeDetails.html'"></td>
-			       	</tr>
-		        </tbody>
-				<tfoot >
-					<tr>
-			            <td colspan="3" class="text-center">
-			              <div st-items-by-page="10" st-pagination="" st-displayed-pages="5" st-template="app/views/padination.custom.html"></div>
-			            </td>
-			        </tr>
-				</tfoot>
-			</table>
+		<div flex="50">
+			<md-input-container class="md-block" flex-gt-sm>
+	            <label>Company Name</label>
+	            <input name="companyName" ng-model="companyName">
+	        </md-input-container>
+	        <md-input-container class="md-block" flex-gt-sm>
+	            <label>Main office</label>
+	            <input name="address1" ng-model="address1">
+	        </md-input-container>
+		</div>
+		<div flex="50">
+			<md-input-container class="md-block" flex-gt-sm>
+	            <label>Loyalty Points</label>
+	            <input name="companyName" ng-model="companyName">
+	        </md-input-container>
+	        <md-input-container class="md-block" flex-gt-sm>
+	            <label>Receipt Message</label>
+	            <textarea name="message" md-maxlength="150" rows="5" ng-model="message"></textarea>
+	        </md-input-container>
 		</div>
 
 	</div>

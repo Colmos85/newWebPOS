@@ -16,10 +16,11 @@
       '$mdDialog',
       '$resource',
       'customersFactory',
+      'AuthService',
       '$mdToast',
 
       function ($rootScope, $log, $http, $q, $state, $scope, 
-                $timeout, $location, $mdDialog, $resource, customersFactory, $mdToast) {
+                $timeout, $location, $mdDialog, $resource, customersFactory, AuthService, $mdToast) {
     	  
     	var vm = this;
 
@@ -33,6 +34,7 @@
 
       vm.reload();
 
+
       vm.toastMessage = function(message) {
         $mdToast.show(
           $mdToast.simple()
@@ -41,6 +43,16 @@
         );
       };
 
+
+      vm.hasAccess = function(){
+        if(AuthService.user.roles[0] !== "ADMIN"){
+          return false;
+        }
+        else
+        {
+          return true;
+        }
+      };
 
       vm.removeItem = function(customer) {
           console.log("selected product to delete", customer);
